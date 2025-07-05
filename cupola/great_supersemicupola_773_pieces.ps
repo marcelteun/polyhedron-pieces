@@ -1,0 +1,625 @@
+%!PS-Adobe-2.0
+%%Title: great supersemicupola 773
+%%Creator: PS.py written by marcelteun
+%%Pages: 4 4
+%%BoundingBox: 0 0 595 842
+% to zoom out from A4:
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+
+% Page 1 contains the pieces to be cut for a uniform compound of 12 tetrahedra.
+% One can either use 3 or 6 colours. Page 1 contains all pieces for one colour
+% if you go for the latter
+% Page 2 shows where all other triangles intersect one triangle.
+
+(polygons.eps) run
+(fonts.eps) run
+polygons begin
+  /scaling_size 220 def
+  /gray_value 0.2 def
+  % distance between pieces when cut
+  /edge_to_edge_offset_mm 1 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area true def
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  /vertices0 [
+    [0.55445898818 0.22806131195] % 0
+    [-0.006930555943 -0.599490366042] % 1
+    [-0.442916559968 0.300463079584] % 2
+    [-0.308642232058 0.023296741798] % 3
+    [0.165965369698 -0.344622218104] % 4
+    [0.381563062539 -0.026806835988] % 5
+    [-0.135746306416 0.278164889737] % 6
+    [-0.308642232058 0.023296741799] % 7
+    [0.381563062539 -0.026806835988] % 8
+    [0.165965369698 -0.344622218104] % 9
+    [-0.135746306417 0.278164889737] % 10
+    [0.381563062539 -0.026806835987] % 11
+    [-0.141204883852 -0.322324028256] % 12
+    [0.24728873463 0.250359501798] % 13
+    [0.165965369699 -0.344622218102] % 14
+  ] def
+  /faces0 [
+    [1 0 2][3 4][5 6][7 8][9 10][11 12][13 14]
+  ] def
+  /bbox0 [-0.442916559968 -0.599490366042 0.55445898818 0.300463079584] def
+
+  /vertices0 vertices0 scaling_size vertices_scale def
+  /vs0 vertices0 0.000001 vertices_make_unique def % last vertex index is 8 now
+  /vs0 vs0 4 6 5 3 vertices_add_intersection def % 9
+  /vs0 vs0 4 8 5 7 vertices_add_intersection def % 10
+  /vs0 vs0 5 6 4 8 vertices_add_intersection def % 11
+  /vs0 vs0 3 4 5 7 vertices_add_intersection def % 12
+
+false { % if
+  % The three big pieces at the tetrahedron vertices
+  /tv_kite vs0 [46 28 0 40] cv_vertices def
+  /tv_rect vs0 [1 16 43 14] cv_vertices def
+  /tv_tooth vs0 [2 15 45 31 56 44 39] cv_vertices def
+  % Define combined sub parts:
+  /tetra_vertex_0
+    tv_kite
+    -9 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /tetra_vertex_1
+    tetra_vertex_0 2
+    tv_rect 0 3
+    vertices_edge_attach_to
+  def
+  /tetra_vertex_2
+    tetra_vertex_1 0
+    tv_tooth vertices_mirror_y 0 1
+    vertices_edge_attach_to
+  def
+  /tetra_vertex [
+    tetra_vertex_0 white polygon_create
+    tetra_vertex_1 white polygon_create
+    tetra_vertex_2 white polygon_create
+    net_create
+  def
+
+  % the two facelets that look like a xmas tree
+  /tree_right vs0 [16 27 51 50 3 49] cv_vertices def
+  /tree_left vs0 [15 13 48 17 47] cv_vertices def
+  % Define combined sub parts:
+  /tree_0
+    tree_right
+    20.9 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /tree_1
+    tree_0 0
+    tree_left vertices_mirror_y 0 1
+    vertices_edge_attach_to
+  def
+  /tree [
+    tree_0 white polygon_create
+    tree_1 white polygon_create
+    net_create
+  def
+
+  % the triangles that form the star at the 4-fold axis
+  /triangle_4fld_0 vs0 [8 6 52] cv_vertices def
+  /triangle_4fld_1 vs0 [8 24 53] cv_vertices def
+  /4fld_0
+    triangle_4fld_0
+    -39 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /4fld_1
+    4fld_0 0
+    triangle_4fld_1 0 1
+    vertices_edge_attach_to
+  def
+  /4fld [
+    4fld_0 white polygon_create
+    4fld_1 white polygon_create
+    net_create
+  def
+
+  % the triangles at the end the star arms at the 4-fold axis
+  /tri_arm_0 vs0 [54 41 26] cv_vertices def
+  /tri_arm_1 vs0 [11 55 7] cv_vertices def
+  /arm_0
+    tri_arm_0
+    75 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /arm_1
+    arm_0 1
+    tri_arm_1 0 2
+    vertices_edge_attach_to
+  def
+  /arm [
+    arm_0 white polygon_create
+    arm_1 white polygon_create
+    net_create
+  def
+} if
+
+  /vertices1 [
+    [0.283873594397 -0.599714419975] % 0
+    [0.555630756473 0.362651438137] % 1
+    [-0.593892084893 -0.120624227777] % 2
+    [-0.443078237847 0.413448531226] % 3
+    [-0.270368083589 -0.571524160079] % 4
+    [0.651477661073 -0.183967166786] % 5
+    [0.068507554684 0.6285264363] % 6
+    [-0.323559102732 -0.268173720126] % 7
+    [-0.389887218704 0.110098091273] % 8
+    [-0.135497311505 0.397804117251] % 9
+    [0.248049830133 0.378295852112] % 10
+    [0.471935385623 0.066263417403] % 11
+    [0.367568965247 -0.30332639924] % 12
+    [0.013540612236 -0.452164927625] % 13
+    [-0.323559102732 -0.268173720126] % 14
+    [0.367568965247 -0.30332639924] % 15
+    [0.471935385623 0.066263417403] % 16
+    [-0.135497311506 0.397804117251] % 17
+    [-0.389887218704 0.110098091273] % 18
+    [0.471935385623 0.066263417403] % 19
+    [0.283873594397 -0.599714419975] % 20
+    [-0.389887218703 0.110098091273] % 21
+    [-0.389887218704 0.110098091272] % 22
+    [0.555630756473 0.362651438137] % 23
+    [0.367568965247 -0.30332639924] % 24
+    [-0.389887218703 0.110098091274] % 25
+    [0.471935385623 0.066263417402] % 26
+    [0.106658484651 -0.413016856634] % 27
+    [0.306937053188 0.296223904492] % 28
+    [0.367568965248 -0.30332639924] % 29
+  ] def
+  /faces1 [
+    [13 0 12 5 11 1 10 6 9 3 8 2 7 4][14 15][16 17][18 19][20 21][22 23][24 25]
+    [26 27][28 29]
+  ] def
+  /bbox1 [-0.593892084893 -0.599714419975 0.651477661073 0.6285264363] def
+
+  /vertices1 vertices1 scaling_size vertices_scale def
+  /vs1 vertices1 0.000001 vertices_make_unique def % last vertex index is 15 now
+  /vs1 vs1 9 11 1 8 vertices_add_intersection def % 16
+  /vs1 vs1 7 12 0 8 vertices_add_intersection def % 17
+
+  /vertices2 [
+    [0.245430246318 0.484995173035] % 0
+    [-0.59173087704 -0.061961181292] % 1
+    [0.300527782248 -0.513485804016] % 2
+    [0.283558924215 -0.205975102098] % 3
+    [-0.012397404462 0.316544359947] % 4
+    [0.26239910435 0.177484471118] % 5
+    [-0.333903226259 0.106489631797] % 6
+    [-0.096961078078 0.261294973253] % 7
+    [0.283558924215 -0.205975102098] % 8
+    [-0.33390322626 0.106489631796] % 9
+    [0.267964639963 0.076625488181] % 10
+    [-0.194638416649 -0.262908542798] % 11
+    [-0.096961078078 0.261294973253] % 12
+    [0.283558924215 -0.205975102099] % 13
+    [-0.017915646343 -0.352338531915] % 14
+    [-0.273287448449 -0.223108453394] % 15
+    [-0.33390322626 0.106489631796] % 16
+    [0.267964639963 0.076625488183] % 17
+    [-0.096564678143 -0.31253844251] % 18
+  ] def
+  /faces2 [
+    [1 2 0][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18]
+  ] def
+  /bbox2 [-0.59173087704 -0.513485804016 0.300527782248 0.484995173035] def
+
+  /vertices2 vertices2 scaling_size vertices_scale def
+  /vs2 vertices2 0.000001 vertices_make_unique def % last vertex index is 12 now
+  /vs2 vs2 5 6 3 4 vertices_add_intersection def % 13
+  /vs2 vs2 5 6 7 9 vertices_add_intersection def % 14
+  /vs2 vs2 3 4 8 12 vertices_add_intersection def % 15
+
+  /vertices3 [
+    [0.169679412451 0.483975895983] % 0
+    [0.057113403249 -0.509668353018] % 1
+    [-0.272594208985 0.434414742072] % 2
+    [0.434084388484 -0.273119963706] % 3
+    [-0.509598831146 0.057730426936] % 4
+    [0.484180975482 0.16909332891] % 5
+    [-0.362865139534 -0.362426077168] % 6
+    [0.181873717119 -0.020603750824] % 7
+    [0.097287746798 -0.155040826396] % 8
+    [-0.06055788117 -0.172728997434] % 9
+    [-0.172802189461 -0.060348710375] % 10
+    [-0.154922924567 0.097475386487] % 11
+    [-0.020383537621 0.181898529189] % 12
+    [0.129505068902 0.129348369359] % 13
+  ] def
+  /faces3 [
+    [13 0 12 2 11 4 10 6 9 1 8 3 7 5]
+  ] def
+  /bbox3 [-0.509598831146 -0.509668353018 0.484180975482 0.483975895983] def
+
+  /vertices3 vertices3 scaling_size vertices_scale def
+  /vs3 vertices3 0.000001 vertices_make_unique def % last vertex index is 13 now
+
+  % Bottom triangle (attached to the {7/3}-gram
+  /kite
+    vs2 [0 4 13 5] cv_vertices
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /bottom_triangle_left vs2 [1 11 6] cv_vertices def
+  /bottom_triangle_right vs2 [2 3 10] cv_vertices def
+  /cap_left vs2 [6 14 7] cv_vertices def
+  /cap_right vs2 [3 8 15] cv_vertices def
+
+  /bottom_triangle0
+    kite
+    -63.2 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /bottom_triangle1
+    bottom_triangle0 0
+    bottom_triangle_left 0 2
+    vertices_edge_attach_to
+  def
+  /bottom_triangle2
+    bottom_triangle0 3
+    bottom_triangle_right 1 0
+    vertices_edge_attach_to
+  def
+  /bottom_triangle3
+    bottom_triangle1 1
+    cap_right 1 0
+    vertices_edge_attach_to
+  def
+  /bottom_triangle4
+    bottom_triangle2 1
+    cap_left 0 2
+    vertices_edge_attach_to
+  def
+  /bottom_triangle_x_7 [
+    % 7 of these triangles are needed
+    bottom_triangle0 white polygon_create
+    bottom_triangle1 white polygon_create
+    bottom_triangle2 white polygon_create
+    bottom_triangle3 white polygon_create
+      2 polygon_reverse_edge
+    bottom_triangle4 white polygon_create
+      2 polygon_reverse_edge
+    net_create
+  def
+
+  % Top triangle
+  /diamond
+    vs0 [2 3 9 6] cv_vertices
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /bottom_flat_triangle vs0 [4 5 10] cv_vertices def
+  /right_kite vs0 [0 8 11 5] cv_vertices def
+  /left_kite vs0 [1 4 12 7] cv_vertices def
+
+  /top_triangle0
+    diamond
+    -86 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /top_triangle1
+    top_triangle0 0
+    right_kite 1 0
+    vertices_edge_attach_to
+  def
+  /top_triangle2
+    top_triangle0 3
+    left_kite 0 3
+    vertices_edge_attach_to
+  def
+  /top_triangle3
+    top_triangle2 1
+    bottom_flat_triangle 0 2
+    vertices_edge_attach_to
+  def
+  /top_triangle_x_7 [
+    % 7 of these triangles are needed
+    top_triangle0 white polygon_create
+    top_triangle1 white polygon_create
+    top_triangle2 white polygon_create
+    top_triangle3 white polygon_create
+      2 polygon_reverse_edge
+    net_create
+  def
+
+  % The pieces for the {7/2}-gram
+  /7-2-bottom
+    vs1 [5 11 12] cv_vertices
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /7-2-cap-left vs1 [0 12 14] cv_vertices def
+  /7-2-cap-right vs1 [1 15 11] cv_vertices def
+  /7-2-side-left vs1 [0 17 7 4 13] cv_vertices def
+  /7-2-side-right vs1 [1 10 6 9 16] cv_vertices def
+  % The top-left and top-right are the same as the bottom
+  % /7-2-top-left vs1 [2 7 8] cv_vertices def
+  % /7-2-top-right vs1 [3 8 9] cv_vertices def
+
+  /7-2-side0
+    7-2-side-right
+    120 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /7-2-side1
+    7-2-side0 4
+    7-2-side-left 1 0
+    vertices_edge_attach_to
+  def
+  /7-2-side2
+    7-2-side0 3
+    7-2-cap-left 1 0
+    vertices_edge_attach_to
+  def
+  /7-2-side3
+    7-2-side1 4
+    7-2-cap-right 0 2
+    vertices_edge_attach_to
+  def
+  /7-2-sides_x_7 [
+    % 14 of 7-2-sides_x_7 are needed: 5x4 + 1
+    7-2-side0 white polygon_create
+      0 polygon_reverse_edge
+    7-2-side1 white polygon_create
+      0 polygon_reverse_edge
+    7-2-side2 white polygon_create
+    7-2-side3 white polygon_create
+    net_create
+  def
+
+  /7-2-gram0
+    7-2-bottom
+    -35.6 vertices_rotate
+    dup 1 vertices_get
+    xy_neg vertices_translate
+  def
+  /7-2-gram1
+    7-2-gram0 2
+    7-2-bottom 0 2
+    vertices_edge_attach_to
+  def
+  /7-2-gram2
+    7-2-gram1 1
+    7-2-bottom 2 1
+    vertices_edge_attach_to
+  def
+  /7-2-gram3
+    7-2-gram0 1
+    7-2-bottom 2 1
+    vertices_edge_attach_to
+  def
+  /7-2-gram_x5+1 [
+    % 21 of 7-2-bottom are needed: 5x4 + 1
+    7-2-gram0 white polygon_create
+    7-2-gram1 white polygon_create
+    7-2-gram2 white polygon_create
+    7-2-gram3 white polygon_create
+    net_create
+  def
+
+  % The only piece for the {7/3}-gram
+  /7-3-gram0
+    vs3 [13 0 12 2 11 4 10 6 9 1 8 3 7 5] cv_vertices
+    -6 vertices_rotate
+    dup 8 vertices_get
+    xy_neg vertices_translate
+  def
+  /7-3-gram [
+    7-3-gram0 white polygon_create
+      1 polygon_reverse_edge
+      3 polygon_reverse_edge
+      5 polygon_reverse_edge
+      7 polygon_reverse_edge
+    net_create
+  def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (Compound of 20 tetrahedra: 20B | A5xI / D3C3)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+% This page will have the pieces for the heptagrams
+polygons begin
+  a4_area
+  /26_faces {
+    % Only 21 needed
+    local_dict_size dict begin
+      gsave
+        6 { % repeat
+          75 0 translate
+          7-2-gram_x5+1 net_cut
+        } repeat
+      grestore
+    end % local dict
+  } def
+
+  .1 setlinewidth
+  20 805 translate
+  26_faces
+  100 -280 translate
+  7-3-gram net_cut
+  120 100 translate
+  7-2-sides_x_7 net_cut
+  130 0 translate
+  7-2-sides_x_7 net_cut
+  -470 -180 translate
+  4 { %repeat
+    130 0 translate
+    7-2-sides_x_7 net_cut
+  } repeat
+  -520 -170 translate
+  4 { %repeat
+    130 0 translate
+    7-2-sides_x_7 net_cut
+  } repeat
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+% This page will have the pieces for the triangles not
+% attached to the {7/3} heptagram
+polygons begin
+  a4_area
+  .1 setlinewidth
+  -50 770 translate
+  gsave
+    4 { %repeat
+      130 0 translate
+      top_triangle_x_7 net_cut
+    } repeat
+  grestore
+  gsave
+    0 -140 translate
+    180 rotate
+    4 { %repeat
+      -130 0 translate
+      top_triangle_x_7 net_cut
+    } repeat
+  grestore
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 3 3
+%%BeginPage
+% This page will have the pieces for the triangles attached
+% to the {7/3} heptagram
+polygons begin
+  a4_area
+  .1 setlinewidth
+  20 715 translate
+  gsave
+    5 { %repeat
+      90 0 translate
+      bottom_triangle_x_7 net_cut
+    } repeat
+  grestore
+  gsave
+    105 -100 translate
+    90 rotate
+    2 { % repeat
+      bottom_triangle_x_7 net_cut
+      0 -200 translate
+    } repeat
+  grestore
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 4 4
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+
+    % triangles at {7/3} (bottom)
+    /base_face_no 2 def
+    def_base_face
+    show_base_face
+
+    % triangles at (top)
+    250 0 translate
+    /base_face_no 0 def
+    def_base_face
+    show_base_face
+
+    % {7/3}
+    -250 250 translate
+    /base_face_no 3 def
+    def_base_face
+    show_base_face
+
+    % {7/2}
+    250 0 translate
+    /base_face_no 1 def
+    def_base_face
+    show_base_face
+
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF
