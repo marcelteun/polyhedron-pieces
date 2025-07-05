@@ -1,0 +1,377 @@
+%!PS-Adobe-2.0
+%%Title: tenth kipiscoidal hexecontahedron
+%%Creator: PS.py written by marcelteun
+%%Pages: 5 5
+%%BoundingBox: 0 0 595 842
+% to zoom out from A4:
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+
+% One can either use 5 or 6 colours. This document contains all pieces for one
+% colour using 5 colours in total
+%
+% Page 1:
+%     contains the pieces that can be seen from a certain side.
+% Page 2:
+%     contains the pieces that can be seen from a the other side.
+% Page 3:
+%     shows the support nets to print on paper to help gluing the pieces on
+%     paper.
+% Page 3:
+%     shows the net of one face
+
+(polygons.eps) run
+(fonts.eps) run
+polygons begin
+  /scaling_size 120 def
+  /gray_value 0.2 def
+  /edge_to_edge_offset_mm 1 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area true def
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  /vertices0 [
+    [0.786777753185 -0.517173642523] % 0
+    [-0.635684654218 -0.694545052404] % 1
+    [0.838661633155 0.427942139198] % 2
+    [0.936794372003 -0.094361613014] % 3
+    [-0.884936864546 -0.321519136593] % 4
+    [0.242055290619 -0.359529468604] % 5
+    [-0.059059415487 -0.255533912095] % 6
+    [0.644704772156 0.090965784408] % 7
+    [0.241595554755 -0.284990622733] % 8
+    [-0.146354372512 -0.407961517987] % 9
+    [-0.164213086981 -0.335592206684] % 10
+    [0.936794372003 -0.094361613014] % 11
+    [0.21041516365 -0.156560064174] % 12
+    [0.241595554755 -0.284990622733] % 13
+    [0.242055290619 -0.359529468604] % 14
+    [-0.635684654218 -0.694545052404] % 15
+    [-0.541359222012 -0.361730852867] % 16
+    [0.644704772156 0.090965784408] % 17
+    [0.936794372003 -0.094361613014] % 18
+    [0.21041516365 -0.156560064174] % 19
+    [0.048195261151 -0.430731261129] % 20
+    [0.367190065917 0.068989293479] % 21
+    [0.443200110651 -0.47696192625] % 22
+    [0.262036394424 -0.011069001111] % 23
+    [0.786777753185 -0.517173642523] % 24
+  ] def
+  /faces0 [
+    [0 4 1 2 3][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20][21 22][23 24]
+  ] def
+  /bbox0 [-0.884936864546 -0.694545052404 0.936794372003 0.427942139198] def
+  /vertices0 vertices0 scaling_size vertices_scale def
+
+  /vs0 vertices0 0.000001 vertices_make_unique def % 17 vertices left
+
+  /vs0 vs0 3 11 14 15 vertices_add_intersection def % 17
+  /vs0 vs0 5 6 11 13 vertices_add_intersection def % 18
+  /vs0 vs0 4 9 1 10 vertices_add_intersection def % 19
+
+  % The pieces that aren't mirrored
+  % The triangle around a 5-fold axis
+  /tri_o5 vs0 [0 3 17] cv_vertices def
+  % the triangle attached on the other side
+  /tri_o5_x0 vs0 [4 1 12] cv_vertices def
+  % the 5-gon, shaped as lambda
+  /tri_o5_pl1 vs0 [3 2 14 17 7] cv_vertices def
+  % the 6-gon, shaped as mountain / house
+  /tri_o5_pl3 vs0 [17 8 5 18 13 15] cv_vertices def
+  % the smallest triangle
+  /tri_o5_xs vs0 [19 9 10] cv_vertices def
+  % Define combined sub parts:
+  /one_side_0
+    tri_o5
+    0 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /one_side_1
+    one_side_0 0
+    tri_o5_x0 1 0
+    vertices_edge_attach_to
+  def
+  /one_side_2
+    one_side_0 1
+    tri_o5_pl1 1 0
+    vertices_edge_attach_to
+  def
+  /one_side_3
+    one_side_2 1
+    tri_o5_pl3 5 4
+    vertices_edge_attach_to
+  def
+  /one_side_4
+    one_side_3 5
+    tri_o5_xs 0 2
+    vertices_edge_attach_to
+  def
+  /one_side [
+    one_side_0 white polygon_create
+    one_side_1 white polygon_create
+    one_side_2 white polygon_create
+    one_side_3 white polygon_create
+    one_side_4 white polygon_create
+    net_create
+  def
+
+  % The pieces that are seen from the other side, i.e. they are mirrored
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+  % The triangle surounded by two other faces in the net:
+  /tri_o5_pl0 vs0 [3 7 17] cv_vertices vertices_mirror_y def
+  % the one that is (almost) the same:
+  /tri_o5_pl2 vs0 [0 17 15] cv_vertices vertices_mirror_y def
+  % the triangle almost at the opposite side
+  /tri_o5_x1 vs0 [1 19 12] cv_vertices vertices_mirror_y def
+  % Define combined sub parts:
+  /mirror_0
+    tri_o5_pl0
+    -40 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /mirror_1
+    mirror_0 2
+    tri_o5_pl2 1 0
+    vertices_edge_attach_to
+  def
+  /mirror_2
+    mirror_0 0
+    tri_o5_x1 0 2
+    vertices_edge_attach_to
+  def
+  /mirror [
+    mirror_0 white polygon_create
+    mirror_1 white polygon_create
+    mirror_2 white polygon_create
+    net_create
+  def
+
+  % /edge_to_edge_offset_mm 1 mm2pt def
+  /edge_to_edge_offset_mm 0 def
+  /paper_0
+    tri_o5_pl3
+    -20 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /paper_1
+    paper_0 4
+    tri_o5_xs 1 0
+    vertices_edge_attach_to
+  def
+  /paper [
+    paper_0 white polygon_create
+    paper_1 white polygon_create
+    net_create
+  def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def 
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (10th kipiscoidal hexecontrahedron)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+polygons begin
+  a4_area
+  /1face {
+    local_dict_size dict begin
+      gsave
+        4 { % repeat
+          one_side net_cut
+          80 0 translate
+        } repeat
+      grestore
+    end % local dict
+  } def
+
+  .1 setlinewidth
+  20 747 translate
+  3 { %repeat
+    1face
+    0 -110 translate
+  } repeat
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+polygons begin
+  a4_area
+  /1face {
+    local_dict_size dict begin
+      gsave
+        4 { % repeat
+          mirror net_cut
+          47 0 translate
+        } repeat
+      grestore
+    end % local dict
+  } def
+
+  .1 setlinewidth
+  30 235 translate
+  1face
+  gsave
+    175 -135 translate
+    0 180 rotate
+    1face
+  grestore
+  0 -140 translate
+  1face
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 3 3
+%%BeginPage
+polygons begin
+  a4_area
+  /1face {
+    local_dict_size dict begin
+      gsave
+        8 { % repeat
+          paper net_draw
+          70 0 translate
+        } repeat
+      grestore
+    end % local dict
+  } def
+
+  .1 setlinewidth
+  50 775 translate
+  10 { %repeat
+    1face
+    0 -80 translate
+  } repeat
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 4 4
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 0 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 5 5
+%%BeginPage
+polygons begin
+  % Define combined sub parts:
+  /edge_to_edge_offset_mm 1 mm2pt neg def
+  /tmp_0
+    tri_o5_x1
+    -15.5 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /tmp_1
+    tmp_0 0
+    tri_o5_x1 1 0
+    vertices_edge_attach_to
+  def
+  /tmp [
+    tmp_0 white polygon_create
+    tmp_1 white polygon_create
+    net_create
+  def
+  a4_area
+  /1face {
+    local_dict_size dict begin
+      gsave
+        3 { % repeat
+          tmp net_cut
+          42 0 translate
+        } repeat
+      grestore
+    end % local dict
+  } def
+
+  .1 setlinewidth
+  30 100 translate
+  1face
+  0 -50 translate
+  1face
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF
