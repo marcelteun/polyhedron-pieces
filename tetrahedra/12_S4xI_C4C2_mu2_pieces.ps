@@ -1,0 +1,326 @@
+%!PS-Adobe-2.0
+%%Title: Compound of tetrahedra 20B | A5xI / D3C3
+%%Creator: PS.py written by marcelteun
+%%Pages: 2 2
+%%BoundingBox: 0 0 595 842
+% to zoom out from A4:
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+
+% Page 1 contains the pieces to be cut for a uniform compound of 12 tetrahedra.
+% One can either use 3 or 6 colours. Page 1 contains all pieces for one colour
+% if you go for the latter
+% Page 2 shows where all other triangles intersect one triangle.
+
+(polygons.eps) run
+(fonts.eps) run
+polygons begin
+  /scaling_size 120 def
+  /gray_value 0.2 def
+  /edge_to_edge_offset_mm 1 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area true def
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  /vertices0 [
+    [1.525765759541 -0.581984118065] % 0
+    [-0.258869848927 1.612343967019] % 1
+    [-1.266895910614 -1.030359848954] % 2
+    [-0.587024728992 0.652606323098] % 3
+    [0.004674794173 -0.826202843389] % 4
+    [0.210396645023 -0.793173176308] % 5
+    [0.462420080666 0.72547006263] % 6
+    [0.430138108053 0.765162893373] % 7
+    [-0.587024728992 0.652606323098] % 8
+    [0.633447955307 0.515179924477] % 9
+    [-0.971651912758 -0.256329821923] % 10
+    [0.707814093912 -0.713310329123] % 11
+    [0.633447955307 0.515179924477] % 12
+    [-0.971651912758 -0.256329821923] % 13
+    [0.707814093912 -0.713310329123] % 14
+    [0.363585317362 0.846993972537] % 15
+    [0.769480887696 -0.703409418451] % 16
+    [-0.148312547587 -0.850765722563] % 17
+    [-0.049502524862 1.354912927812] % 18
+    [-0.448944244985 -0.899033637896] % 19
+    [-0.554113846782 0.838313939988] % 20
+    [-0.554113846782 0.838313939988] % 21
+    [0.633447955307 0.515179924477] % 22
+    [0.633447955307 0.515179924477] % 23
+    [-0.448944244985 -0.899033637896] % 24
+    [-0.252743842026 -0.822350103723] % 25
+    [0.792804806535 0.267584471232] % 26
+    [-0.413836609172 0.708611104034] % 27
+    [-0.252743842026 -0.822350103723] % 28
+    [0.792804806535 0.267584471232] % 29
+    [-0.413836609172 0.708611104034] % 30
+    [-0.76288287977 0.290992059033] % 31
+    [0.129434924463 -0.80617198351] % 32
+    [0.129434924463 -0.80617198351] % 33
+    [0.633447955307 0.515179924477] % 34
+    [0.633447955307 0.515179924477] % 35
+    [-0.76288287977 0.290992059033] % 36
+    [-0.716517434198 0.412546594773] % 37
+    [-0.422653797856 -0.709927291546] % 38
+    [0.804475829948 0.304889786324] % 39
+    [-0.697677691262 0.461938036563] % 40
+    [-0.422653797856 -0.709927291546] % 41
+    [0.836757802561 0.265196955581] % 42
+    [-0.662628454615 0.553825295192] % 43
+    [1.06243335993 -0.656374440939] % 44
+    [0.283229990998 -0.781479420103] % 45
+    [-0.993910869487 -0.314685287246] % 46
+    [-0.546128513477 -0.742520517752] % 47
+    [0.212078297542 0.803711457898] % 48
+    [0.996261186137 -0.307163304272] % 49
+    [-0.546128513477 -0.742520517752] % 50
+    [0.212078297542 0.803711457898] % 51
+    [0.996261186137 -0.307163304272] % 52
+    [0.000982885781 -0.826795597657] % 53
+    [0.398822019534 0.72424645191] % 54
+    [0.398822019534 0.72424645191] % 55
+    [-0.71785004814 0.409052931183] % 56
+    [-0.792106442795 0.214377748693] % 57
+    [-0.051211229007 -0.835175622568] % 58
+    [-1.099653620213 -0.591907059058] % 59
+    [1.316398435476 -0.324553078858] % 60
+    [0.903310593252 0.183365876417] % 61
+    [-0.818396025842 0.145455342734] % 62
+  ] def
+  /faces0 [
+    [0 1 2][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20][21 22][23 24]
+    [25 26][27 28][29 30][31 32][33 34][35 36][37 38][39 40][41 42][43 44][45 46]
+    [47 48][49 50][51 52][53 54][55 56][57 58][59 60][61 62]
+  ] def
+  /bbox0 [-1.266895910614 -1.030359848954 1.525765759541 1.612343967019] def
+  /vertices0 vertices0 scaling_size vertices_scale def
+
+  /vs0 vertices0 0.000001 vertices_make_unique def % 42 vertices left
+  /vs0 vs0 8 16 14 13 vertices_add_intersection def % 43
+  /vs0 vs0 15 16 39 40 vertices_add_intersection def
+  /vs0 vs0 15 16 31 33 vertices_add_intersection def % 45
+  /vs0 vs0 8 10 39 40 vertices_add_intersection def
+  /vs0 vs0 8 15 17 19 vertices_add_intersection def
+  /vs0 vs0 13 14 37 38 vertices_add_intersection def % 48
+  /vs0 vs0 15 16 3 7 vertices_add_intersection def
+  /vs0 vs0 15 16 3 4 vertices_add_intersection def % 50
+  /vs0 vs0 15 16 27 28 vertices_add_intersection def
+  /vs0 vs0 5 6 16 8 vertices_add_intersection def
+  /vs0 vs0 24 25 10 8 vertices_add_intersection def % 53
+  /vs0 vs0 23 26 41 42 vertices_add_intersection def
+  /vs0 vs0 11 12 3 7 vertices_add_intersection def % 55
+  /vs0 vs0 15 16 31 32 vertices_add_intersection def % 55
+
+  % The three big pieces at the tetrahedron vertices
+  /tv_kite vs0 [46 28 0 40] cv_vertices def
+  /tv_rect vs0 [1 16 43 14] cv_vertices def
+  /tv_tooth vs0 [2 15 45 31 56 44 39] cv_vertices def
+  % Define combined sub parts:
+  /tetra_vertex_0
+    tv_kite
+    -9 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /tetra_vertex_1
+    tetra_vertex_0 2
+    tv_rect 0 3
+    vertices_edge_attach_to
+  def
+  /tetra_vertex_2
+    tetra_vertex_1 0
+    tv_tooth vertices_mirror_y 0 1
+    vertices_edge_attach_to
+  def
+  /tetra_vertex [
+    tetra_vertex_0 white polygon_create
+    tetra_vertex_1 white polygon_create
+    tetra_vertex_2 white polygon_create
+    net_create
+  def
+
+  % the two facelets that look like a xmas tree
+  /tree_right vs0 [16 27 51 50 3 49] cv_vertices def
+  /tree_left vs0 [15 13 48 17 47] cv_vertices def
+  % Define combined sub parts:
+  /tree_0
+    tree_right
+    20.9 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /tree_1
+    tree_0 0
+    tree_left vertices_mirror_y 0 1
+    vertices_edge_attach_to
+  def
+  /tree [
+    tree_0 white polygon_create
+    tree_1 white polygon_create
+    net_create
+  def
+
+  % the triangles that form the star at the 4-fold axis
+  /triangle_4fld_0 vs0 [8 6 52] cv_vertices def
+  /triangle_4fld_1 vs0 [8 24 53] cv_vertices def
+  /4fld_0
+    triangle_4fld_0
+    -39 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /4fld_1
+    4fld_0 0
+    triangle_4fld_1 0 1
+    vertices_edge_attach_to
+  def
+  /4fld [
+    4fld_0 white polygon_create
+    4fld_1 white polygon_create
+    net_create
+  def
+
+  % the triangles at the end the star arms at the 4-fold axis
+  /tri_arm_0 vs0 [54 41 26] cv_vertices def
+  /tri_arm_1 vs0 [11 55 7] cv_vertices def
+  /arm_0
+    tri_arm_0
+    75 vertices_rotate
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /arm_1
+    arm_0 1
+    tri_arm_1 0 2
+    vertices_edge_attach_to
+  def
+  /arm [
+    arm_0 white polygon_create
+    arm_1 white polygon_create
+    net_create
+  def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def 
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (Compound of 20 tetrahedra: 20B | A5xI / D3C3)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+polygons begin
+  a4_area
+  /1face {
+    local_dict_size dict begin
+      gsave
+        0 -57 translate
+        tetra_vertex net_cut
+        -38 80 translate
+        tree net_cut
+        14 0 translate
+        4fld net_draw
+        -2 -15 translate
+        arm net_draw
+      grestore
+    end % local dict
+  } def
+  /2faces {
+    gsave
+      63 -1 translate
+      1face
+      -124 6 translate
+      -180 rotate
+      1face
+    grestore
+  } def
+
+  .1 setlinewidth
+  240 747 translate
+  1.4 1.4 scale
+  4 { %repeat
+    2faces
+    0 -124 translate
+    -1 1 scale
+  } repeat
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 0 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF

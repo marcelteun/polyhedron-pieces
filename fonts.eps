@@ -1,0 +1,226 @@
+%!PS-Adobe-2.0
+%%Title: fonts.eps
+%%Creator: Teun T\"unnissen
+%%BoundingBox: 0 0 0 0
+%%EndComments
+
+(control.eps) run
+/FONTS 20 dict def
+FONTS begin
+  /Marge 0 def
+  /bd {bind def} bind def
+
+  /fontdict_get_BBox
+  {
+  %  (fontdict_get_BBox in) pstack pop
+    /LOCAL 3 dict def
+    LOCAL begin
+      /fontDict exch def
+      [
+      fontDict begin
+        FontBBox        % [ llx lly urx ury
+        FontMatrix
+      end         % [ llx lly urx ury FontMatrix
+      /fontMatrix exch def
+      dup type [] type eq {
+        aload pop
+      } if
+      2 %repeat
+        { fontMatrix XYMatrix_mul_DxDy
+          4 2 roll
+        }
+      repeat
+      ]         % [ Dllx Dlly Durx Dury ]
+    end
+  %  (fontdict_get_BBox out) pstack pop
+  } bd %fontdict_get_BBox
+
+  /XYMatrix_mul_DxDy
+  {
+    /LOCAL 2 dict def
+    LOCAL begin
+      /Matrix exch def
+      1 index Matrix 0 get mul      % x y x*M[0]
+      1 index Matrix 2 get mul add    % x y x*M[0]+y*M[2]
+      3 1 roll          % x*M[0]+y*M[2] x y
+      Matrix 3 get mul exch     % x*M[0]+y*M[2] y*M[3] x
+      Matrix 1 get mul add      % x*M[0]+y*M[2] y*M[3]+x*M[1]
+    end
+  } bd %XYMatrix_mul_DxDy
+
+  /orig_up_left     0 def
+  /orig_base_left   1 def
+  /orig_low_left    2 def
+  /orig_up_centre   3 def
+  /orig_centre      4 def
+  /orig_low_centre  5 def
+  /orig_up_right    6 def
+  /orig_base_right  7 def
+  /orig_low_right   8 def
+  /orig_mid_left    9 def
+  /orig_mid_right   10 def
+
+  /fontdictString_2_originbox {
+  % --fnt dict-- (str) => originbox
+  %originbox [ o0 o1 o2 o3 o4 o5 o6 o7 o8]
+  %with
+  %          o0           o3          o6
+  %            .----------.----------.
+  %            |    /\           o   |
+  %            |   /  \              |
+  %          o9.  /----\  .o4    |   .o10
+  %          o1. /      \        |   .o7
+  %            |              \_/    |
+  %            .__________.__________.
+  %          o2           o5          o8
+  %  (fontdictString_2_originbox in) pstack pop
+    /LOCAL 11 dict def
+    LOCAL begin
+      /saveFont currentfont def
+      /str exch def
+      setfont
+      currentfont fontdict_get_BBox
+      /bbox exch def
+      /X0 bbox 0 get def
+      /Y0 bbox 1 get def
+      str stringwidth pop /X2 exch X0 sub def
+      /Y2 bbox 3 get def
+      /X1 X0 X2 add 2 div def
+      /Y1 Y0 Y2 add 2 div def
+      /originbox 11 array def
+      originbox 0 [ X0 Y2 ] put
+      originbox 1 [ X0  0 ] put
+      originbox 2 [ X0 Y0 ] put
+      originbox 3 [ X1 Y2 ] put
+      originbox 4 [ X1 Y1 ] put
+      originbox 5 [ X1 Y0 ] put
+      originbox 6 [ X2 Y2 ] put
+      originbox 7 [ X2  0 ] put
+      originbox 8 [ X2 Y0 ] put
+      originbox 9 [ X0 Y1 ] put
+      originbox 10[ X2 Y1 ] put
+      originbox
+      saveFont setfont
+    end
+  %  (fontdictString_2_originbox out) pstack pop
+  } bd %fontdictString_2_originbox
+
+  /fontdictStringOrigin_str_ %f s o -> str
+  {
+    /LOCAL 4 dict def
+    LOCAL begin
+      /origin exch def
+      /str exch def
+      /fontDict exch def
+      fontDict str fontdictString_2_originbox
+      origin get aload pop
+      exch neg exch neg
+      rmoveto
+      fontDict setfont
+      str
+    end
+  } bd
+
+  /fontdictStringOrigin_show_ %f s o
+  {
+    fontdictStringOrigin_str_ show
+  } bd
+
+  /fontdictStringOrigin_path_ %f s o
+  {
+    fontdictStringOrigin_str_ false charpath
+  } bd
+
+  /XYfontdictStringOrigin_show_ %X Y f s o
+  {
+    5 -2 roll
+    moveto
+    dup origin_return_dXdY
+    rmoveto
+    fontdictStringOrigin_show_
+  } bd
+
+  /loadIfArray {
+    dup type [] type eq {
+      aload pop
+    } if
+  } bd
+
+  /fontdictStringOrigin_fillBoundingBox_ {
+    /LOCAL 2 dict def LOCAL begin
+      /org exch def
+      fontdictString_2_originbox
+      dup org get aload pop
+      exch neg exch neg
+      translate
+      dup 2 get aload pop
+      3 -1 roll 6 get aload pop
+      exch 3 index sub
+      exch 2 index sub
+      4 2 roll
+      org origin_return_dXdY
+      %/== pstack ==
+      3 -1 roll add
+      3  1 roll add
+      exch
+      4 2 roll
+      rectfill
+    end
+  } bd
+
+  /fontdictStringOriginGray_showOn_ %f s o g#
+  {
+    gsave
+      setgray
+      3 copy
+      currentpoint translate
+      fontdictStringOrigin_fillBoundingBox_
+    grestore
+    fontdictStringOrigin_show_
+  } bd
+
+  /XYfontdictStringOriginGray_showOn_ %X Y f s o g#
+  {
+    gsave
+      setgray
+      4 index 4 index translate
+      3 copy fontdictStringOrigin_get_XY translate
+      3 copy
+      fontdictStringOrigin_fillBoundingBox_
+    grestore
+    XYfontdictStringOrigin_show_
+  } bd
+
+  /fontdictStringOrigin_get_XY %f s o
+  {
+    3 1 roll
+    fontdictString_2_originbox
+    exch get aload pop
+    exch neg exch neg
+  } bd
+
+  /origin_return_dXdY { %bd
+    /LOCAL 2 dict def LOCAL begin
+      /org exch def
+      CONTROL begin
+        { 0 0 } (otherwise)
+        { Marge Marge neg } 0
+        { Marge 0 } 1
+        { Marge Marge } 2
+        { 0 Marge neg } 3
+        { 0 0 } 4
+        { 0 Marge } 5
+        { Marge neg Marge neg } 6
+        { Marge neg 0 } 7
+        { Marge neg Marge } 8
+        { Marge 0 } 9
+        { Marge neg 0 } 10
+        org case
+      end
+    end
+  } bd
+
+%%Trailer
+end %FONTS
+%%EOF
+% vi: ts=2:expandtab

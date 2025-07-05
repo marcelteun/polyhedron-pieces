@@ -1,0 +1,72 @@
+%!PS-Adobe-2.0
+%%Title: extended program control
+%%Creator: Teun Tunnissen
+%%Pages: 0
+%%BoundingBox: 0 0 0 0 
+%%EndComments
+%extra functions for program control:
+% a case statement with syntax
+%	 {..} otherwise {..} val_n .. {..} val_1 value case
+% the 'otherwise' is required otherwise a error will occur.
+%
+%variables:
+% -otherwise
+%
+%functions:
+% -case
+
+/bd {bind def} bind def
+/df {def} bind def
+
+%%BeginProcSet: CONTROL 0.0 0
+/CONTROL 5 dict def
+CONTROL begin
+
+/otherwise (otherwise) def
+
+/case % {..} (otherwise) {..} val_n .. {..} val_1 value 
+{ %bind def
+  /LOCAL 2 dict def
+  LOCAL begin
+    /caseVar exch def
+    { %loop until all cases checked/popped
+      dup %val_i
+      caseVar eq
+      { %ifelse val_i==caseVar
+        otherwise eq
+        { %if some smartass has as caseVar otherwise
+          %formaly this should be a 'ifelse', but it's not necessary
+          %because of the 'exit'.
+          /P exch def
+          exit
+        } if
+        /P exch def
+        { %loop until rest of cases (until otherwise) are popped
+          otherwise eq
+          { %if val_i == otherwise
+            pop exit
+          }{ %else val_i != otherwise
+            pop
+          } ifelse
+        } loop
+        exit
+      }{ %else val_i != caseVar
+        otherwise eq
+        { %ifelse val_i == otherwise
+          /P exch def
+          exit
+        }{ %else val_i != otherwise
+          pop
+        } ifelse
+      }ifelse
+    } loop
+  P %exec
+  end
+} bind def
+
+end %CONTROL
+%%EndProcSet: CONTROL 0.0 0
+%%EndProlog
+
+%%Trailer
+%%END

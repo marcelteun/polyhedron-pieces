@@ -1,0 +1,920 @@
+%!PS-Adobe-2.0
+%%Creator: Marcel Tünnissen
+%%EndComments
+
+%%BeginSetup
+(fonts.eps) run
+% Take a bit bigger size to allow extra definitions of vertices, faces and
+% pieces.
+150 dict dup /polygons exch def begin
+
+  /df {def} bind def
+  /bd {bind def} bind df
+
+  %%%%%%%
+  %%% distances
+  %%%%%%%
+  /inch2pt {72 mul} bd
+  /cm2inch {2.54 div} bd
+  /cm2pt_factor 72 2.54 div df
+  /cm2pt   {cm2pt_factor mul} df
+  /mm2pt   {cm2pt_factor 10 div mul} df
+  /scaling_size 60 df
+  /face_space 0 df % distance between 2 faces
+  /tab_width 10 df
+  /white [1.0 1.0 1.0] def
+  /black [0.0 0.0 0.0] def
+  /red [1.0 0.0 0.0] def
+  /green [0.0 1.0 0.0] def
+  /yellow [1.0 1.0 0.0] def
+  /blue [0.0 0.0 1.0] def
+
+  % this is used in vertices_edge_attach_to as distance between to faces that
+  % are attached edge to edge. This is used when sending this to a Silhouette
+  % Portrait cutter otherwise if multiple vertices meet in a sharp angle the the
+  % knive will damage pieces that meet in one vertex (at that vertex) especially
+  % when the angle is sharp.
+  /edge_to_edge_offset_mm 0 def
+
+  % best to use rounded line join
+  1 setlinejoin
+
+  %%%%%%%
+  %%% fonts
+  %%%%%%%
+  /font      /Times-Roman df
+  /use_font  font findfont  8 scalefont df
+
+  %%%%%%%
+  %%% maths
+  %%%%%%%
+  /tan { % angle -> d
+    dup sin
+    exch cos
+    div
+  } bd
+
+  %%%%%%%
+  %%% vector operations
+  %%%%%%%
+  /ar2xy { % d r -> x y
+    % create a vector x, y from angle (in degrees) and length)
+    1 index cos  % d r cos(d)
+    1 index mul  % d r r.cos(d)
+    3  1 roll    % r.cos(d) d r
+    exch sin mul
+  } bind def
+
+  /xy2ar { % x y -> d r
+    % convert vector with angle (in degrees) and length)a vector to a vector in x, y
+    2 copy exch atan
+    3 1 roll
+    xy_len
+  } bd
+
+  /xy_op { % x0 y0 x1 y1 /op -> x0.x1 y0.y1   % where . is the operation 'op'
+    % 2D vector operation per element
+    1 dict begin
+      /op exch load def
+      exch 3 1 roll       % x0 x1 y0 y1
+      op 3 1 roll         % y0.y1 x0 x1
+      op exch
+    end
+  } bd
+
+  /xy_neg { % x y -> -x -y
+    neg exch neg exch
+  } bd
+
+  /cmp_mul { % x0 y0 x1 y1 -> x0*x1-y0*y1 x0*y1+y0*x1
+    % complex multiply
+    4 dict begin
+      /y1 exch def
+      /x1 exch def
+      /y0 exch def
+      /x0 exch def
+      x0 x1 mul y0 y1 mul sub
+      x0 y1 mul y0 x1 mul add
+    end
+  } bd
+
+  /xy_imul { % x0 y0 x1 y1  -> x0.x1-y0.y1 x0.y1 y0.x1
+    % complex multiplication of two vectors
+    3 index 2 index mul  % x0 y0 x1 y1 x0.x1
+    3 index 2 index mul  % x0 y0 x1 y1 x0.x1 y0.y1
+    sub 5 1 roll         % x0.x1-y0.y1 x0 y0 x1 y1
+    4 -1 roll mul        % x0.x1-y0.y1 y0 x1 y1.x0
+    3 1 roll mul         % x0.x1-y0.y1 y1.x0 y0.x1
+    add
+  } bd
+
+  /xy_rot { % x y deg -> x' y'
+    % rotate vector [x y] deg degrees clockwise
+    dup cos exch sin
+    xy_imul
+  } bd
+
+  /xy_smul { % x y f -> f*x f*y
+    dup /mul xy_op
+  } bd
+
+  /xy_scale { % x y -> s*x s*y  % where s = scaling_size
+    % size the vector according to the scaling_size
+    scaling_size xy_smul
+  } bd
+
+  /xy_len { % x y -> V(x*x + y*y)
+    % calculate the norm of the vector (x, y)
+    dup mul exch
+    dup mul add
+    sqrt
+  } bd
+
+  /xy_2_v { % x y -> [x y]
+    [ 3 1 roll ]
+  } bd
+
+  /v_op { % [x0 y0] [x1 y1] /op -> [x0.x1 y0.y1]
+    % where . is the operation 'op'
+    3 -1 roll aload pop  % [x1 y1] /op x1 y0
+    4 -1 roll aload pop  %         /op x0 y0 [x1 y1]
+    5 -1 roll xy_op
+    xy_2_v
+  } bd
+
+  /xy_equal { % margin x0 y0 x1 y1 -> bool
+    % Check the distance between (x0, y0) and (x1, y1) is smaller than margin
+    %
+    % margin: margin to define the coordinates as being equal
+    % x0 y0: the X and Y coordinate of the first coordinate
+    % x1 y1: the X and Y coordinate of the second coordinate
+    %
+    % Return: boolean expressing whether the coordinates are equal with the
+    % specified margin.
+    /sub xy_op    % margin dx dy
+    xy_len        % margin distance
+    ge
+  } bd
+
+  /v_mirror_y { % [x y] -> [x -y]
+    % where . is the operation 'op'
+    exch aload pop neg xy_2_v
+  } bd
+
+  /v_moveto { % [x y] -> _
+    aload pop moveto
+  } bd
+
+  /v_lineto { % [x y] -> _
+    aload pop lineto
+  } bd
+
+  %%%%%%%
+  %%% vertex array operations
+  %%%%%%%
+  /cv_vertices { % [[x0 y0]..[xn yn]] [i0 .. im]-> [[xi0 yi0] .. [xim yim]]
+    % Filter vertex array to only keep certain indices
+    %
+    % vs: the original vertex array with [x y] coordinates
+    % indices: an array with vertes indices for the vertices that are needed
+    %
+    % Return:
+    % A vertex array with only the vertices with the specified indices.
+
+    %/---cvvertices-in-- pstack ==
+    [ 3 1 roll           % [    [[x0 y0]..[xn yn]] [i0 .. im]
+    dup length 1 sub     % [ .. [[x0 y0]..[xn yn]] [i0 .. im] m
+    0 1 3 -1 roll        % [ .. [[x0 y0]..[xn yn]] [i0 .. im] 0 1 m
+    { % for              % [ .. [[x0 y0]..[xn yn]] [i0 .. im] j
+      3 copy get get     % [ .. [[x0 y0]..[xn yn]] [i0 .. im] j [xij yij]
+      4 1 roll % [ .. [xij yij] [[x0 y0]..[xn yn]] [i0 .. im] j
+      pop      % [ .. [xij yij] [[x0 y0]..[xn yn]] [i0 .. im]
+    } for
+    pop pop ]
+    %/---cvvertices-out-- pstack ==
+  } bd
+
+  /vertices_append_v { % [[x0 y0]..[xm ym]] [xn yn] -> [[x0 y0]..[xn yn]]
+    % Append the specified (x, y) to the vertex array
+    %
+    % vs: an array with [x y] coordinates to append to
+    % x y: the X and Y coordinate of the vertex to add
+    %
+    % Return:
+    % A new array of vertices appended with the new vertex
+    2 dict begin
+      exch aload length % vn v0 .. vm n
+      1 add /n exch def % vn v0 .. vm
+      n -1 roll         % v0 .. vm vn
+      n array astore
+    end
+  } bd
+
+  /xy_in_vertices {  % x y vertices margin -> bool
+    % return whether the specified (x, y) are in vertices using a specified margin
+    %
+    % x y: the X and Y coordinate to check
+    % vertices: the array with vertices
+    % margin: if the coordinates are within this distance, then they are
+    %         considered to be equal
+    2 dict begin
+      /m exch def        % x y vertices
+      false 4 1 roll     % false x y vertices
+      { % forall
+        % x y [xi yi]
+        m exch           % false x y margin [xi yi]
+        aload pop        % false x y margin xi yi
+        4 index 4 index  % false x y margin xi yi x y
+        xy_equal         % false x y bool
+        { % if           % false x y
+          3 -1 roll pop  % x y
+          true 3 1 roll  % true x y
+          exit
+        } if
+      } forall           % bool x y
+      pop pop
+    end
+  } bd
+
+  /vertices_make_unique {  % vertices margin -> new_vertices
+    4 dict begin
+      /m exch def
+      /vs [] def % unique vertices
+      { % forall       % [x y]
+        aload 3 1 roll % [x y] x y
+        vs m           % [x y] x y unique_vertices margin
+        xy_in_vertices % [x y] bool
+        { % if           [x y]
+          pop
+        }{ % else
+          vs exch vertices_append_v
+          /vs exch def
+        } ifelse
+      } forall
+      vs
+    end
+  } bd
+
+  /vertices_show_nos {  % vertices -> _
+    % Show vertex number (from 0) for the vertex array
+    %
+    % vertices: an array with [x y] coordinates
+
+    % local name space:
+    3 dict begin
+      % Show vertices with lower index on top of indices with higher index
+      /vs exch def
+      /i vs length def
+      { % loop
+        /i i 1 sub def
+        % TODO: calculate string length? (now max vertex number is 99999)
+        i (     ) cvs      % label
+        7 0                % (label) anchor alpha
+        vs i get aload pop % (label) anchor alpha x y
+        % show arc at x y
+        gsave
+          2 copy translate
+          0 0 0.3 0 360 arc fill
+        grestore
+        add_label
+        i 0 le {exit} if
+      } loop
+    end
+  } bind def
+
+  /vertices_add_intersection { % vertices v0 v1 v2 v3 -> new_vertices
+    % Add to the vertex array the vertex where two lines intersect
+    %
+    % Each line is defined by a pair of vertex indices
+    % vertices: an array with [x y] coordinates for the vertices
+    % v0: an index in vs specifying a vertex in the first line
+    % v1: an index in vs specifying another vertex in the first line
+    % v2: an index in vs specifying a vertex in the second line
+    % v3: an index in vs specifying another vertex in the second line
+    %
+    % Return: an array with the new vertex appended
+    4 index 5 1 roll         % vs vs v0 v1 v2 v3
+    vertices_line_intersect  % vs x0 y0
+    [ 3 1 roll ]             % vs [x0 y0]
+    vertices_append_v
+  } bd
+
+  /vertices_index_mod { % Vs i -> Vs i_
+    2 copy exch length ge { % if the index is greater than or equal to the length
+      1 index length    % Vs i |Vs|
+      mod
+    } if
+  } bd
+
+  /vertices_get { % Vs i -> x y
+    %/---vertices_get-in-- pstack ==
+    vertices_index_mod
+    get aload pop
+    %/---vertices_get-out-- pstack ==
+  } bd
+
+  /vertices_get_reverse { % Vs i -> x y
+    %/---vertices_get_reverse-in-- pstack ==
+    vertices_index_mod
+    1 index length 1 sub  % Vs i maxI
+    sub neg
+    vertices_get
+    %/---vertices_get_reverse-out-- pstack ==
+  } bd
+
+  /vertices_translate { % Vs Tx Ty -> newVs
+    4 dict begin
+      /y exch def
+      /x exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          x y /add xy_op
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_scale { % vertices s -> new_vertices
+    % scale the vertices in the vertex array with the specified factor
+    %
+    % vertices: an array with [x y] coordinates
+    % s: factor to scale both all x and y with
+    % return: and new vertex array with the scaled coordinates
+    4 dict begin
+      /s exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          s s /mul xy_op
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_xy_op { % Vs x y /op -> newVs
+    5 dict begin
+      /op exch def
+      /y exch def
+      /x exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          x y op xy_op
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_rotate { % Vs alpha -> newVs
+    4 dict begin
+      dup
+      cos /x exch def
+      sin /y exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          x y cmp_mul
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_mirror_y { % Vs -> mirroredVs
+    2 dict begin
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          neg xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_edge_length { % Vs i -> len
+    4 dict begin
+      /i exch def
+      /vs exch def
+      vs i 1 add vertices_get
+      vs i vertices_get
+      /sub xy_op
+      xy_len
+    end
+  } bd
+
+  /vertices_edge_get_xys { % Vs i -> x_i+1 y_i+1 x_i y_i
+    2 copy 1 add            % Vs i Vs i+1
+    vertices_get                % Vs i x_i+1 y_i+1
+    4 2 roll                % x_i+1 y_i+1 Vs i
+    get aload pop           % x_i+1 y_i+1 x_i y_i
+  } bd
+
+  /vertices_edge_get_centre { % Vs i -> cx cy
+    vertices_edge_get_xys
+    /add xy_op
+    2 {exch 2 div} repeat
+  } bd
+
+  /vertices_edge_get_angle { % Vs i -> angle
+    vertices_edge_get_xys
+    /sub xy_op
+    exch % dy dx % edge 0
+    atan
+  } bd
+
+  /vertices_get_angle_1st_edge { % Vs -> Vs angle
+    dup 0 vertices_edge_get_angle
+  } bd
+
+  /vertices_rotate_1st_edge_to_x-axis { % Vs -> Vs
+    vertices_get_angle_1st_edge neg
+    vertices_rotate
+  } bd
+
+  /vertices_rotate_1st_edge_to_y-axis { % Vs -> Vs
+    vertices_get_angle_1st_edge 90 sub neg
+    vertices_rotate
+  } bd
+
+  /vertices_line_intersect { % vs v0 v1 v2 v3 -> x_intersect y_intersect
+    % Find the intersection of two lines from the specified vertex array
+    %
+    % vs: an array with [x y] coordinates
+    % v0: an index in vs specifying a vertex in the first line
+    % v1: an index in vs specifying another vertex in the first line
+    % v2: an index in vs specifying a vertex in the second line
+    % v3: an index in vs specifying another vertex in the second line
+    %
+    % Return:
+    % x_intersect y_intersect is the intersection of the line that connects
+    % vs[v0] with vs[v1] and] vs[v2] with vs[v3]
+    10 dict begin
+      /v3 exch def
+      /v2 exch def
+      /v1 exch def
+      /v0 exch def
+      /vs exch def
+      vs v1 vertices_get vs v0 vertices_get /sub xy_op
+      /c exch def        % y1 - y0
+      /a exch def        % x1 - x0
+      vs v2 vertices_get vs v3 vertices_get /sub xy_op
+      /d exch def        % y2 - y3
+      /b exch def        % x2 - x3
+      % 1 / (matrix determinant) : TODO: handle 1/0?
+      1 a d mul b c mul sub div
+      d b
+      vs v2 vertices_get vs v0 vertices_get /sub xy_op
+      /mul xy_op         % 1/D d(x2-x0) b(y2-y0)
+      sub
+      mul                % t0
+      %/--------t0------- pstack ==
+      dup a c /mul xy_op % t0.a t0.c
+      vs v0 vertices_get /add
+      xy_op
+                         % x0 + t0.a	y0 + t0.c
+    end
+  } bd
+
+  /vertices_vertex_attach_to { % Vs0 V0 Vs1 v0 -> _
+    % attach the array arrays such that Vs0[v0] == Vs1[v0]
+    % Only a translation is done, no rotation.
+    6 dict begin
+      /v0 exch def
+      /Vs1 exch def
+      /V0 exch def
+      /Vs0 exch def
+      % Translate Vs1
+      Vs1
+        Vs0 V0 vertices_get
+        Vs1 v0 vertices_get
+        /sub xy_op
+        vertices_translate
+      %/--T-- pstack ==
+    end
+  } bd
+
+  /opp_shift /_oppShift def
+  /reverse_edges /reverse_edges def
+  /vertices_edge_attach_to { % Vs0 e0 /reverse_edges* Vs1 v0 v1 /reverse_edges* -> Vs
+                      % * /reverse_edges is optional
+    % attach the array Vs1 to Vs0: such that vertex Vs0[e0] == Vs1[v0]
+    % and the the directed edge Vs1[v1]-Vs1[v0] is in the direction of e0 =
+    % Vs[e0+1] - Vs[e0]
+    % I.e.
+    %      Vs0[e0]
+    %      =          _-"\
+    %      Vs1[v0] _-"    \
+    % +----------+"   Vs1  \
+    % |           \         \
+    % |            \         \
+    % |   Vs0       \_________\
+    % |              \Vs1[v1]
+    % |               \
+    % |________________\
+    %                   Vs0[e0+1]
+    %
+    % /reverse_edges will reverse the order of the vertices in the array. This
+    % can be handy to attach the face to the other vertex of the same edge.
+    % E.g. if you want to attach Vs[v1] to Vs0[e0+1] instead.
+    %
+    %         Vs0[e0]
+    % +----------+
+    % |           \      _-"\
+    % |            \  _-"    \
+    % |      Vs1[v1]\"   Vs1  \
+    % |              \         \
+    % | Vs0           \         \
+    % |________________\_________\
+    %                   Vs0[e0+1] = Vs1[v0]
+    %
+    % This effect can be obtained by adding the first /reverse_edges after the
+    % edge number. Keep the same e0, but exchange v0 and v1.
+    %
+    %/---vertices_edge_attach_to-in-- pstack ==
+    9 dict begin
+      /isOppShift 1 index opp_shift eq def
+      isOppShift {pop} if
+      /subAngle 90 def
+      /verticesGet1
+        1 index
+        /reverse_edges eq { % if
+          exch pop
+          /vertices_get_reverse
+        }{ % else
+          /vertices_get
+        } ifelse
+        load
+      def
+      /v1 exch def
+      /v0 exch def
+      /Vs1 exch def
+      /verticesGet0
+        1 index
+        /reverse_edges eq { % if
+          exch pop
+          /vertices_get_reverse
+        }{ % else
+          /vertices_get
+        } ifelse
+        load
+      def
+      /e0 exch def
+      /Vs0 exch def
+      % Rotate Vs1
+      /Vs1 Vs1
+        Vs0 e0 1 add verticesGet0     % x_i+1 y_i+1
+        Vs0 e0 verticesGet0           % x_i+1 y_i+1 x_i y_i
+        /sub xy_op                % x_i+1-x_i y_i+1-y_i
+        exch atan                 % alpha
+        /angle 1 index 90 sub def
+        Vs1 v1 verticesGet1
+        Vs1 v0 verticesGet1
+        /sub xy_op
+        exch atan                 % alpha beta
+        sub                       % alpha-beta
+        vertices_rotate
+        %/--R-- pstack ==
+      def
+      % Translate Vs1
+      Vs1
+        Vs0 e0 verticesGet0
+        Vs1 v0 verticesGet1
+        /sub xy_op
+        1 0 angle
+        xy_rot edge_to_edge_offset_mm xy_smul
+        /add xy_op
+        vertices_translate
+      % translate
+        isOppShift { % if
+          angle 180 add
+        }{
+          angle
+        } ifelse
+        % optimise:
+        dup cos face_space mul exch sin face_space mul
+        vertices_translate
+      %/--T-- pstack ==
+    end
+    %/---vertices_edge_attach_to-out-- pstack ==
+  } bd
+
+  /vertices_get_cog { % Vs -> x y
+    % returns the centre of gravity for Vs, by taking the average of all
+    % vertices in Vs.
+    3 dict begin
+      /g [0 0] def
+      aload length
+      /n exch def
+      n { %repeat
+        g /add v_op
+        /g exch def
+      } repeat
+      g aload pop
+      n dup /div xy_op
+    end
+  } bd
+
+  /vertices_sub_get_cog { % Vs Is -> x y
+    % returns the centre of gravity for a sub array of Vs, by taking the average
+    % of all vertices the sub array of Vs. 'Is' refer to the indices in Vs that
+    % define the sub-array.
+    [ exch                 % Vs [ Is
+    aload length { %repeat % Vs [ .. i0 .. in
+      counttomark          % Vs [ .. i0 .. in m
+      1 add index          % Vs [ .. i0 .. in Vs
+      exch vertices_get xy_2_v % Vs [ .. i0 .. Vs[in]
+      counttomark 1 roll   % Vs [ Vs[in] .. i0 .. in-1
+    } repeat
+    ] exch pop             % [Vs[in] .. Vs[0]]
+    vertices_get_cog
+  } bd
+
+  %%%%%%%
+  %%% polygon operations
+  %%%%%%%
+  /polygon_create { % Vs [colour] -> polygon
+                   % where the colour is either a rgb or cmyk colour
+    5 dict dup begin    % Vs [fillR fillG fillB] polygon
+      3 1 roll
+      /c exch def
+      /Vs exch def
+      /o false def
+      /Es [ % edges used when cutting, where direction is important
+        % Edges is an array of pairs of vertex indices [v1 v0]
+        % Cutting is done from v0 to v1, they are in this order in the array
+        % since then one can do aload pop moveto lineto
+        0 1 Vs length 1 sub {        % for  % /Es [ .. i
+          [ exch                     % for  % /Es [ .. [ i
+            dup 1 add Vs length mod  % /Es [ .. [ i (i+1)%n
+            exch
+          ]                          % /Es [ .. [(i+1)%n i]
+        } for
+      ] def
+    end
+  } bd
+
+  /no_col -1 def
+
+  /polygon_set_add_order { % polygon bool -> _
+    /o exch put
+  } bd
+
+  /dot {
+    0 360 arc
+  } bd
+
+  /polygon_cut { % polygon -> _
+    begin
+      % for all edges
+      0 1 Es length 1 sub { % for
+        % i
+        Es exch get aload pop        % j i
+        Vs exch get aload pop moveto
+        Vs exch get aload pop lineto
+      } for
+      stroke
+    end
+  } bd
+
+  /polygon_reverse_edge { % polygon i -> polygon
+    % reverse to direction of the edge. This is important when using polygon_cut
+    1 index begin
+      Es exch [         % polygon Es i [
+        Es 2 index get  % polygon Es i [ [p q]
+        aload pop exch  % polygon Es i [ q p
+      ]                 % polygon Es i [q p]
+      put               % polygon
+    end
+  } bd
+
+  /polygon_cut_to_edge { % polygon -> _
+    5 dict begin
+      % add first vertex to the array (in local dict) so edge i is from v_i to v_i+1
+      /Vs exch  % /Vs polygon
+        begin
+          [
+            Vs aload pop
+            Vs 0 get
+          ]
+        end
+      def
+      0 1 Vs length 2 sub {  % for all n-1 edges where n is amount for vertices (note PS for loop is including)
+        dup Vs exch get /v0 exch def
+        1 add Vs exch get /v1 exch def
+        /c
+          v0 v1 /add v_op
+          [2 2] /div v_op
+        def
+        c v_moveto v0 v_lineto
+        c v_moveto v1 v_lineto
+        stroke
+      } for
+    end
+  } bd
+
+  /polygon_draw { % polygon -> _
+    begin
+      Vs aload length        % [x0 y0] [x1 y1] .. [xn-2 yn-2] [xn-1 yn-1] n
+      exch v_moveto          % [x0 y0] [x1 y1] .. [xn-2 yn-2]             n
+      1 sub                  % [x0 y0] [x1 y1] .. [xn-2 yn-2]             n-1
+      { v_lineto } repeat
+      closepath
+      c no_col ne { % if
+        gsave
+          c aload length 3 eq {setrgbcolor}{setcmykcolor}ifelse fill
+        grestore
+      } if
+      stroke
+      o { % if
+        newpath Vs 0 vertices_get 5 dot fill
+        newpath Vs 1 vertices_get 5 dot stroke
+        newpath Vs 1 vertices_get 3 dot stroke
+      } if
+    end
+  } bd
+
+  /polygon_get_Varr { % polygon -> vertices
+  begin
+    Vs
+  end
+  } bd
+
+  %%%%%%%
+  %%% net operations
+  %%%%%%%
+  /net_new { % _ ->  net
+    2 dict dup begin
+      /p 13 dict def
+      /l 0 def
+    end
+  } bd
+
+  /net_add { % net polygon -> _
+    exch begin
+      p l 3 -1 roll     % p l polygon
+      put               %
+      /l l 1 add def
+    end
+  } bd
+
+  /net_get_polygon { % net i -> polygon_i
+    exch begin
+      p exch get
+    end
+  } bd
+
+  /net_get_vertices_i { % net i -> Vs_i
+    net_get_polygon /Vs get
+  } bd
+
+  /net_create { % [ polygon0 .. polygon_n-1 -> net
+    counttomark            %   [ polygon0 .. polygon_n-1 n
+    dup dict dup begin     %   [ polygon0 .. polygon_n-1 n p
+      1 index 3 add 1 roll % p [ polygon0 .. polygon_n-1 n
+      1 sub -1 0           % p [ polygon0 .. polygon_n-1 n-1 -1 0
+      { % for              % p [ polygon0 .. polygon_i i
+        exch def           % p [ polygon0 .. polygon_i-1
+      } for                % p [
+      pop
+    end                    % p
+    2 dict dup begin       % p net
+      exch dup length      % net p l
+      /l exch def
+      /p exch def
+    end                    % net
+  } bd
+
+  /net_cut { % net -> _
+    /p get {  % forall % key value
+      polygon_cut pop
+    } forall
+  } bd
+
+  /net_draw { % net -> _
+    /p get {  % forall % key value
+      polygon_draw pop
+    } forall
+  } bd
+
+  /net_xy_op { %net x y op -> _
+    % apply the operation op to all vertices of the net
+    4 -1 roll begin % net
+      0 1 l 1 sub { % for                  % x y op i
+        p exch get begin % polygon_i
+          3 copy Vs 4 1 roll               % x y op Vs x y op
+          vertices_xy_op                       % x y op newVs
+          /Vs exch def
+        end % polygon_i
+      } for
+      pop pop pop
+    end % net
+  } bd
+
+  /add_label { % (label) anchor alpha x y
+    % add specified label to specified position
+    %
+    % (label): string defining the label
+    % anchor: number specifying which anchor to use (see FONTS)
+    % alpha: rotate the label with this amount of degrees
+    % x: x coordinate where to attach the label to
+    % y: y coordinate where to attach the label to
+    gsave
+      translate
+      rotate
+      FONTS begin
+        0 0      % (label) anchor 0 0
+        use_font % (label) anchor 0 0 font
+        5 -2 roll
+        XYfontdictStringOrigin_show_
+      end
+    grestore
+  } bd
+
+  /net_label_tab { % net i (label)
+    % print (label) at the centre of gravity of Vs on a line
+    % parallel to the first edge of Vs with index i in the net.
+    4 % anchor              % net i (label) 4
+    4 2 roll                % (label) 4 net i
+    net_get_vertices_i          % (label) 4 Vs
+    vertices_get_angle_1st_edge % (label) 4 Vs alpha
+    180 add exch            % (label) 4 alpha Vs
+    vertices_get_cog            % (label) 4 alpha x y
+    add_label
+  } bd
+
+  /net_label_edge { % net f_i e_i (label)
+    % print (label) at the edge with index e_i of the polygon with index f_i in
+    % the net.
+    5 % anchor              % net f_i e_i (label) 5
+    5 -2 roll               % e_i (label) 5 net f_i
+    net_get_vertices_i          % e_i (label) 5 Vs
+    4 -1 roll               % (label) 5 Vs e_i
+    2 copy
+    vertices_edge_get_angle     % (label) Vs e_i angle
+    3 1 roll
+    vertices_edge_get_centre    % (label) angle cx cy
+    add_label
+  } bd
+
+  %%%%%%%
+  %%% tab
+  %%%%%%%
+  /push_tab_vertices { % l alpha beta -> [..]
+    10 dict begin
+      tan /tanb exch def
+      tan /tana exch def
+      /l exch def
+      [ [0 0] [l 0]                    % [ [l 0] [0 0]
+        /x2
+          l
+          tab_width tanb div
+          sub
+        def
+        /y2 tab_width def
+        /x3 tab_width tana div def
+        /y3 tab_width def
+        x3 x2 gt { %if bowtie
+          [ tanb l mul
+            tana tanb add
+            div
+            dup tana mul
+          ]
+        } { %else
+          [x2 y2] [x3 y3]
+        } ifelse
+      ]                                 % net Vs edge_br tab_arr
+    end
+  } bd
+
+  /net_add_tab { % net net_elem_nr edge_nr alpha beta -> _
+    % add a tab with width tab_width to edge edge_nr of element elem_nr to the
+    % net. The tab will use a tab angle alpha on the left side and beta on the
+    % right side
+    10 dict begin
+      5 2 roll                         % alpha beta net net_elem_nr edge_nr
+      2 index 3 -1 roll net_get_vertices_i % alpha beta net edge_nr Vs
+      exch 2 copy                      % alpha beta net Vs edge_nr Vs edge_nr
+      vertices_edge_length                 % alpha beta net Vs edge_nr l
+      6 -2 roll                        % net Vs edge_nr l alpha beta
+      push_tab_vertices                    % net Vs edge_br tab_arr
+      0 1 vertices_edge_attach_to          % net Vs_
+      white polygon_create             % net polygon
+      net_add                          % _
+    end
+  } bd
+
+%%EndSetup
+
+%%Trailer
+end
+%%EOF
+% vi: ts=2:expandtab

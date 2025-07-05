@@ -1,0 +1,1908 @@
+%!PS-Adobe-2.0
+%%Title: Compound of tetrahedra 20B | A5xI / D3C3
+%%Creator: PS.py written by marcelteun
+%%Pages: 1 1
+%%BoundingBox: 0 0 595 842
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+
+/bd {bind def} bind def
+/df {def} bind def
+
+%%BeginProcSet: CONTROL 0.0 0
+/CONTROL 5 dict def
+CONTROL begin
+
+/otherwise (otherwise) def
+
+/case % {..} (otherwise) {..} val_n .. {..} val_1 value 
+{ %bind def
+  /LOCAL 2 dict def
+  LOCAL begin
+    /caseVar exch def
+    { %loop until all cases checked/popped
+      dup %val_i
+      caseVar eq
+      { %ifelse val_i==caseVar
+        otherwise eq
+        { %if some smartass has as caseVar otherwise
+          %formaly this should be a 'ifelse', but it's not necessary
+          %because of the 'exit'.
+          /P exch def
+          exit
+        } if
+        /P exch def
+        { %loop until rest of cases (until otherwise) are popped
+          otherwise eq
+          { %if val_i == otherwise
+            pop exit
+          }{ %else val_i != otherwise
+            pop
+          } ifelse
+        } loop
+        exit
+      }{ %else val_i != caseVar
+        otherwise eq
+        { %ifelse val_i == otherwise
+          /P exch def
+          exit
+        }{ %else val_i != otherwise
+          pop
+        } ifelse
+      }ifelse
+    } loop
+  P %exec
+  end
+} bind def
+
+end %CONTROL
+
+/FONTS 20 dict def
+FONTS begin
+  /Marge 0 def
+  /bd {bind def} bind def
+
+  /fontdict_get_BBox
+  {
+  %  (fontdict_get_BBox in) pstack pop
+    /LOCAL 3 dict def
+    LOCAL begin
+      /fontDict exch def
+      [
+      fontDict begin
+        FontBBox        % [ llx lly urx ury
+        FontMatrix
+      end         % [ llx lly urx ury FontMatrix
+      /fontMatrix exch def
+      dup type [] type eq {
+        aload pop
+      } if
+      2 %repeat
+        { fontMatrix XYMatrix_mul_DxDy
+          4 2 roll
+        }
+      repeat
+      ]         % [ Dllx Dlly Durx Dury ]
+    end
+  %  (fontdict_get_BBox out) pstack pop
+  } bd %fontdict_get_BBox
+
+  /XYMatrix_mul_DxDy
+  {
+    /LOCAL 2 dict def
+    LOCAL begin
+      /Matrix exch def
+      1 index Matrix 0 get mul      % x y x*M[0]
+      1 index Matrix 2 get mul add    % x y x*M[0]+y*M[2]
+      3 1 roll          % x*M[0]+y*M[2] x y
+      Matrix 3 get mul exch     % x*M[0]+y*M[2] y*M[3] x
+      Matrix 1 get mul add      % x*M[0]+y*M[2] y*M[3]+x*M[1]
+    end
+  } bd %XYMatrix_mul_DxDy
+
+  /orig_up_left     0 def
+  /orig_base_left   1 def
+  /orig_low_left    2 def
+  /orig_up_centre   3 def
+  /orig_centre      4 def
+  /orig_low_centre  5 def
+  /orig_up_right    6 def
+  /orig_base_right  7 def
+  /orig_low_right   8 def
+  /orig_mid_left    9 def
+  /orig_mid_right   10 def
+
+  /fontdictString_2_originbox {
+  % --fnt dict-- (str) => originbox
+  %originbox [ o0 o1 o2 o3 o4 o5 o6 o7 o8]
+  %with
+  %          o0           o3          o6
+  %            .----------.----------.
+  %            |    /\           o   |
+  %            |   /  \              |
+  %          o9.  /----\  .o4    |   .o10
+  %          o1. /      \        |   .o7
+  %            |              \_/    |
+  %            .__________.__________.
+  %          o2           o5          o8
+  %  (fontdictString_2_originbox in) pstack pop
+    /LOCAL 11 dict def
+    LOCAL begin
+      /saveFont currentfont def
+      /str exch def
+      setfont
+      currentfont fontdict_get_BBox
+      /bbox exch def
+      /X0 bbox 0 get def
+      /Y0 bbox 1 get def
+      str stringwidth pop /X2 exch X0 sub def
+      /Y2 bbox 3 get def
+      /X1 X0 X2 add 2 div def
+      /Y1 Y0 Y2 add 2 div def
+      /originbox 11 array def
+      originbox 0 [ X0 Y2 ] put
+      originbox 1 [ X0  0 ] put
+      originbox 2 [ X0 Y0 ] put
+      originbox 3 [ X1 Y2 ] put
+      originbox 4 [ X1 Y1 ] put
+      originbox 5 [ X1 Y0 ] put
+      originbox 6 [ X2 Y2 ] put
+      originbox 7 [ X2  0 ] put
+      originbox 8 [ X2 Y0 ] put
+      originbox 9 [ X0 Y1 ] put
+      originbox 10[ X2 Y1 ] put
+      originbox
+      saveFont setfont
+    end
+  %  (fontdictString_2_originbox out) pstack pop
+  } bd %fontdictString_2_originbox
+
+  /fontdictStringOrigin_str_ %f s o -> str
+  {
+    /LOCAL 4 dict def
+    LOCAL begin
+      /origin exch def
+      /str exch def
+      /fontDict exch def
+      fontDict str fontdictString_2_originbox
+      origin get aload pop
+      exch neg exch neg
+      rmoveto
+      fontDict setfont
+      str
+    end
+  } bd
+
+  /fontdictStringOrigin_show_ %f s o
+  {
+    fontdictStringOrigin_str_ show
+  } bd
+
+  /fontdictStringOrigin_path_ %f s o
+  {
+    fontdictStringOrigin_str_ false charpath
+  } bd
+
+  /XYfontdictStringOrigin_show_ %X Y f s o
+  {
+    5 -2 roll
+    moveto
+    dup origin_return_dXdY
+    rmoveto
+    fontdictStringOrigin_show_
+  } bd
+
+  /loadIfArray {
+    dup type [] type eq {
+      aload pop
+    } if
+  } bd
+
+  /fontdictStringOrigin_fillBoundingBox_ {
+    /LOCAL 2 dict def LOCAL begin
+      /org exch def
+      fontdictString_2_originbox
+      dup org get aload pop
+      exch neg exch neg
+      translate
+      dup 2 get aload pop
+      3 -1 roll 6 get aload pop
+      exch 3 index sub
+      exch 2 index sub
+      4 2 roll
+      org origin_return_dXdY
+      %/== pstack ==
+      3 -1 roll add
+      3  1 roll add
+      exch
+      4 2 roll
+      rectfill
+    end
+  } bd
+
+  /fontdictStringOriginGray_showOn_ %f s o g#
+  {
+    gsave
+      setgray
+      3 copy
+      currentpoint translate
+      fontdictStringOrigin_fillBoundingBox_
+    grestore
+    fontdictStringOrigin_show_
+  } bd
+
+  /XYfontdictStringOriginGray_showOn_ %X Y f s o g#
+  {
+    gsave
+      setgray
+      4 index 4 index translate
+      3 copy fontdictStringOrigin_get_XY translate
+      3 copy
+      fontdictStringOrigin_fillBoundingBox_
+    grestore
+    XYfontdictStringOrigin_show_
+  } bd
+
+  /fontdictStringOrigin_get_XY %f s o
+  {
+    3 1 roll
+    fontdictString_2_originbox
+    exch get aload pop
+    exch neg exch neg
+  } bd
+
+  /origin_return_dXdY { %bd
+    /LOCAL 2 dict def LOCAL begin
+      /org exch def
+      CONTROL begin
+        { 0 0 } (otherwise)
+        { Marge Marge neg } 0
+        { Marge 0 } 1
+        { Marge Marge } 2
+        { 0 Marge neg } 3
+        { 0 0 } 4
+        { 0 Marge } 5
+        { Marge neg Marge neg } 6
+        { Marge neg 0 } 7
+        { Marge neg Marge } 8
+        { Marge 0 } 9
+        { Marge neg 0 } 10
+        org case
+      end
+    end
+  } bd
+end %FONTS
+
+% Take a bit bigger size to allow extra definitions of vertices, faces and
+% pieces.
+150 dict dup /polygons exch def begin
+
+  /df {def} bind def
+  /bd {bind def} bind df
+
+  %%%%%%%
+  %%% distances
+  %%%%%%%
+  /inch2pt {72 mul} bd
+  /cm2inch {2.54 div} bd
+  /cm2pt_factor 72 2.54 div df
+  /cm2pt   {cm2pt_factor mul} df
+  /mm2pt   {cm2pt_factor 10 div mul} df
+  /scaling_size 60 df
+  /face_space 0 df % distance between 2 faces
+  /tab_width 10 df
+  /white [1.0 1.0 1.0] def
+  /black [0.0 0.0 0.0] def
+  /red [1.0 0.0 0.0] def
+  /green [0.0 1.0 0.0] def
+  /yellow [1.0 1.0 0.0] def
+  /blue [0.0 0.0 1.0] def
+
+  % this is used in vertices_edge_attach_to as distance between to faces that
+  % are attached edge to edge. This is used when sending this to a Silhouette
+  % Portrait cutter otherwise if multiple vertices meet in a sharp angle the the
+  % knive will damage pieces that meet in one vertex (at that vertex) especially
+  % when the angle is sharp.
+  /edge_to_edge_offset_mm 0 def
+
+  % best to use rounded line join
+  1 setlinejoin
+
+  %%%%%%%
+  %%% fonts
+  %%%%%%%
+  /font      /Times-Roman df
+  /use_font  font findfont  8 scalefont df
+
+  %%%%%%%
+  %%% maths
+  %%%%%%%
+  /tan { % angle -> d
+    dup sin
+    exch cos
+    div
+  } bd
+
+  %%%%%%%
+  %%% vector operations
+  %%%%%%%
+  /xy_op { % x0 y0 x1 y1 /op -> x0.x1 y0.y1   % where . is the operation 'op'
+    % 2D vector operation per element
+    1 dict begin
+      /op exch load def
+      exch 3 1 roll       % x0 x1 y0 y1
+      op 3 1 roll         % y0.y1 x0 x1
+      op exch
+    end
+  } bd
+
+  /xy_neg { % x y -> -x -y
+    neg exch neg exch
+  } bd
+
+  /cmp_mul { % x0 y0 x1 y1 -> x0*x1-y0*y1 x0*y1+y0*x1
+    % complex multiply
+    4 dict begin
+      /y1 exch def
+      /x1 exch def
+      /y0 exch def
+      /x0 exch def
+      x0 x1 mul y0 y1 mul sub
+      x0 y1 mul y0 x1 mul add
+    end
+  } bd
+
+  /xy_imul { % x0 y0 x1 y1  -> x0.x1-y0.y1 x0.y1 y0.x1
+    % complex multiplication of two vectors
+    3 index 2 index mul  % x0 y0 x1 y1 x0.x1
+    3 index 2 index mul  % x0 y0 x1 y1 x0.x1 y0.y1
+    sub 5 1 roll         % x0.x1-y0.y1 x0 y0 x1 y1
+    4 -1 roll mul        % x0.x1-y0.y1 y0 x1 y1.x0
+    3 1 roll mul         % x0.x1-y0.y1 y1.x0 y0.x1
+    add
+  } bd
+
+  /xy_rot { % x y deg -> x' y'
+    % rotate vector [x y] deg degrees clockwise
+    dup cos exch sin
+    xy_imul
+  } bd
+
+  /xy_smul { % x y f -> f*x f*y
+    dup /mul xy_op
+  } bd
+
+  /xy_scale { % x y -> s*x s*y  % where s = scaling_size
+    % size the vector according to the scaling_size
+    scaling_size xy_smul
+  } bd
+
+  /xy_len { % x y -> V(x*x + y*y)
+    % calculate the norm of the vector (x, y)
+    dup mul exch
+    dup mul add
+    sqrt
+  } bd
+
+  /xy_2_v { % x y -> [x y]
+    [ 3 1 roll ]
+  } bd
+
+  /v_op { % [x0 y0] [x1 y1] /op -> [x0.x1 y0.y1]
+    % where . is the operation 'op'
+    exch aload pop     % [x1 y1] /op x0 y0
+    4 -1 roll          %         /op x0 y0 [x1 y1]
+    aload pop
+    5 -1 roll xy_op
+    xy_2_v
+  } bd
+
+  /xy_equal { % margin x0 y0 x1 y1 -> bool
+    % Check the distance between (x0, y0) and (x1, y1) is smaller than margin
+    %
+    % margin: margin to define the coordinates as being equal
+    % x0 y0: the X and Y coordinate of the first coordinate
+    % x1 y1: the X and Y coordinate of the second coordinate
+    %
+    % Return: boolean expressing whether the coordinates are equal with the
+    % specified margin.
+    /sub xy_op    % margin dx dy
+    xy_len        % margin distance
+    ge
+  } bd
+
+  /v_mirror_y { % [x y] -> [x -y]
+    % where . is the operation 'op'
+    exch aload pop neg xy_2_v
+  } bd
+
+  /v_moveto { % [x y] -> _
+    aload pop moveto
+  } bd
+
+  /v_lineto { % [x y] -> _
+    aload pop lineto
+  } bd
+
+  %%%%%%%
+  %%% vertex array operations
+  %%%%%%%
+  /cv_vertices { % [[x0 y0]..[xn yn]] [i0 .. im]-> [[xi0 yi0] .. [xim yim]]
+    % Filter vertex array to only keep certain indices
+    %
+    % vs: the original vertex array with [x y] coordinates
+    % indices: an array with vertes indices for the vertices that are needed
+    %
+    % Return:
+    % A vertex array with only the vertices with the specified indices.
+
+    %/---cvvertices-in-- pstack ==
+    [ 3 1 roll           % [    [[x0 y0]..[xn yn]] [i0 .. im]
+    dup length 1 sub     % [ .. [[x0 y0]..[xn yn]] [i0 .. im] m
+    0 1 3 -1 roll        % [ .. [[x0 y0]..[xn yn]] [i0 .. im] 0 1 m
+    { % for              % [ .. [[x0 y0]..[xn yn]] [i0 .. im] j
+      3 copy get get     % [ .. [[x0 y0]..[xn yn]] [i0 .. im] j [xij yij]
+      4 1 roll % [ .. [xij yij] [[x0 y0]..[xn yn]] [i0 .. im] j
+      pop      % [ .. [xij yij] [[x0 y0]..[xn yn]] [i0 .. im]
+    } for
+    pop pop ]
+    %/---cvvertices-out-- pstack ==
+  } bd
+
+  /vertices_append_v { % [[x0 y0]..[xm ym]] [xn yn] -> [[x0 y0]..[xn yn]]
+    % Append the specified (x, y) to the vertex array
+    %
+    % vs: an array with [x y] coordinates to append to
+    % x y: the X and Y coordinate of the vertex to add
+    %
+    % Return:
+    % A new array of vertices appended with the new vertex
+    2 dict begin
+      exch aload length % vn v0 .. vm n
+      1 add /n exch def % vn v0 .. vm
+      n -1 roll         % v0 .. vm vn
+      n array astore
+    end
+  } bd
+
+  /xy_in_vertices {  % x y vertices margin -> bool
+    % return whether the specified (x, y) are in vertices using a specified margin
+    %
+    % x y: the X and Y coordinate to check
+    % vertices: the array with vertices
+    % margin: if the coordinates are within this distance, then they are
+    %         considered to be equal
+    2 dict begin
+      /m exch def        % x y vertices
+      false 4 1 roll     % false x y vertices
+      { % forall
+        % x y [xi yi]
+        m exch           % false x y margin [xi yi]
+        aload pop        % false x y margin xi yi
+        4 index 4 index  % false x y margin xi yi x y
+        xy_equal         % false x y bool
+        { % if           % false x y
+          3 -1 roll pop  % x y
+          true 3 1 roll  % true x y
+          exit
+        } if
+      } forall           % bool x y
+      pop pop
+    end
+  } bd
+
+  /vertices_make_unique {  % vertices margin -> new_vertices
+    4 dict begin
+      /m exch def
+      /vs [] def % unique vertices
+      { % forall       % [x y]
+        aload 3 1 roll % [x y] x y
+        vs m           % [x y] x y unique_vertices margin
+        xy_in_vertices % [x y] bool
+        { % if           [x y]
+          pop
+        }{ % else
+          vs exch vertices_append_v
+          /vs exch def
+        } ifelse
+      } forall
+      vs
+    end
+  } bd
+
+  /vertices_show_nos {  % vertices -> _
+    % Show vertex number (from 0) for the vertex array
+    %
+    % vertices: an array with [x y] coordinates
+
+    % local name space:
+    3 dict begin
+      % Show vertices with lower index on top of indices with higher index
+      /vs exch def
+      /i vs length def
+      { % loop
+        /i i 1 sub def
+        % TODO: calculate string length? (now max vertex number is 99999)
+        i (     ) cvs      % label
+        7 0                % (label) anchor alpha
+        vs i get aload pop % (label) anchor alpha x y
+        % show arc at x y
+        gsave
+          2 copy translate
+          0 0 0.3 0 360 arc fill
+        grestore
+        add_label
+        i 0 le {exit} if
+      } loop
+    end
+  } bind def
+
+  /vertices_add_intersection { % vertices v0 v1 v2 v3 -> new_vertices
+    % Add to the vertex array the vertex where two lines intersect
+    %
+    % Each line is defined by a pair of vertex indices
+    % vertices: an array with [x y] coordinates for the vertices
+    % v0: an index in vs specifying a vertex in the first line
+    % v1: an index in vs specifying another vertex in the first line
+    % v2: an index in vs specifying a vertex in the second line
+    % v3: an index in vs specifying another vertex in the second line
+    %
+    % Return: an array with the new vertex appended
+    4 index 5 1 roll         % vs vs v0 v1 v2 v3
+    vertices_line_intersect  % vs x0 y0
+    [ 3 1 roll ]             % vs [x0 y0]
+    vertices_append_v
+  } bd
+
+  /vertices_index_mod { % Vs i -> Vs i_
+    2 copy exch length ge { % if the index is greater than or equal to the length
+      1 index length    % Vs i |Vs|
+      mod
+    } if
+  } bd
+
+  /vertices_get { % Vs i -> x y
+    %/---vertices_get-in-- pstack ==
+    vertices_index_mod
+    get aload pop
+    %/---vertices_get-out-- pstack ==
+  } bd
+
+  /vertices_get_reverse { % Vs i -> x y
+    %/---vertices_get_reverse-in-- pstack ==
+    vertices_index_mod
+    1 index length 1 sub  % Vs i maxI
+    sub neg
+    vertices_get
+    %/---vertices_get_reverse-out-- pstack ==
+  } bd
+
+  /vertices_translate { % Vs Tx Ty -> newVs
+    4 dict begin
+      /y exch def
+      /x exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          x y /add xy_op
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_scale { % vertices s -> new_vertices
+    % scale the vertices in the vertex array with the specified factor
+    %
+    % vertices: an array with [x y] coordinates
+    % s: factor to scale both all x and y with
+    % return: and new vertex array with the scaled coordinates
+    4 dict begin
+      /s exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          s s /mul xy_op
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_xy_op { % Vs x y /op -> newVs
+    5 dict begin
+      /op exch def
+      /y exch def
+      /x exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          x y op xy_op
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_rotate { % Vs alpha -> newVs
+    4 dict begin
+      dup
+      cos /x exch def
+      sin /y exch def
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          x y cmp_mul
+          xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_mirror_y { % Vs -> mirroredVs
+    2 dict begin
+      /Vs exch def
+      [
+        0 1 Vs length 1 sub { % for all array indices   .. i
+          Vs exch vertices_get
+          neg xy_2_v
+        } for
+      ]
+    end
+  } bd
+
+  /vertices_edge_length { % Vs i -> len
+    4 dict begin
+      /i exch def
+      /vs exch def
+      vs i 1 add vertices_get
+      vs i vertices_get
+      /sub xy_op
+      xy_len
+    end
+  } bd
+
+  /vertices_edge_get_xys { % Vs i -> x_i+1 y_i+1 x_i y_i
+    2 copy 1 add            % Vs i Vs i+1
+    vertices_get                % Vs i x_i+1 y_i+1
+    4 2 roll                % x_i+1 y_i+1 Vs i
+    get aload pop           % x_i+1 y_i+1 x_i y_i
+  } bd
+
+  /vertices_edge_get_centre { % Vs i -> cx cy
+    vertices_edge_get_xys
+    /add xy_op
+    2 {exch 2 div} repeat
+  } bd
+
+  /vertices_edge_get_angle { % Vs i -> angle
+    vertices_edge_get_xys
+    /sub xy_op
+    exch % dy dx % edge 0
+    atan
+  } bd
+
+  /vertices_get_angle_1st_edge { % Vs -> Vs angle
+    dup 0 vertices_edge_get_angle
+  } bd
+
+  /vertices_rotate_1st_edge_to_x-axis { % Vs -> Vs
+    vertices_get_angle_1st_edge neg
+    vertices_rotate
+  } bd
+
+  /vertices_rotate_1st_edge_to_y-axis { % Vs -> Vs
+    vertices_get_angle_1st_edge 90 sub neg
+    vertices_rotate
+  } bd
+
+  /vertices_line_intersect { % vs v0 v1 v2 v3 -> x_intersect y_intersect
+    % Find the intersection of two lines from the specified vertex array
+    %
+    % vs: an array with [x y] coordinates
+    % v0: an index in vs specifying a vertex in the first line
+    % v1: an index in vs specifying another vertex in the first line
+    % v2: an index in vs specifying a vertex in the second line
+    % v3: an index in vs specifying another vertex in the second line
+    %
+    % Return:
+    % x_intersect y_intersect is the intersection of the line that connects
+    % vs[v0] with vs[v1] and] vs[v2] with vs[v3]
+    10 dict begin
+      /v3 exch def
+      /v2 exch def
+      /v1 exch def
+      /v0 exch def
+      /vs exch def
+      vs v1 vertices_get vs v0 vertices_get /sub xy_op
+      /c exch def        % y1 - y0
+      /a exch def        % x1 - x0
+      vs v2 vertices_get vs v3 vertices_get /sub xy_op
+      /d exch def        % y2 - y3
+      /b exch def        % x2 - x3
+      % 1 / (matrix determinant) : TODO: handle 1/0?
+      1 a d mul b c mul sub div
+      d b
+      vs v2 vertices_get vs v0 vertices_get /sub xy_op
+      /mul xy_op         % 1/D d(x2-x0) b(y2-y0)
+      sub
+      mul                % t0
+      %/--------t0------- pstack ==
+      dup a c /mul xy_op % t0.a t0.c
+      vs v0 vertices_get /add
+      xy_op
+                         % x0 + t0.a	y0 + t0.c
+    end
+  } bd
+
+  /vertices_vertex_attach_to { % Vs0 V0 Vs1 v0 -> _
+    % attach the array arrays such that Vs0[v0] == Vs1[v0]
+    % Only a translation is done, no rotation.
+    6 dict begin
+      /v0 exch def
+      /Vs1 exch def
+      /V0 exch def
+      /Vs0 exch def
+      % Translate Vs1
+      Vs1
+        Vs0 V0 vertices_get
+        Vs1 v0 vertices_get
+        /sub xy_op
+        vertices_translate
+      %/--T-- pstack ==
+    end
+  } bd
+
+  /opp_shift /_oppShift def
+  /reverse_edges /reverse_edges def
+  /vertices_edge_attach_to { % Vs0 e0 /reverse_edges* Vs1 v0 v1 /reverse_edges* -> Vs
+                      % * /reverse_edges is optional
+    % attach the array Vs1 to Vs0: such that vertex Vs0[e0] == Vs1[v0]
+    % and the the directed edge Vs1[v1]-Vs1[v0] is in the direction of e0 =
+    % Vs[e0+1] - Vs[e0]
+    % I.e.
+    %      Vs0[e0]
+    %      =          _-"\
+    %      Vs1[v0] _-"    \
+    % +----------+"   Vs1  \
+    % |           \         \
+    % |            \         \
+    % |   Vs0       \_________\
+    % |              \Vs1[v1]
+    % |               \
+    % |________________\
+    %                   Vs0[e0+1]
+    %
+    % /reverse_edges will reverse the order of the vertices in the array. This
+    % can be handy to attach the face to the other vertex of the same edge.
+    % E.g. if you want to attach Vs[v1] to Vs0[e0+1] instead.
+    %
+    %         Vs0[e0]
+    % +----------+
+    % |           \      _-"\
+    % |            \  _-"    \
+    % |      Vs1[v1]\"   Vs1  \
+    % |              \         \
+    % | Vs0           \         \
+    % |________________\_________\
+    %                   Vs0[e0+1] = Vs1[v0]
+    %
+    % This effect can be obtained by adding the first /reverse_edges after the
+    % edge number. Keep the same e0, but exchange v0 and v1.
+    %
+    %/---vertices_edge_attach_to-in-- pstack ==
+    9 dict begin
+      /isOppShift 1 index opp_shift eq def
+      isOppShift {pop} if
+      /subAngle 90 def
+      /verticesGet1
+        1 index
+        /reverse_edges eq { % if
+          exch pop
+          /vertices_get_reverse
+        }{ % else
+          /vertices_get
+        } ifelse
+        load
+      def
+      /v1 exch def
+      /v0 exch def
+      /Vs1 exch def
+      /verticesGet0
+        1 index
+        /reverse_edges eq { % if
+          exch pop
+          /vertices_get_reverse
+        }{ % else
+          /vertices_get
+        } ifelse
+        load
+      def
+      /e0 exch def
+      /Vs0 exch def
+      % Rotate Vs1
+      /Vs1 Vs1
+        Vs0 e0 1 add verticesGet0     % x_i+1 y_i+1
+        Vs0 e0 verticesGet0           % x_i+1 y_i+1 x_i y_i
+        /sub xy_op                % x_i+1-x_i y_i+1-y_i
+        exch atan                 % alpha
+        /angle 1 index 90 sub def
+        Vs1 v1 verticesGet1
+        Vs1 v0 verticesGet1
+        /sub xy_op
+        exch atan                 % alpha beta
+        sub                       % alpha-beta
+        vertices_rotate
+        %/--R-- pstack ==
+      def
+      % Translate Vs1
+      Vs1
+        Vs0 e0 verticesGet0
+        Vs1 v0 verticesGet1
+        /sub xy_op
+        1 0 angle
+        xy_rot edge_to_edge_offset_mm xy_smul
+        /add xy_op
+        vertices_translate
+      % translate
+        isOppShift { % if
+          angle 180 add
+        }{
+          angle
+        } ifelse
+        % optimise:
+        dup cos face_space mul exch sin face_space mul
+        vertices_translate
+      %/--T-- pstack ==
+    end
+    %/---vertices_edge_attach_to-out-- pstack ==
+  } bd
+
+  /vertices_get_cog { % Vs -> x y
+    % returns the centre of gravity for Vs, by taking the average of all
+    % vertices in Vs.
+    3 dict begin
+      /g [0 0] def
+      aload length
+      /n exch def
+      n { %repeat
+        g /add v_op
+        /g exch def
+      } repeat
+      g aload pop
+      n dup /div xy_op
+    end
+  } bd
+
+  /vertices_sub_get_cog { % Vs Is -> x y
+    % returns the centre of gravity for a sub array of Vs, by taking the average
+    % of all vertices the sub array of Vs. 'Is' refer to the indices in Vs that
+    % define the sub-array.
+    [ exch                 % Vs [ Is
+    aload length { %repeat % Vs [ .. i0 .. in
+      counttomark          % Vs [ .. i0 .. in m
+      1 add index          % Vs [ .. i0 .. in Vs
+      exch vertices_get xy_2_v % Vs [ .. i0 .. Vs[in]
+      counttomark 1 roll   % Vs [ Vs[in] .. i0 .. in-1
+    } repeat
+    ] exch pop             % [Vs[in] .. Vs[0]]
+    vertices_get_cog
+  } bd
+
+  %%%%%%%
+  %%% polygon operations
+  %%%%%%%
+  /polygon_create { % Vs [colour] -> polygon
+                   % where the colour is either a rgb or cmyk colour
+    3 dict dup begin    % Vs [fillR fillG fillB] polygon
+      3 1 roll
+      /c exch def
+      /Vs exch def
+      /o false def
+    end
+  } bd
+
+  /no_col -1 def
+
+  /polygon_set_add_order { % polygon bool -> _
+    /o exch put
+  } bd
+
+  /dot {
+    0 360 arc
+  } bd
+
+  /polygon_draw { % polygon -> _
+    begin
+      Vs aload length        % [x0 y0] [x1 y1] .. [xn-2 yn-2] [xn-1 yn-1] n
+      exch v_moveto          % [x0 y0] [x1 y1] .. [xn-2 yn-2]             n
+      1 sub                  % [x0 y0] [x1 y1] .. [xn-2 yn-2]             n-1
+      { v_lineto } repeat
+      closepath
+      c no_col ne { % if
+        gsave
+          c aload length 3 eq {setrgbcolor}{setcmykcolor}ifelse fill
+        grestore
+      } if
+      stroke
+      o { % if
+        newpath Vs 0 vertices_get 5 dot fill
+        newpath Vs 1 vertices_get 5 dot stroke
+        newpath Vs 1 vertices_get 3 dot stroke
+      } if
+    end
+  } bd
+
+  /polygon_get_Varr { % polygon -> vertices
+  begin
+    Vs
+  end
+  } bd
+
+  %%%%%%%
+  %%% net operations
+  %%%%%%%
+  /net_new { % _ ->  net
+    2 dict dup begin
+      /p 13 dict def
+      /l 0 def
+    end
+  } bd
+
+  /net_add { % net polygon -> _
+    exch begin
+      p l 3 -1 roll     % p l polygon
+      put               %
+      /l l 1 add def
+    end
+  } bd
+
+  /net_get_polygon { % net i -> polygon_i
+    exch begin
+      p exch get
+    end
+  } bd
+
+  /net_get_vertices_i { % net i -> Vs_i
+    net_get_polygon /Vs get
+  } bd
+
+  /net_create { % [ polygon0 .. polygon_n-1 -> net
+    counttomark            %   [ polygon0 .. polygon_n-1 n
+    dup dict dup begin     %   [ polygon0 .. polygon_n-1 n p
+      1 index 3 add 1 roll % p [ polygon0 .. polygon_n-1 n
+      1 sub -1 0           % p [ polygon0 .. polygon_n-1 n-1 -1 0
+      { % for              % p [ polygon0 .. polygon_i i
+        exch def           % p [ polygon0 .. polygon_i-1
+      } for                % p [
+      pop
+    end                    % p
+    2 dict dup begin       % p net
+      exch dup length      % net p l
+      /l exch def
+      /p exch def
+    end                    % net
+  } bd
+
+  /net_draw { % net -> _
+    /p get {  % forall % key value
+      polygon_draw pop
+    } forall
+  } bd
+
+  /net_xy_op { %net x y op -> _
+    % apply the operation op to all vertices of the net
+    4 -1 roll begin % net
+      0 1 l 1 sub { % for                  % x y op i
+        p exch get begin % polygon_i
+          3 copy Vs 4 1 roll               % x y op Vs x y op
+          vertices_xy_op                       % x y op newVs
+          /Vs exch def
+        end % polygon_i
+      } for
+      pop pop pop
+    end % net
+  } bd
+
+  /add_label { % (label) anchor alpha x y
+    % add specified label to specified position
+    %
+    % (label): string defining the label
+    % anchor: number specifying which anchor to use (see FONTS)
+    % alpha: rotate the label with this amount of degrees
+    % x: x coordinate where to attach the label to
+    % y: y coordinate where to attach the label to
+    gsave
+      translate
+      rotate
+      FONTS begin
+        0 0      % (label) anchor 0 0
+        use_font % (label) anchor 0 0 font
+        5 -2 roll
+        XYfontdictStringOrigin_show_
+      end
+    grestore
+  } bd
+
+  /net_label_tab { % net i (label)
+    % print (label) at the centre of gravity of Vs on a line
+    % parallel to the first edge of Vs with index i in the net.
+    4 % anchor              % net i (label) 4
+    4 2 roll                % (label) 4 net i
+    net_get_vertices_i          % (label) 4 Vs
+    vertices_get_angle_1st_edge % (label) 4 Vs alpha
+    180 add exch            % (label) 4 alpha Vs
+    vertices_get_cog            % (label) 4 alpha x y
+    add_label
+  } bd
+
+  /net_label_edge { % net f_i e_i (label)
+    % print (label) at the edge with index e_i of the polygon with index f_i in
+    % the net.
+    5 % anchor              % net f_i e_i (label) 5
+    5 -2 roll               % e_i (label) 5 net f_i
+    net_get_vertices_i          % e_i (label) 5 Vs
+    4 -1 roll               % (label) 5 Vs e_i
+    2 copy
+    vertices_edge_get_angle     % (label) Vs e_i angle
+    3 1 roll
+    vertices_edge_get_centre    % (label) angle cx cy
+    add_label
+  } bd
+
+  %%%%%%%
+  %%% tab
+  %%%%%%%
+  /push_tab_vertices { % l alpha beta -> [..]
+    10 dict begin
+      tan /tanb exch def
+      tan /tana exch def
+      /l exch def
+      [ [0 0] [l 0]                    % [ [l 0] [0 0]
+        /x2
+          l
+          tab_width tanb div
+          sub
+        def
+        /y2 tab_width def
+        /x3 tab_width tana div def
+        /y3 tab_width def
+        x3 x2 gt { %if bowtie
+          [ tanb l mul
+            tana tanb add
+            div
+            dup tana mul
+          ]
+        } { %else
+          [x2 y2] [x3 y3]
+        } ifelse
+      ]                                 % net Vs edge_br tab_arr
+    end
+  } bd
+
+  /net_add_tab { % net net_elem_nr edge_nr alpha beta -> _
+    % add a tab with width tab_width to edge edge_nr of element elem_nr to the
+    % net. The tab will use a tab angle alpha on the left side and beta on the
+    % right side
+    10 dict begin
+      5 2 roll                         % alpha beta net net_elem_nr edge_nr
+      2 index 3 -1 roll net_get_vertices_i % alpha beta net edge_nr Vs
+      exch 2 copy                      % alpha beta net Vs edge_nr Vs edge_nr
+      vertices_edge_length                 % alpha beta net Vs edge_nr l
+      6 -2 roll                        % net Vs edge_nr l alpha beta
+      push_tab_vertices                    % net Vs edge_br tab_arr
+      0 1 vertices_edge_attach_to          % net Vs_
+      white polygon_create             % net polygon
+      net_add                          % _
+    end
+  } bd
+end
+
+polygons begin
+  /scaling_size 220 def
+  /gray_value 0.2 def
+  /edge_to_edge_offset_mm 1 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  /vertices0 [
+    [-1.632993161856 0] % 0
+    [0.816496580928 1.414213562373] % 1
+    [0.816496580928 -1.414213562373] % 2
+    [0.816496580928 -0.220801185229] % 3
+    [-0.658418582289 0.562670895858] % 4
+    [-1.181030553615 0.260940733531] % 5
+    [0.706532685806 -0.981699953588] % 6
+    [0.706532685806 -0.981699953588] % 7
+    [0.816496580928 -0.679791720989] % 8
+    [-0.658418582289 -0.562670895858] % 9
+    [0.816496580928 0.220801185229] % 10
+    [0.816496580928 0.679791720989] % 11
+    [0.706532685806 0.981699953588] % 12
+    [0.706532685806 0.981699953588] % 13
+    [-1.181030553615 -0.260940733531] % 14
+    [0.816496580928 -1.27395147171] % 15
+    [-0.014452315737 0.934464993201] % 16
+    [-0.014452315738 0.9344649932] % 17
+    [-0.829661588545 0.412885157848] % 18
+    [-0.829661588545 0.412885157848] % 19
+    [0.816496580927 -1.273951471709] % 20
+    [0.57937958297 0.643764604018] % 21
+    [-0.780709783971 -0.325441336153] % 22
+    [0.542459292528 -0.830688679216] % 23
+    [0.57937958297 0.643764604018] % 24
+    [-0.780709783971 -0.325441336153] % 25
+    [0.542459292528 -0.830688679216] % 26
+    [0.816496580928 0.726048528291] % 27
+    [-0.988668581479 -0.372000969926] % 28
+    [-0.365606733598 -0.731725895521] % 29
+    [0.816496580928 0.024596772444] % 30
+    [0.816496580928 0] % 31
+    [-0.408248290464 0.707106781186] % 32
+    [-0.408248290464 -0.707106781186] % 33
+    [0.816496580928 0] % 34
+    [-0.408248290464 0.707106781187] % 35
+    [-0.408248290464 -0.707106781186] % 36
+    [0.816496580928 0.438344428974] % 37
+    [-0.014452315737 0.9344649932] % 38
+    [-0.014452315737 0.934464993201] % 39
+    [-0.014452315737 -0.9344649932] % 40
+    [-0.014452315738 -0.9344649932] % 41
+    [0.816496580928 -0.438344428974] % 42
+    [0.57937958297 -0.643764604018] % 43
+    [0.542459292528 0.830688679216] % 44
+    [-0.780709783971 0.325441336153] % 45
+    [0.57937958297 -0.643764604018] % 46
+    [0.542459292528 0.830688679216] % 47
+    [-0.780709783971 0.325441336153] % 48
+    [-0.817979871286 0] % 49
+    [0.386946860676 -0.719405167408] % 50
+    [0.386946860676 0.719405167408] % 51
+    [-0.817979871286 0] % 52
+    [0.386946860676 -0.719405167408] % 53
+    [0.386946860676 0.719405167408] % 54
+    [-0.658418582289 -0.562670895858] % 55
+    [0.816496580928 -0.563594800509] % 56
+    [-1.061782936316 0.037422543213] % 57
+    [-1.181030553614 -0.260940733532] % 58
+    [0.816496580928 0.160477056695] % 59
+    [-1.061782936316 0.037422543213] % 60
+    [-0.606997022497 -0.592359147246] % 61
+    [0.816496580928 0.300739147359] % 62
+    [-0.576896534256 0.609737672235] % 63
+    [-0.606997022497 -0.592359147246] % 64
+    [0.816496580928 0.300739147359] % 65
+    [-0.344344001101 0.744001939852] % 66
+    [0.595476359921 -0.591605903413] % 67
+    [-0.014452315738 0.934464993201] % 68
+    [-0.014452315738 0.9344649932] % 69
+    [-0.606997022496 -0.592359147246] % 70
+    [-0.606997022496 -0.592359147246] % 71
+    [0.595476359921 -0.591605903413] % 72
+    [0.816496580928 -0.300739147359] % 73
+    [-0.606997022497 0.592359147246] % 74
+    [-0.606997022497 0.592359147246] % 75
+    [-0.576896534256 -0.609737672235] % 76
+    [-0.344344001101 -0.744001939852] % 77
+    [0.816496580928 -0.300739147359] % 78
+    [-0.988668581478 0.372000969926] % 79
+    [0.816496580928 -0.726048528291] % 80
+    [0.816496580928 -0.024596772444] % 81
+    [-0.365606733598 0.731725895521] % 82
+    [-0.014452315738 0.9344649932] % 83
+    [-0.576896534255 -0.609737672235] % 84
+    [0.816496580928 0.387425886723] % 85
+    [-0.014452315738 0.934464993201] % 86
+    [-0.344344001102 -0.744001939852] % 87
+    [0.816496580928 0.387425886723] % 88
+    [-0.014452315737 -0.934464993201] % 89
+    [0.816496580927 1.273951471709] % 90
+    [-0.829661588545 -0.412885157848] % 91
+    [-0.014452315737 -0.934464993201] % 92
+    [0.816496580928 1.273951471709] % 93
+    [-0.829661588545 -0.412885157848] % 94
+    [-0.014452315737 -0.934464993201] % 95
+    [0.816496580928 -0.387425886723] % 96
+    [-0.576896534255 0.609737672235] % 97
+    [-0.014452315738 -0.934464993201] % 98
+    [0.816496580928 -0.387425886723] % 99
+    [-0.344344001102 0.744001939852] % 100
+    [-0.606997022496 0.592359147246] % 101
+    [-0.014452315738 -0.934464993201] % 102
+    [-0.014452315737 -0.934464993201] % 103
+    [0.595476359921 0.591605903413] % 104
+    [0.595476359921 0.591605903413] % 105
+    [-0.606997022496 0.592359147246] % 106
+    [-1.181030553614 0.260940733532] % 107
+    [-1.061782936316 -0.037422543213] % 108
+    [0.816496580928 0.563594800509] % 109
+    [-0.658418582289 0.562670895858] % 110
+    [-1.061782936316 -0.037422543213] % 111
+    [0.816496580928 -0.160477056695] % 112
+  ] def
+  /faces0 [
+    [0 2 1][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20][21 22][23 24]
+    [25 26][27 28][29 30][31 32][33 34][35 36][37 38][39 40][41 42][43 44][45 46]
+    [47 48][49 50][51 52][53 54][55 56][57 58][59 60][61 62][63 64][65 66][67 68]
+    [69 70][71 72][73 74][75 76][77 78][79 80][81 82][83 84][85 86][87 88][89 90]
+    [91 92][93 94][95 96][97 98][99 100][101 102][103 104][105 106][107 108]
+    [109 110][111 112]
+  ] def
+  /bbox0 [-1.632993161856 -1.414213562373 0.816496580928 1.414213562373] def
+  /vertices0 vertices0 scaling_size vertices_scale def
+  /vs0 vertices0 0.000001 vertices_make_unique def
+  /vs0 vs0 13 15 27 28 vertices_add_intersection def
+  /vs0 vs0 52 53 26 14 vertices_add_intersection def
+  /vs0 vs0 12 36 56 5 vertices_add_intersection def
+  /vs0 vs0 47 48 6 7 vertices_add_intersection def
+  /vs0 vs0 19 20 10 11 vertices_add_intersection def
+  /vs0 vs0 27 53 46 43 vertices_add_intersection def
+  /vs0 vs0 14 15 41 39 vertices_add_intersection def
+
+  % The faces below come from triangle 0 that accurs three times for one
+  % tetrahedron
+  %
+  %        t0x3_o5_0 .-=|
+  %               .-'.'/| t0x3_o3_colar_in0
+  % t0x3_thin_0.-'\_-  \|
+  %         .-'         |
+  %      .-'            |
+  %  _.-'\ t0x3_o3_top  |
+  % -_    -             |
+  %   '-./              |
+  %      '-.            |
+  %         '-.    _    |
+  % t0x3_thin_1'-./ \  /|
+  %               '-.-_\| t0x3_o3_colar_in1
+  %       t0x3_o5_1  '-.|
+  %
+  /t0x3_o3_top vs0 [0 12 61 5] cv_vertices def
+  /t0x3_o5_0 vs0 [1 14 60 52] cv_vertices def
+  /t0x3_o5_1 vs0 [2 13 59 27] cv_vertices def
+  /t0x3_o3_colar_in0 vs0 [52 11 63 19] cv_vertices def
+  /t0x3_o3_colar_in1 vs0 [13 48 62 6] cv_vertices def
+  /t0x3_thin_0 vs0 [14 41 65] cv_vertices def
+  /t0x3_thin_1 vs0 [27 64 46] cv_vertices def
+
+  /vertices1 [
+    [-0.816496580928 1.414213562373] % 0
+    [1.632993161856 0] % 1
+    [-0.816496580928 -1.414213562373] % 2
+    [-0.079839124218 0.988904181441] % 3
+    [-0.816496580928 -0.220801185229] % 4
+    [-0.816496580928 -0.679791720989] % 5
+    [0.74376895045 0.373131747161] % 6
+    [0.74376895045 0.373131747161] % 7
+    [0.547225498286 0.626868252839] % 8
+    [-0.816496580928 0.220801185229] % 9
+    [-0.079839124218 -0.988904181441] % 10
+    [0.74376895045 -0.373131747161] % 11
+    [-0.816496580928 0.679791720989] % 12
+    [0.547225498286 -0.626868252839] % 13
+    [0.74376895045 -0.373131747161] % 14
+    [0.028630879365 0.926278995673] % 15
+    [-0.816496580928 -1.273951471709] % 16
+    [-0.695026047224 -1.34408251704] % 17
+    [0.787865701562 0.4879345667] % 18
+    [-0.816496580928 -1.273951471709] % 19
+    [-0.695026047225 -1.344082517041] % 20
+    [0.896335705146 -0.425309380932] % 21
+    [0.21702885487 0.817507373801] % 22
+    [-0.180468609195 1.047002641681] % 23
+    [-0.048742903225 -0.830688679216] % 24
+    [-0.048742903225 -0.830688679216] % 25
+    [0.269271082641 -0.787345309534] % 26
+    [-0.816496580928 0.024596772444] % 27
+    [0.429549720251 -0.694808394965] % 28
+    [1.037024760344 -0.344082517041] % 29
+    [-0.816496580928 0.726048528291] % 30
+    [0.408248290464 -0.707106781187] % 31
+    [0.408248290464 0.707106781187] % 32
+    [0.408248290464 0.707106781187] % 33
+    [-0.816496580928 0] % 34
+    [-0.816496580928 0] % 35
+    [0.408248290464 -0.707106781187] % 36
+    [1.511522628152 0.070131045332] % 37
+    [-0.816496580928 0.438344428974] % 38
+    [-0.816496580928 -0.438344428974] % 39
+    [1.511522628152 -0.070131045332] % 40
+    [1.511522628152 -0.070131045332] % 41
+    [1.511522628152 0.070131045332] % 42
+    [-0.048742903225 0.830688679216] % 43
+    [-0.180468609195 -1.047002641681] % 44
+    [0.21702885487 -0.817507373801] % 45
+    [0.896335705146 0.425309380932] % 46
+    [0.269271082641 0.787345309534] % 47
+    [-0.048742903225 0.830688679216] % 48
+    [0.386946860676 -0.719405167408] % 49
+    [0.386946860676 0.719405167408] % 50
+    [-0.220528179417 1.070131045332] % 51
+    [-0.220528179417 -1.070131045332] % 52
+    [0.996965190123 -0.367210920692] % 53
+    [-0.695026047225 0.457556932055] % 54
+    [-0.816496580928 -0.563594800509] % 55
+    [0.599467726057 -0.596706188572] % 56
+    [-0.695026047225 0.457556932055] % 57
+    [-0.816496580928 0.160477056695] % 58
+    [-0.220528179417 -0.789606864004] % 59
+    [0.743768950449 0.513393837825] % 60
+    [-0.816496580928 0.300739147359] % 61
+    [-0.220528179417 -0.789606864004] % 62
+    [0.743768950449 0.513393837825] % 63
+    [-0.816496580928 0.300739147359] % 64
+    [0.072727630478 0.900819724548] % 65
+    [-0.573555513521 -0.585786437627] % 66
+    [-0.573555513521 -0.585786437627] % 67
+    [0.66869603199 -0.556737207507] % 68
+    [0.668696031989 -0.556737207507] % 69
+    [0.072727630478 0.900819724548] % 70
+    [-0.220528179417 0.789606864004] % 71
+    [-0.816496580928 -0.300739147359] % 72
+    [0.743768950449 -0.513393837825] % 73
+    [-0.220528179417 0.789606864004] % 74
+    [-0.816496580928 -0.300739147359] % 75
+    [0.743768950449 -0.513393837825] % 76
+    [0.429549720251 0.694808394965] % 77
+    [-0.816496580928 -0.024596772444] % 78
+    [-0.816496580928 -0.726048528291] % 79
+    [1.037024760344 0.344082517041] % 80
+    [0.147800548938 -0.857476354866] % 81
+    [0.794083692938 0.203820426377] % 82
+    [0.794083692938 0.203820426377] % 83
+    [-0.816496580928 0.387425886723] % 84
+    [-0.816496580928 0.387425886723] % 85
+    [0.147800548938 -0.857476354866] % 86
+    [0.787865701562 -0.4879345667] % 87
+    [-0.695026047225 1.344082517041] % 88
+    [-0.816496580928 1.27395147171] % 89
+    [0.028630879365 -0.926278995673] % 90
+    [-0.695026047225 1.344082517041] % 91
+    [-0.816496580928 1.273951471709] % 92
+    [0.794083692938 -0.203820426377] % 93
+    [0.147800548938 0.857476354866] % 94
+    [-0.816496580928 -0.387425886723] % 95
+    [0.794083692938 -0.203820426377] % 96
+    [0.147800548938 0.857476354866] % 97
+    [-0.816496580928 -0.387425886723] % 98
+    [-0.573555513521 0.585786437627] % 99
+    [0.072727630478 -0.900819724548] % 100
+    [0.668696031989 0.556737207507] % 101
+    [-0.573555513521 0.585786437627] % 102
+    [0.072727630478 -0.900819724548] % 103
+    [0.66869603199 0.556737207507] % 104
+    [-0.695026047225 -0.457556932055] % 105
+    [0.996965190123 0.367210920692] % 106
+    [0.599467726057 0.596706188572] % 107
+    [-0.816496580928 0.563594800509] % 108
+    [-0.816496580928 -0.160477056695] % 109
+    [-0.695026047225 -0.457556932055] % 110
+  ] def
+  /faces1 [
+    [0 2 1][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20][21 22][23 24]
+    [25 26][27 28][29 30][31 32][33 34][35 36][37 38][39 40][41 42][43 44][45 46]
+    [47 48][49 50][51 52][53 54][55 56][57 58][59 60][61 62][63 64][65 66][67 68]
+    [69 70][71 72][73 74][75 76][77 78][79 80][81 82][83 84][85 86][87 88][89 90]
+    [91 92][93 94][95 96][97 98][99 100][101 102][103 104][105 106][107 108]
+    [109 110]
+  ] def
+  /bbox1 [-0.816496580928 -1.414213562373 1.632993161856 1.414213562373] def
+  /vertices1 vertices1 scaling_size vertices_scale def
+  /vs1 vertices1 0.000001 vertices_make_unique def
+  /vs1 vs1 29 30 60 61 vertices_add_intersection def
+  /vs1 vs1 31 32 67 68 vertices_add_intersection def
+
+  % The faces below come from triangle 1 that accurs once for one tetrahedron
+  % (The intersection lines have a 3-fold symmetry in this triangle so you still
+  % need these facelets three times)
+  % 
+  %     _.
+  %  _-'  '-.  t1x1_side0
+  % =____   '-.
+  %      ''--__'-.
+  %            `'''=-.
+  %                  |'-.
+  %                  |   '-_ t1x1_tri_at_v
+  %                  |  .-'
+  %                  |-'
+  %         ___,...='  
+  % ___---''.-'
+  % \    .-' t1x1_side1
+  %  '-.'   
+  /t1x1_tri_at_v vs1 [1 29 32] cv_vertices def
+  /t1x1_side0 vs1 [29 59 61 78] cv_vertices def
+  /t1x1_side1 vs1 [32 79 67 24] cv_vertices def
+
+  % Define combined sub parts:
+  /o3_top_sub_0
+    t0x3_o3_top
+    22 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /o3_top_sub_1
+    o3_top_sub_0 0
+    t0x3_o3_top 0 3 
+    vertices_edge_attach_to
+  def
+  /o3_top_sub_2
+    o3_top_sub_1 0
+    t0x3_o3_top 0 3 
+    vertices_edge_attach_to
+  def
+  /o3_top_sub_3
+    o3_top_sub_2 0
+    t0x3_o3_top 0 3 
+    vertices_edge_attach_to
+  def
+  /o3_top_sub_4
+    o3_top_sub_3 0
+    t0x3_o3_top 0 3 
+    vertices_edge_attach_to
+  def
+  /o3_top_sub_5
+    o3_top_sub_4 0
+    t0x3_o3_top 0 3 
+    vertices_edge_attach_to
+  def
+  /o3_top_sub [
+    o3_top_sub_0 white polygon_create
+    o3_top_sub_1 white polygon_create
+    o3_top_sub_2 white polygon_create
+    o3_top_sub_3 white polygon_create
+    o3_top_sub_4 white polygon_create
+    o3_top_sub_5 white polygon_create
+    net_create
+  def
+
+  /long_sub_0
+    t0x3_o5_0
+    15 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /long_sub_1
+    long_sub_0 0
+    t0x3_o5_1 0 3
+    vertices_edge_attach_to
+  def
+  /long_sub_2
+    long_sub_1 0
+    t1x1_tri_at_v 0 2
+    vertices_edge_attach_to
+  def
+  /long_sub_3
+    long_sub_1 1
+    t0x3_o5_0 3 2
+    vertices_edge_attach_to
+  def
+  /long_sub_4
+    long_sub_3 0
+    t0x3_o5_1 0 3
+    vertices_edge_attach_to
+  def
+  /long_sub_5
+    long_sub_4 0
+    t1x1_tri_at_v 0 2
+    vertices_edge_attach_to
+  def
+  /long_sub_6
+    long_sub_4 1
+    t0x3_o5_0 3 2
+    vertices_edge_attach_to
+  def
+  /long_sub_7
+    long_sub_6 0
+    t0x3_o5_1 0 3
+    vertices_edge_attach_to
+  def
+  /long_sub_8
+    long_sub_7 0
+    t1x1_tri_at_v 0 2
+    vertices_edge_attach_to
+  def
+  /long_sub [
+    long_sub_0 white polygon_create
+    long_sub_1 white polygon_create
+    long_sub_2 white polygon_create
+    long_sub_3 white polygon_create
+    long_sub_4 white polygon_create
+    long_sub_5 white polygon_create
+    long_sub_6 white polygon_create
+    long_sub_7 white polygon_create
+    long_sub_8 white polygon_create
+    net_create
+  def
+
+  /surround_o3_0
+    t1x1_side0
+    42 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /surround_o3_1
+    surround_o3_0 0
+    t0x3_o3_colar_in0 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_2
+    surround_o3_1 0
+    t0x3_o3_colar_in1 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_3
+    surround_o3_2 0
+    t1x1_side1 0 3
+    vertices_edge_attach_to
+  def
+  % repeat 3 times around: 1
+  /surround_o3_4
+    surround_o3_3 0
+    t1x1_side0 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_5
+    surround_o3_4 0
+    t0x3_o3_colar_in0 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_6
+    surround_o3_5 0
+    t0x3_o3_colar_in1 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_7
+    surround_o3_6 0
+    t1x1_side1 0 3
+    vertices_edge_attach_to
+  def
+  % repeat 3 times around: 2
+  /surround_o3_8
+    surround_o3_7 0
+    t1x1_side0 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_9
+    surround_o3_8 0
+    t0x3_o3_colar_in0 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_10
+    surround_o3_9 0
+    t0x3_o3_colar_in1 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_11
+    surround_o3_10 0
+    t1x1_side1 0 3
+    vertices_edge_attach_to
+  def
+  % repeat 3 times around: 3
+  /surround_o3_12
+    surround_o3_11 0
+    t1x1_side0 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_13
+    surround_o3_12 0
+    t0x3_o3_colar_in0 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_14
+    surround_o3_13 0
+    t0x3_o3_colar_in1 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3_15
+    surround_o3_14 0
+    t1x1_side1 0 3
+    vertices_edge_attach_to
+  def
+  /surround_o3 [
+    surround_o3_0 white polygon_create
+    surround_o3_1 white polygon_create
+    surround_o3_2 white polygon_create
+    surround_o3_3 white polygon_create
+    surround_o3_4 white polygon_create
+    surround_o3_5 white polygon_create
+    surround_o3_6 white polygon_create
+    surround_o3_7 white polygon_create
+    surround_o3_8 white polygon_create
+    surround_o3_9 white polygon_create
+    surround_o3_10 white polygon_create
+    surround_o3_11 white polygon_create
+    surround_o3_12 white polygon_create
+    surround_o3_13 white polygon_create
+    surround_o3_14 white polygon_create
+    surround_o3_15 white polygon_create
+    net_create
+  def
+
+  /surround_o3_extra_0
+    surround_o3_0
+    18 vertices_rotate
+  def
+  /surround_o3_extra_1
+    surround_o3_extra_0 3
+    t1x1_side1 1 0
+    vertices_edge_attach_to
+  def
+  /surround_extra [
+    surround_o3_extra_0 white polygon_create
+    surround_o3_extra_1 white polygon_create
+    net_create
+  def
+
+  edge_to_edge_offset_mm
+  /edge_to_edge_offset_mm 0 def
+
+  /thin_0
+    t0x3_thin_1
+    -90 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /thin_1
+    thin_0 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_2
+    thin_1 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_3
+    thin_2 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_4
+    thin_3 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_5
+    thin_4 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_6
+    thin_5 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_7
+    thin_6 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_8
+    thin_7 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_9
+    thin_8 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_10
+    thin_9 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_11
+    thin_10 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_12
+    thin_11 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_13
+    thin_12 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_14
+    thin_13 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_15
+    thin_14 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_16
+    thin_15 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_17
+    thin_16 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_18
+    thin_17 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_19
+    thin_18 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_20
+    thin_19 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_21
+    thin_20 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin_22
+    thin_21 2
+    t0x3_thin_1 1 0
+    vertices_edge_attach_to
+  def
+  /thin_23
+    thin_22 2
+    t0x3_thin_0 1 0
+    vertices_edge_attach_to
+  def
+  /thin [
+    thin_0 white polygon_create
+    thin_1 white polygon_create
+    thin_2 white polygon_create
+    thin_3 white polygon_create
+    thin_4 white polygon_create
+    thin_5 white polygon_create
+    thin_6 white polygon_create
+    thin_7 white polygon_create
+    thin_8 white polygon_create
+    thin_9 white polygon_create
+    thin_10 white polygon_create
+    thin_11 white polygon_create
+    thin_12 white polygon_create
+    thin_13 white polygon_create
+    thin_14 white polygon_create
+    thin_15 white polygon_create
+    thin_16 white polygon_create
+    thin_17 white polygon_create
+    thin_18 white polygon_create
+    thin_19 white polygon_create
+    thin_20 white polygon_create
+    thin_21 white polygon_create
+    thin_22 white polygon_create
+    thin_23 white polygon_create
+    net_create
+  def
+
+  /edge_to_edge_offset_mm exch def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def 
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (Compound of 20 tetrahedra: 20B | A5xI / D3C3)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+
+    show_base_face
+
+    % translate to start position
+    gsave
+      160 937 20 sub translate
+
+      % draw parts at 3-fold axis
+      /dx
+        o3_top_sub_0 0 vertices_edge_length 2 mul 1.5 mm2pt add
+      def
+
+      % translate to next position
+      gsave
+        % translate to the left bottom of o3_top_sub
+        o3_top_sub_2 1 vertices_get
+        o3_top_sub_0 0 vertices_get /sub xy_op
+        translate
+        % attach upper left of long_sub
+        long_sub_0 0 vertices_get
+        long_sub_7 2 vertices_get /sub xy_op
+        translate
+
+        % some extra margin
+        0 -2 translate
+
+        % draw long parts at 5-fold axis
+        long_sub net_draw
+        dx 0 translate
+
+        % some extra margin
+        2 0 translate
+
+        long_sub net_draw
+      grestore
+    grestore
+
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF
