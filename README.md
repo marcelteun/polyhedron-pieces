@@ -9,3 +9,5 @@ The resulting PDF can be loaded into the tool inkscape to which I have installed
 I cut them by choosing: Extensions &rarr; Export &rarr; Send to Silhouette ...
 
 The last page usually shows me the result of the faces when they are exported from Orbitit.
+
+Adjustments can be if needed. To scale up or down the pieces, one can update the variable scaling_size. It tried to make sure that this also keeps the (relative) position more or less the same, but this is in general unverified.
