@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: Pseudo-Cupoalic Prismatoid 6/4 | 6/4
 %%Creator: PS.py written by marcelteun
-%%Pages: 4 1
+%%Pages: 5 1
 %%BoundingBox: 0 0 595 842
 %%EndComments
 %%BeginProlog
@@ -296,6 +296,37 @@ showpage
 %%EndPage
 
 %%Page: 4 4
+%%BeginPage
+.1 setlinewidth
+polygons begin
+  a4_area
+  %0 -0.7 cm2pt translate
+  /dx 1.5 scaling_size mul def
+  /dy -3.55 scaling_size mul def
+  30 825 translate
+  local_dict_size dict begin
+    gsave
+      4 { % repeat
+        rect net_cut
+        dx 0 translate
+      } repeat
+    grestore
+    % dx includes the margin offset, i.e. you will get the double margin here
+    % this is corrected in dy
+    0 dy dx 2 mul sub translate
+    gsave
+      90 rotate
+      2 { % repeat
+        rect net_cut
+        dx 0 translate
+      } repeat
+    grestore
+  end % local dict
+end % polygons
+showpage
+%%EndPage
+
+%%Page: 5 5
 %%BeginPage
 .1 setlinewidth
 polygons begin
