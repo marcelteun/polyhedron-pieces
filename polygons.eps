@@ -561,6 +561,7 @@
         1 index
         /reverse_edges eq { % if
           exch pop
+          /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
           /vertices_get_reverse
         }{ % else
           /vertices_get
