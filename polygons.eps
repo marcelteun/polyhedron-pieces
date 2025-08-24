@@ -43,7 +43,7 @@
   %%% fonts
   %%%%%%%
   /font      /Times-Roman df
-  /use_font  font findfont  8 scalefont df
+  /use_font  font findfont  12 scalefont df
 
   %%%%%%%
   %%% maths
@@ -641,13 +641,13 @@
   %%%%%%%
   %%% polygon operations
   %%%%%%%
-  /polygon_create { % Vs [colour] -> polygon
-                   % where the colour is either a rgb or cmyk colour
+  /polygon_create { % Vs colour -> polygon
+                    % where the colour is either a rgb or cmyk colour
     5 dict dup begin    % Vs [fillR fillG fillB] polygon
       3 1 roll
       /c exch def
       /Vs exch def
-      /o false def
+      /o false def % whether to show the vertices
       /Es [ % edges used when cutting, where direction is important
         % Edges is an array of pairs of vertex indices [v1 v0]
         % Cutting is done from v0 to v1, they are in this order in the array
@@ -662,6 +662,18 @@
     end
   } bd
 
+  /polygon_create_from_lines { % Vs Lines colour -> polygon
+    % Vs: an array of vertices
+    % Es: [[x0 y0] [x1 y1] .. [xn yn]]
+    % colour: is either a rgb or cmyk colour
+    5 dict dup begin    % Vs [fillR fillG fillB] polygon
+      4 1 roll
+      /c exch def
+      /Es exch def
+      /Vs exch def
+      /o false def % whether to show the vertices
+    end
+  } bd
   /no_col -1 def
 
   /polygon_set_add_order { % polygon bool -> _
