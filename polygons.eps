@@ -43,7 +43,9 @@
   %%% fonts
   %%%%%%%
   /font      /Times-Roman df
-  /use_font  font findfont  12 scalefont df
+  /font_size 12 df
+  /line_step font_size 3 add neg df
+  /use_font  font findfont font_size scalefont df
 
   %%%%%%%
   %%% maths
@@ -851,6 +853,16 @@
       end
     grestore
   } bd
+
+  /tline { % str -> _
+    % Add line of text where the top-left of the text ends up at the current position
+    % Then translate down one step
+    0  % anchor top-left
+    0  % angle
+    0 0  % x y
+    add_label
+    0 line_step translate
+  } def
 
   /net_label_tab { % net i (label)
     % print (label) at the centre of gravity of Vs on a line
