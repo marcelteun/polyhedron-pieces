@@ -19,6 +19,7 @@
   /cm2pt_factor 72 2.54 div df
   /cm2pt   {cm2pt_factor mul} df
   /mm2pt   {cm2pt_factor 10 div mul} df
+  /org_scaling 60 df
   /scaling_size 60 df
   /face_space 0 df % distance between 2 faces
   /tab_width 10 df
@@ -853,6 +854,15 @@
       end
     grestore
   } bd
+
+  /rel_translate { % make sure translations are relative to the scaling size
+    2 { % repeat
+      exch
+      org_scaling div
+      scaling_size mul
+    } repeat
+    translate
+  } bind def
 
   /tline { % str -> _
     % Add line of text where the top-left of the text ends up at the current position
