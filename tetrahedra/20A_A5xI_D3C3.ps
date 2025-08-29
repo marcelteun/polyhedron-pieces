@@ -326,7 +326,7 @@ polygons begin
   % This faces has a 3-fold symmetry
   %   |_ qquad      _-"
   %  /.'         _-"
-  %  |-_   |- _-" slim
+  %  |-_   |- _-" thin
   % /   "-_|-"qquad
   % |   _-"
   % /_-"
@@ -372,12 +372,12 @@ polygons begin
     vertices_edge_attach_to
   def
   /o3_top [
-    o3_top_0 white polygon_create
-    o3_top_1 white polygon_create
-    o3_top_2 white polygon_create
-    o3_top_3 white polygon_create
-    o3_top_4 white polygon_create
-    o3_top_5 white polygon_create
+    o3_top_0 white polygon_create 0 polygon_reverse_edge
+    o3_top_1 white polygon_create 0 polygon_reverse_edge
+    o3_top_2 white polygon_create 0 polygon_reverse_edge
+    o3_top_3 white polygon_create 0 polygon_reverse_edge
+    o3_top_4 white polygon_create 0 polygon_reverse_edge
+    o3_top_5 white polygon_create 0 polygon_reverse_edge
     net_create
   def
 
@@ -413,12 +413,12 @@ polygons begin
     vertices_edge_attach_to
   def
   /bottom [
-    bottom_0 white polygon_create
+    bottom_0 white polygon_create 0 polygon_reverse_edge
     bottom_1 white polygon_create
     bottom_2 white polygon_create
     bottom_3 white polygon_create
     bottom_4 white polygon_create
-    bottom_5 white polygon_create
+    bottom_5 white polygon_create 0 polygon_reverse_edge
     net_create
   def
   /half_bottom [
@@ -440,8 +440,8 @@ polygons begin
     vertices_edge_attach_to
   def
   /quads_r [
-    quads_0 white polygon_create
-    quads_1 white polygon_create
+    quads_0 white polygon_create 1 polygon_reverse_edge
+    quads_1 white polygon_create 0 polygon_reverse_edge
     net_create
   def
 
@@ -457,8 +457,8 @@ polygons begin
     vertices_edge_attach_to
   def
   /quads_l [
-    quads_2 white polygon_create
-    quads_3 white polygon_create
+    quads_2 white polygon_create 0 polygon_reverse_edge
+    quads_3 white polygon_create 0 polygon_reverse_edge
     net_create
   def
 
