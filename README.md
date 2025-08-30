@@ -9,7 +9,7 @@ The resulting PDF can be loaded into the tool inkscape to which I have installed
 I think it is good practice to print the pieces on paper first. Then you will get an idea about the sizes of the pieces and you can use it to see how big the piece of cardboard you will need.
 
 I cut them by choosing: Extensions &rarr; Export &rarr; Send to Silhouette ...
-It is good to select the option: "Preview: show cut pattern before sending". There I check the vertices where edges meet in a sharp angle. I check whether both edges are drawn towards that vertex.
+It is good to select the option: "Preview: show cut pattern before sending". There I check the vertices where edges meet in a sharp angle. I check whether both edges are drawn towards that vertex. I prefer the setting to cut all edges twice.
 
 The last pages usually shows me the result of the faces when they are exported from Orbitit. When there are very small pieces I glue them on paper with a printed template for higher precision.
 
