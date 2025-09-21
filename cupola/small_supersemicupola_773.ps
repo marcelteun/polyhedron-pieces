@@ -1,0 +1,408 @@
+%!PS-Adobe-2.0
+%%Title: small supersemicupola 773
+%%Creator: PS.py written by marcelteun
+%%Pages: 3 3
+%%BoundingBox: 0 0 595 842
+% to zoom out from A4:
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+
+% Page 1 contains the pieces to be cut for a uniform compound of 12 tetrahedra.
+% One can either use 3 or 6 colours. Page 1 contains all pieces for one colour
+% if you go for the latter
+% Page 2 shows where all other triangles intersect one triangle.
+
+(polygons.eps) run
+(fonts.eps) run
+polygons begin
+  /org_scaling 100 def
+  /scaling_size org_scaling def
+  /gray_value 0.2 def
+  % distance between pieces when cut
+  /edge_to_edge_offset_mm 1 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area true def
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  % heptagons on the side
+  /vertices0 [
+    [0.897322835576 -1.104244474493] % 0
+    [-0.050864817573 -1.421955309082] % 1
+    [-0.890446482363 -0.878721815869] % 2
+    [1.24011183476 -0.164832050667] % 3
+    [0.719375071971 0.688885246734] % 4
+    [-0.272762049316 0.814040880107] % 5
+    [-0.989200040863 0.116390104813] % 6
+    [-0.050864817573 -1.421955309082] % 7
+    [-0.5284558081 0.565052201173] % 8
+    [0.081327589654 0.769373351713] % 9
+    [0.897322835576 -1.104244474493] % 10
+    [0.081327589654 0.769373351713] % 11
+    [-0.5284558081 0.565052201173] % 12
+  ] def
+  /faces0 [
+    [2 1 0 3 4 5 6][7 8][9 10][11 12]
+  ] def
+  /bbox0 [-0.989200040863 -1.421955309082 1.24011183476 0.814040880107] def
+
+  /vertices0 vertices0 scaling_size vertices_scale def
+  /vs0 vertices0 0.000001 vertices_make_unique def % last vertex index is 8 now
+
+  /long_centre vs0 [1 0 8 7] cv_vertices def
+  /long_left vs0 [1 7 6 2] cv_vertices def
+  /long_right vs0 [0 3 4 8] cv_vertices def
+  /top_triangle vs0 [7 8 5] cv_vertices def
+
+  /heptagon_0
+    long_centre
+    -18.6 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /heptagon_1
+    heptagon_0 3
+    long_left 1 0
+    vertices_edge_attach_to
+  def
+  /heptagon_2
+    heptagon_0 1
+    long_right 0 3
+    vertices_edge_attach_to
+  def
+  /heptagon_3
+    heptagon_0 2
+    top_triangle 1 0
+    vertices_edge_attach_to
+  def
+  /heptagon [
+    heptagon_0 white polygon_create
+    heptagon_1 white polygon_create
+    heptagon_2 white polygon_create
+    heptagon_3 white polygon_create
+      1 polygon_reverse_edge
+    net_create
+  def
+  /heptagon_centre_left [
+    heptagon_1 white polygon_create
+    net_create
+  def
+  /heptagon_little_tri [
+    heptagon_3 white polygon_create
+      1 polygon_reverse_edge
+    net_create
+  def
+  /heptagon_centre_right [
+    heptagon_2 white polygon_create
+    net_create
+  def
+  /heptagon_centre_long [
+    heptagon_0 white polygon_create
+    net_create
+  def
+
+  % heptagram at the top
+  /vertices1 [
+    [0.560950350463 0.30712482122] % 0
+    [0.174601364844 -0.615227856073] % 1
+    [-0.638655268013 -0.033322666962] % 2
+    [0.109626968585 0.630057838022] % 3
+    [0.58986667714 -0.247079450165] % 4
+    [-0.372142336399 -0.520097137998] % 5
+    [-0.42424775662 0.478544451955] % 6
+    [-0.388189687039 -0.212536970755] % 7
+    [-0.40820040598 0.170984284712] % 8
+    [-0.120827893448 0.425750886348] % 9
+    [0.257530487291 0.359918386828] % 10
+    [0.441963158435 0.023060001029] % 11
+    [0.293588556872 -0.331163035882] % 12
+    [-0.075864216131 -0.43601355228] % 13
+  ] def
+  /faces1 [
+    [13 1 12 4 11 0 10 3 9 6 8 2 7 5]
+  ] def
+  /bbox1 [-0.638655268013 -0.615227856073 0.58986667714 0.630057838022] def
+
+  /vertices1 vertices1 scaling_size vertices_scale def
+  /vs1 vertices1 0.000001 vertices_make_unique def
+
+  /heptagram_0 vs1 faces1 0 get cv_vertices def
+  /heptagram [
+    heptagram_0 white polygon_create
+    net_create
+  def
+  /inner_heptagon_0
+    vs1 [7 13 12 11 10 9 8] cv_vertices
+    28 vertices_rotate
+  def
+  /inner_heptagon [
+    inner_heptagon_0 white polygon_create
+    net_create
+  def
+
+  % triangles
+  /vertices2 [
+    [0.357871021097 0.376744462467] % 0
+    [-0.641345709723 0.337172694134] % 1
+    [-0.107467187664 -0.508388494476] % 2
+    [0.001254698739 0.362621461863] % 3
+    [-0.298006226143 -0.206611200211] % 4
+    [-0.298006226143 -0.206611200211] % 5
+    [0.035846989065 -0.235786548985] % 6
+    [0.214556844369 0.104142516976] % 7
+    [0.001254698739 0.362621461863] % 8
+  ] def
+  /faces2 [
+    [2 0 1][3 4][5 6][7 8]
+  ] def
+  /bbox2 [-0.641345709723 -0.508388494476 0.357871021097 0.376744462467] def
+
+  /vertices2 vertices2 scaling_size vertices_scale def
+  /vs2 vertices2 0.000001 vertices_make_unique def % last vertex index is 12 now
+
+  /medium_triangle vs2 [1 4 3] cv_vertices def
+  /small_tri_left vs2 [4 2 5] cv_vertices def
+  /small_tri_right vs2 [3 6 0] cv_vertices def
+  /para vs2 [4 5 6 3] cv_vertices def
+
+  /triangle_cut_0
+    medium_triangle
+    -2.3 vertices_rotate
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /triangle_cut_1
+    triangle_cut_0 1
+    para 0 3
+    vertices_edge_attach_to
+  def
+  /triangle_cut_2
+    triangle_cut_1 0
+    small_tri_left 0 2
+    vertices_edge_attach_to
+  def
+  /triangle_cut_3
+    triangle_cut_1 2
+    small_tri_right 1 0
+    vertices_edge_attach_to
+  def
+  /triangle_cut_4
+    triangle_cut_1 1
+    para 2 1
+    vertices_edge_attach_to
+  def
+  /triangle_cut_5
+    triangle_cut_2 1
+    small_tri_right 2 1
+    vertices_edge_attach_to
+  def
+  /triangle_cut_6
+    triangle_cut_3 1
+    small_tri_left 2 1
+    vertices_edge_attach_to
+  def
+  /triangle_cut_7
+    triangle_cut_4 3
+    medium_triangle 2 1
+    vertices_edge_attach_to
+  def
+  /triangle_cut [
+    triangle_cut_0 white polygon_create
+    triangle_cut_1 white polygon_create
+    triangle_cut_2 white polygon_create
+    triangle_cut_3 white polygon_create
+    triangle_cut_4 white polygon_create
+    triangle_cut_5 white polygon_create
+    triangle_cut_6 white polygon_create
+    triangle_cut_7 white polygon_create
+    net_create
+  def
+
+  /whole_triangle_0
+    vs2 [0 1 2] cv_vertices
+    dup 1 vertices_get
+    xy_neg vertices_translate
+    -2.3 60 add vertices_rotate
+  def
+  /whole_triangle_1
+    whole_triangle_0 2
+    whole_triangle_0 1 0
+    vertices_edge_attach_to
+  def
+  /whole_triangle [
+    whole_triangle_0 white polygon_create
+    whole_triangle_1 white polygon_create
+    net_create
+  def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (Small Supersemicupola 773)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+% This page will have the pieces for the heptagrams
+polygons begin
+  a4_area
+  .1 setlinewidth
+  30 120 rel_translate
+  gsave
+    4 { %repeat
+      triangle_cut net_cut
+      111 0 rel_translate
+    } repeat
+  grestore
+  0 5 rel_translate
+    4 { %repeat
+      whole_triangle net_cut
+      111 0 rel_translate
+    } repeat
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+% This page will have the pieces for the triangles not
+% attached to the {7/3} heptagram
+polygons begin
+  a4_area
+  130 30 rel_translate
+  .1 setlinewidth
+  /triplet {
+    gsave
+      2 { %repeat
+        heptagon net_cut
+        240 0 rel_translate
+      } repeat
+    grestore
+    gsave
+      220 390 rel_translate
+      180 rotate
+      heptagon net_cut
+    grestore
+  } bind def
+  triplet
+  gsave
+    -30 260 rel_translate
+    heptagram net_cut
+    -20 100 rel_translate
+    inner_heptagon net_cut
+  grestore
+  gsave
+    272 235 rel_translate
+    -26 rotate
+    heptagon_centre_long net_cut
+  grestore
+  gsave
+    120 200 rel_translate
+    heptagon_little_tri net_cut
+  grestore
+  0 380 rel_translate
+  triplet
+  gsave
+    -20 390 rel_translate
+    180 rotate
+    heptagon_centre_left net_cut
+    -480 0 rel_translate
+    heptagon_centre_right net_cut
+  grestore
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 3 3
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+
+    % triangle
+    /base_face_no 2 def
+    def_base_face
+    show_base_face
+
+    % heptagon
+    150 0 rel_translate
+    /base_face_no 0 def
+    def_base_face
+    show_base_face
+
+    % {7/2}
+    250 0 rel_translate
+    /base_face_no 1 def
+    def_base_face
+    show_base_face
+
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF
