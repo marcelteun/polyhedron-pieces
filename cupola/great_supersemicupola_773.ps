@@ -16,7 +16,8 @@
 (polygons.eps) run
 (fonts.eps) run
 polygons begin
-  /scaling_size 220 def
+  /org_scaling 220 def
+  /scaling_size org_scaling def
   /gray_value 0.2 def
   % distance between pieces when cut
   /edge_to_edge_offset_mm 1 mm2pt def
@@ -395,7 +396,7 @@ end
 %%EndProlog
 [
   /Author (Marcel T"unnissen)
-  /Title (Compound of 20 tetrahedra: 20B | A5xI / D3C3)
+  /Title (Great Supersemicupola 773)
   /DOCINFO
 pdfmark
 
@@ -409,7 +410,7 @@ polygons begin
     local_dict_size dict begin
       gsave
         6 { % repeat
-          75 0 translate
+          75 0 rel_translate
           7-2-gram_x5+1 net_cut
         } repeat
       grestore
@@ -417,22 +418,22 @@ polygons begin
   } def
 
   .1 setlinewidth
-  20 805 translate
+  20 805 rel_translate
   26_faces
-  100 -280 translate
+  100 -280 rel_translate
   7-3-gram net_cut
-  120 100 translate
+  120 100 rel_translate
   7-2-sides_x_7 net_cut
-  130 0 translate
+  130 0 rel_translate
   7-2-sides_x_7 net_cut
-  -470 -180 translate
+  -470 -180 rel_translate
   4 { %repeat
-    130 0 translate
+    130 0 rel_translate
     7-2-sides_x_7 net_cut
   } repeat
-  -520 -170 translate
+  -520 -170 rel_translate
   4 { %repeat
-    130 0 translate
+    130 0 rel_translate
     7-2-sides_x_7 net_cut
   } repeat
 
@@ -447,18 +448,18 @@ end % polygons
 polygons begin
   a4_area
   .1 setlinewidth
-  -50 770 translate
+  -50 770 rel_translate
   gsave
     4 { %repeat
-      130 0 translate
+      130 0 rel_translate
       top_triangle_x_7 net_cut
     } repeat
   grestore
   gsave
-    0 -140 translate
+    0 -140 rel_translate
     180 rotate
     4 { %repeat
-      -130 0 translate
+      -130 0 rel_translate
       top_triangle_x_7 net_cut
     } repeat
   grestore
@@ -474,19 +475,19 @@ end % polygons
 polygons begin
   a4_area
   .1 setlinewidth
-  20 715 translate
+  20 715 rel_translate
   gsave
     5 { %repeat
-      90 0 translate
+      90 0 rel_translate
       bottom_triangle_x_7 net_cut
     } repeat
   grestore
   gsave
-    105 -100 translate
+    105 -100 rel_translate
     90 rotate
     2 { % repeat
       bottom_triangle_x_7 net_cut
-      0 -200 translate
+      0 -200 rel_translate
     } repeat
   grestore
 
@@ -508,19 +509,19 @@ polygons begin
     show_base_face
 
     % triangles at (top)
-    250 0 translate
+    250 0 rel_translate
     /base_face_no 0 def
     def_base_face
     show_base_face
 
     % {7/3}
-    -250 250 translate
+    -250 250 rel_translate
     /base_face_no 3 def
     def_base_face
     show_base_face
 
     % {7/2}
-    250 0 translate
+    250 0 rel_translate
     /base_face_no 1 def
     def_base_face
     show_base_face
