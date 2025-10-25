@@ -1,0 +1,356 @@
+%!PS-Adobe-2.0
+%%Title: roof top of squares on virtual square base
+%%Creator: PS.py written by marcelteun
+%%Pages: 5 5
+%%BoundingBox: 0 0 595 842
+% to zoom out from A4:
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+
+% Page 1 contains the pieces to be cut for a uniform compound of 12 tetrahedra.
+% One can either use 3 or 6 colours. Page 1 contains all pieces for one colour
+% if you go for the latter
+% Page 2 shows where all other triangles intersect one triangle.
+
+(polygons.eps) run
+(fonts.eps) run
+polygons begin
+  /org_scaling 100 def
+  /scaling_size org_scaling def
+  /gray_value 0.2 def
+  % distance between pieces when cut
+  /edge_to_edge_offset_mm 2 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area true def
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  % the sqaures on the side
+  /vertices0 [
+    [1.764705882353 -0.529411764706] % 0
+    [1.764705882353 1.470588235294] % 1
+    [-0.235294117647 1.470588235294] % 2
+    [-0.235294117647 -0.529411764706] % 3
+    [0.564705882353 -0.529411764706] % 4
+    [-0.235294117647 1.470588235294] % 5
+  ] def
+  /faces0 [
+    [0 1 2 3][4 5]
+  ] def
+  /bbox0 [-0.235294117647 -0.529411764706 1.764705882353 1.470588235294] def
+
+  % the triangles
+  /vertices1 [
+    [0 2.037706832434] % 0
+    [1 0.305656024865] % 1
+    [-1 0.305656024865] % 2
+    [0.6 0.998476347893] % 3
+    [0 0.305656024865] % 4
+    [0 0.305656024865] % 5
+    [-0.6 0.998476347893] % 6
+  ] def
+  /faces1 [
+    [0 2 1][3 4][5 6]
+  ] def
+  /bbox1 [-1 0.305656024865 1 2.037706832434] def
+
+  /vertices0 vertices0 scaling_size vertices_scale def
+  /vs0 vertices0 0.000001 vertices_make_unique def % last vertex index is 4
+
+  /vertices1 vertices1 scaling_size vertices_scale def
+  /vs1 vertices1 0.000001 vertices_make_unique def % last vertex index is 5
+
+  % Make sure to have the mirrors as well
+  /square_inner_l vs0 [4 2 3] cv_vertices def
+  /square_outer_l vs0 [4 0 1 2] cv_vertices def
+  /square_inner_r square_inner_l vertices_mirror_y def
+  /square_outer_r square_outer_l vertices_mirror_y def
+
+  /square_0
+    square_inner_l
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /square_1
+    square_0 0
+    square_outer_l 0 3
+    vertices_edge_attach_to
+  def
+  /square_2
+    square_1 1
+    square_inner_l 2 1
+    vertices_edge_attach_to
+  def
+  /square_3
+    square_2 0
+    square_outer_l 0 3
+    vertices_edge_attach_to
+  def
+  /square_4
+    square_3 1
+    square_inner_l 2 1
+    vertices_edge_attach_to
+  def
+  /square_5
+    square_4 0
+    square_outer_l 0 3
+    vertices_edge_attach_to
+  def
+  /3squares [
+    square_0 white polygon_create
+      1 polygon_reverse_edge
+    square_1 white polygon_create
+    square_2 white polygon_create
+      1 polygon_reverse_edge
+    square_3 white polygon_create
+    square_4 white polygon_create
+      1 polygon_reverse_edge
+    square_5 white polygon_create
+    net_create
+  def
+
+  /square_6
+    square_1 2
+    square_outer_r 2 3
+    %2 copy neg def
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /square_7
+      square_6 3
+      square_inner_r 1 0
+      /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+      vertices_edge_attach_to
+    def
+  def
+  /2squares [
+    square_0 white polygon_create
+      1 polygon_reverse_edge
+    square_1 white polygon_create
+    square_6 white polygon_create
+    square_7 white polygon_create
+      1 polygon_reverse_edge
+    net_create
+  def
+
+  /whole_triangle vs1 [0 2 1] cv_vertices def
+  /kite vs1 [0 5 4 3] cv_vertices def
+  /small_triangle_l vs1 [2 4 5] cv_vertices def
+  /small_triangle_r vs1 [4 1 3] cv_vertices def
+
+  /tri_0
+    whole_triangle
+    dup 1 vertices_get
+    xy_neg vertices_translate
+  def
+  /tri_1
+    tri_0 2
+    whole_triangle 1 0
+    vertices_edge_attach_to
+  def
+  /tri_2
+    tri_0 0
+    whole_triangle 1 0
+    vertices_edge_attach_to
+  def
+  /tri_3
+    tri_1 2
+    whole_triangle 1 0
+    vertices_edge_attach_to
+  def
+  /tri_5
+    tri_3 2
+    kite 0 3
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm 1 mm2pt def
+  /tri_6
+    tri_5 1
+    small_triangle_l 2 1
+    vertices_edge_attach_to
+  def
+  /tri_7
+    tri_5 2
+    small_triangle_r 0 2
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm 1.5 mm2pt def
+  /tri_4
+    tri_6 0
+    kite 0 3
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm 1 mm2pt def
+  /tri_8
+    tri_4 1
+    small_triangle_l 2 1
+    vertices_edge_attach_to
+  def
+  /tri_9
+    tri_4 2
+    small_triangle_r 0 2
+    vertices_edge_attach_to
+  def
+
+  /triangles [
+    tri_0 white polygon_create
+    tri_1 white polygon_create
+    tri_2 white polygon_create
+    tri_3 white polygon_create
+    tri_4 white polygon_create
+    tri_5 white polygon_create
+      3 polygon_reverse_edge
+    tri_6 white polygon_create
+    tri_7 white polygon_create
+    tri_8 white polygon_create
+    tri_9 white polygon_create
+    net_create
+  def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (Small Supersemicupola 773)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+% This page will have three of eight needed squares one side
+polygons begin
+  a4_area
+  .1 setlinewidth
+  240 60 rel_translate
+  90 rotate
+  3squares net_cut
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+% This page will have three of eight needed squares opposite side
+polygons begin
+  a4_area
+  .1 setlinewidth
+  40 60 rel_translate
+  90 rotate
+  1 -1 scale
+  3squares net_cut
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 3 3
+%%BeginPage
+% This page will have the the remaining two squares
+polygons begin
+  a4_area
+  30 400 rel_translate
+  .1 setlinewidth
+  2squares net_cut
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 4 4
+%%BeginPage
+% This page will have the pieces for the triangles not
+% attached to the {7/3} heptagram
+polygons begin
+  a4_area
+  130 30 rel_translate
+  .1 setlinewidth
+  triangles net_cut
+
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 5 5
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+
+    % square
+    /base_face_no 0 def
+    def_base_face
+    show_base_face
+
+    % triangle
+    250 0 rel_translate
+    /base_face_no 1 def
+    def_base_face
+    show_base_face
+
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF
