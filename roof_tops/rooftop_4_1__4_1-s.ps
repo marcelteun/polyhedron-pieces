@@ -16,7 +16,7 @@
 (polygons.eps) run
 (fonts.eps) run
 polygons begin
-  /org_scaling 100 def
+  /org_scaling 80 def
   /scaling_size org_scaling def
   /gray_value 0.2 def
   % distance between pieces when cut
@@ -102,7 +102,17 @@ polygons begin
     square_outer_l 0 3
     vertices_edge_attach_to
   def
-  /3squares [
+  /square_6
+    square_5 1
+    square_inner_l 2 1
+    vertices_edge_attach_to
+  def
+  /square_7
+    square_6 0
+    square_outer_l 0 3
+    vertices_edge_attach_to
+  def
+  /4squares [
     square_0 white polygon_create
       1 polygon_reverse_edge
     square_1 white polygon_create
@@ -112,6 +122,79 @@ polygons begin
     square_4 white polygon_create
       1 polygon_reverse_edge
     square_5 white polygon_create
+    square_6 white polygon_create
+      1 polygon_reverse_edge
+    square_7 white polygon_create
+    net_create
+  def
+
+  /square_0
+    square_outer_l
+    dup 1 vertices_get
+    xy_neg vertices_translate
+    -90 vertices_rotate
+  def
+  /square_1
+    square_0 3
+    square_inner_r 1 2
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+    /square_2
+      % reverse edge to attach the shorted edge at the left side
+      square_1 1 reverse_edges
+      square_outer_l 2 1
+      vertices_edge_attach_to
+    def
+  def
+  /square_3
+    square_2 3
+    square_inner_r 1 2
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+    /square_4
+      % reverse edge to attach the shorted edge at the left side
+      square_3 1 reverse_edges
+      square_outer_l 2 1
+      vertices_edge_attach_to
+    def
+  def
+  /square_5
+    square_4 3
+    square_inner_r 1 2
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+    /square_6
+      % reverse edge to attach the shorted edge at the left side
+      square_5 1 reverse_edges
+      square_outer_l 2 1
+      vertices_edge_attach_to
+    def
+  def
+  /square_7
+    square_6 3
+    square_inner_r 1 2
+    vertices_edge_attach_to
+  def
+
+  /4squares_one_side [
+    square_0 white polygon_create
+    square_1 white polygon_create
+      1 polygon_reverse_edge
+    square_2 white polygon_create
+    square_3 white polygon_create
+      1 polygon_reverse_edge
+    square_4 white polygon_create
+    square_5 white polygon_create
+      1 polygon_reverse_edge
+    square_6 white polygon_create
+    square_7 white polygon_create
+      1 polygon_reverse_edge
     net_create
   def
 
@@ -274,64 +357,19 @@ pdfmark
 
 %%Page: 1 1
 %%BeginPage
-% This page will have three of eight needed squares one side
 polygons begin
   a4_area
-  .1 setlinewidth
-  240 60 rel_translate
-  90 rotate
-  3squares net_cut
-
-  showpage
-end % polygons
-%%EndPage
-
-%%Page: 2 2
-%%BeginPage
-% This page will have three of eight needed squares opposite side
-polygons begin
-  a4_area
-  .1 setlinewidth
-  40 60 rel_translate
-  90 rotate
-  1 -1 scale
-  3squares net_cut
-
-  showpage
-end % polygons
-%%EndPage
-
-%%Page: 3 3
-%%BeginPage
-% This page will have the the remaining two squares
-polygons begin
-  a4_area
-  30 400 rel_translate
-  .1 setlinewidth
-  2squares net_cut
-
-  showpage
-end % polygons
-%%EndPage
-
-%%Page: 4 4
-%%BeginPage
-% This page will have the pieces for the triangles not
-% attached to the {7/3} heptagram
-polygons begin
-  a4_area
-  130 30 rel_translate
-  .1 setlinewidth
-  triangles net_cut
-
-  showpage
-end % polygons
-%%EndPage
-
-%%Page: 5 5
-%%BeginPage
-polygons begin
-  a4_area
+  gsave
+    40 800 translate
+    (These are the pieces for a roof top polyhedron with squares on a square base) tline
+    (Page 2 contains all the squares that if you are using one colour.) tline
+    (If you are using two colours for the squares:) tline
+    ( - page 3 contains the squares that can be cut in colour A.) tline
+    ( - page 4 contains the squares that can be cut in colour B.) tline
+    (Note these pieces don't fit to make a square since the faces are supposed to be flipped) tline
+    (in respect to each other.) tline
+    (Page 5 contains half of the triangles that are needed and can be cut in colours C and D.) tline
+  grestore
   local_dict_size dict begin
     .1 setlinewidth
     /if_show_base true def
@@ -349,6 +387,61 @@ polygons begin
 
     showpage
   end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+% This page will have all eight squares that are needed
+polygons begin
+  a4_area
+  .1 setlinewidth
+  200 60 rel_translate
+  90 rotate
+  4squares net_cut
+  1 -1 scale
+  0 5 rel_translate
+  4squares net_cut
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 3 3
+%%BeginPage
+% This page will have three of eight needed squares opposite side
+polygons begin
+  a4_area
+  .1 setlinewidth
+  55 60 rel_translate
+  4squares_one_side net_cut
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 4 4
+%%BeginPage
+% This page will have the pieces for the triangles not
+% attached to the {7/3} heptagram
+polygons begin
+  a4_area
+  .1 setlinewidth
+  55 760 rel_translate
+  1 -1 scale
+  4squares_one_side net_cut
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 5 5
+%%BeginPage
+% This page will have the pieces for the triangles not
+% attached to the {7/3} heptagram
+polygons begin
+  a4_area
+  130 30 rel_translate
+  .1 setlinewidth
+  triangles net_cut
+  showpage
 end % polygons
 %%EndPage
 
