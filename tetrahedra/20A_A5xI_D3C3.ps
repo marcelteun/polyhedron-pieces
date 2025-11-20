@@ -599,7 +599,7 @@ polygons begin
   25 825 translate
   local_dict_size dict begin
     (These are the pieces used for a compound of 20 tetrahedra. I assumed using five colours.) tline
-    (Page 2 contains the pieces to be cut for two tetrahedra, plus some spare for the smaller pieces, since it fit.) tline
+    (Page 2 contains the pieces to be cut for two tetrahedra, plus some spare for the smaller pieces, since they fit.) tline
     (There are two different types of faces in one polyedron:) tline
     ( - Page 3 shows how all faces meet the first type of face.) tline
     ( - Page 4 shows how all faces meet the other type of face.) tline
@@ -725,8 +725,8 @@ polygons begin
       6 small_row_x
     grestore
 
-    % The tiniest facelets: 9 + 3 extra
-    /column_tiny_x {  % no_of_tiny_pairs -> _
+    % The tiniest facelets: 6 + 2 extra
+    /column_tiny_x {  % no_of_tiny_pairs_of_pairs -> _
       /dy -35 def
       gsave
         dup { % repeat
@@ -770,10 +770,15 @@ polygons begin
       325 -436 rel_translate
       2 small_row_x
     grestore
-    % tiny
+    gsave
+      130 -336 rel_translate
+      2 small_row_x
+    grestore
+    % TODO: some more small ones?
+    % tiny: 7 - 10
     gsave
       40 -510 rel_translate
-      1 column_tiny_x
+      2 column_tiny_x
     grestore
 
   end % local dict
