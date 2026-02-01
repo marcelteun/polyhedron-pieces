@@ -16,8 +16,8 @@
 (polygons.eps) run
 (fonts.eps) run
 polygons begin
-  /org_scaling 80 def
-  /scaling_size org_scaling def
+  /__org_scaling 80 def
+  /scaling_size 75 def
   /gray_value 0.2 def
   % distance between pieces when cut
   /edge_to_edge_offset_mm 2 mm2pt def
@@ -412,7 +412,7 @@ end % polygons
 polygons begin
   a4_area
   .1 setlinewidth
-  55 60 rel_translate
+  55 20 rel_translate
   4squares_one_side net_cut
   showpage
 end % polygons
@@ -425,7 +425,7 @@ end % polygons
 polygons begin
   a4_area
   .1 setlinewidth
-  55 760 rel_translate
+  55 530 rel_translate
   1 -1 scale
   4squares_one_side net_cut
   showpage
@@ -438,7 +438,7 @@ end % polygons
 % attached to the {7/3} heptagram
 polygons begin
   a4_area
-  130 30 rel_translate
+  80 30 rel_translate
   .1 setlinewidth
   triangles net_cut
   showpage

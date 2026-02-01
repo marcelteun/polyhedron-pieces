@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: Compound of tetrahedra 20A | A5xI / D3C3
 %%Creator: PS.py written by marcelteun
-%%Pages: 5 1
+%%Pages: 6 1
 %%BoundingBox: 0 0 595 842
 % %%BoundingBox: -595 -842 1100 1700
 %%EndComments
@@ -829,7 +829,7 @@ showpage
 
 %%Page: 5 5
 %%BeginPage
-% extra for missing pieces
+% paper templates to glue on the smalles pieces
 polygons begin
   % Save old value on stack
   edge_to_edge_offset_mm
@@ -895,6 +895,18 @@ polygons begin
   end % local dict
   % recover old value
   /edge_to_edge_offset_mm exch def
+end % polygons
+showpage
+%%EndPage
+
+%%Page: 6 6
+%%BeginPage
+% extra for missing pieces
+polygons begin
+  .2 setlinewidth
+  a4_area
+  200 200 translate
+  bottom net_cut
 end % polygons
 showpage
 %%EndPage
