@@ -1,0 +1,667 @@
+%!PS-Adobe-2.0
+%%Title: roof top of squares on virtual square base
+%%Creator: PS.py written by marcelteun
+%%Pages: 8 8
+%%BoundingBox: 0 0 595 842
+% to zoom out from A4:
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+
+% Page 1 contains the pieces to be cut for a uniform compound of 12 tetrahedra.
+% One can either use 3 or 6 colours. Page 1 contains all pieces for one colour
+% if you go for the latter
+% Page 2 shows where all other triangles intersect one triangle.
+
+(polygons.eps) run
+(fonts.eps) run
+polygons begin
+  /org_scaling 80 def
+  /scaling_size org_scaling def
+  /gray_value 0.2 def
+  % distance between pieces when cut
+  /edge_to_edge_offset_mm 2 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area true def
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  % the squares
+  /vertices0 [
+    [-0.970588235294 1.058823529412] % 0
+    [-0.970588235294 -0.941176470588] % 1
+    [1.029411764706 -0.941176470588] % 2
+    [1.029411764706 1.058823529412] % 3
+    [1.029411764706 0.392156862745] % 4
+    [-0.113445378151 -0.941176470588] % 5
+    [0.229411764706 1.058823529412] % 6
+    [-0.570588235294 -0.941176470588] % 7
+    [-0.303921568627 -0.941176470588] % 8
+    [1.029411764706 1.058823529412] % 9
+    [-0.68487394958 -0.655462184874] % 10
+    [-0.303921568627 1.058823529412] % 11
+    [-0.970588235294 0.058823529412] % 12
+    [-0.303921568627 -0.941176470588] % 13
+    [-0.68487394958 -0.655462184874] % 14
+    [1.029411764706 -0.941176470588] % 15
+    [1.029411764706 0.392156862745] % 16
+    [0.229411764706 1.058823529412] % 17
+    [-0.303921568627 1.058823529412] % 18
+    [-0.970588235294 0.058823529412] % 19
+  ] def
+  /faces0 [
+    [0 1 2 3][4 5][6 7][8 9][10 11][12 13][14 15][16 17][18 19]
+  ] def
+  /bbox0 [-0.970588235294 -0.941176470588 1.029411764706 1.058823529412] def
+
+  % the triangles
+  /vertices1 [
+    [1 -0.61131204973] % 0
+    [-1 -0.61131204973] % 1
+    [0 1.120738757839] % 2
+    [1 -0.61131204973] % 3
+    [-0.428571428571 0.378431268881] % 4
+    [0.333333333333 0.543388488649] % 5
+    [0 -0.61131204973] % 6
+    [-0.333333333333 0.543388488649] % 7
+    [0 -0.61131204973] % 8
+    [-1 -0.61131204973] % 9
+    [0.428571428571 0.378431268881] % 10
+    [1 -0.61131204973] % 11
+    [-0.2 0.774328596325] % 12
+    [0.333333333333 0.543388488649] % 13
+    [-0.333333333333 0.543388488649] % 14
+    [0.2 0.774328596325] % 15
+    [-1 -0.61131204973] % 16
+  ] def
+  /faces1 [
+    [2 1 0][3 4][5 6][7 8][9 10][11 12][13 14][15 16]
+  ] def
+  /bbox1 [-1 -0.61131204973 1 1.120738757839] def
+
+  /vertices2 [
+    [0 1.120738757839] % 0
+    [1 -0.61131204973] % 1
+    [-1 -0.61131204973] % 2
+    [-0.6 0.081508273297] % 3
+    [0.333333333333 0.543388488649] % 4
+    [0.6 0.081508273297] % 5
+    [-0.333333333333 0.543388488649] % 6
+    [-0.6 0.081508273297] % 7
+    [0 -0.61131204973] % 8
+    [0 -0.61131204973] % 9
+    [0.6 0.081508273297] % 10
+    [0.333333333333 0.543388488649] % 11
+    [-0.333333333333 0.543388488649] % 12
+  ] def
+  /faces2 [
+    [0 2 1][3 4][5 6][7 8][9 10][11 12]
+  ] def
+  /bbox2 [-1 -0.61131204973 1 1.120738757839] def
+
+  /vertices3 [
+    [1 -0.509426708108] % 0
+    [0 1.22262409946] % 1
+    [-1 -0.509426708108] % 2
+    [0 -0.509426708108] % 3
+    [-0.333333333333 0.645273830271] % 4
+    [0 -0.509426708108] % 5
+    [0.333333333333 0.645273830271] % 6
+    [0.333333333333 0.645273830271] % 7
+    [-0.333333333333 0.645273830271] % 8
+  ] def
+  /faces3 [
+    [1 2 0][3 4][5 6][7 8]
+  ] def
+  /bbox3 [-1 -0.509426708108 1 1.22262409946] def
+
+  /vertices0 vertices0 scaling_size vertices_scale def
+  /vs0 vertices0 0.000001 vertices_make_unique def % last vertex index is 11
+  /vs0 vs0 9 10 8 11 vertices_add_intersection def
+  /vs0 vs0 4 5 2 9 vertices_add_intersection def
+  /vs0 vs0 3 8 4 6 vertices_add_intersection def
+  /vs0 vs0 6 7 2 9 vertices_add_intersection def
+
+  /vertices1 vertices1 scaling_size vertices_scale def
+  /vs1 vertices1 0.000001 vertices_make_unique def % last vertex index is 9
+  /vs1 vs1 0 3 5 4 vertices_add_intersection def
+  /vs1 vs1 1 7 5 6 vertices_add_intersection def
+  /vs1 vs1 0 8 1 7 vertices_add_intersection def
+  /vs1 vs1 1 9 0 3 vertices_add_intersection def
+  /vs1 vs1 0 8 1 9 vertices_add_intersection def
+
+  /vertices2 vertices2 scaling_size vertices_scale def
+  /vs2 vertices2 0.000001 vertices_make_unique def % last vertex index is 7
+  /vs2 vs2 3 4 5 6 vertices_add_intersection def
+
+  /vertices3 vertices3 scaling_size vertices_scale def
+  /vs3 vertices3 0.000001 vertices_make_unique def % last vertex index is 5
+
+  /square@bot_l vs0 [1 7 15 9 12 11] cv_vertices def
+  /square@top_l vs0 [0 11 10] cv_vertices def
+  /square@top_top_r vs0 [3 6 14] cv_vertices def
+  /square@r_top_r vs0 [3 14 4] cv_vertices def
+  /square@r_bot_r vs0 [2 4 13] cv_vertices def
+  /square@bot_bot_r vs0 [2 13 5] cv_vertices def
+  /square@long vs0 [10 12 15 6] cv_vertices def
+
+  /square_0
+    square@bot_l
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /square_1
+    square_0 5
+    square@top_l 1 0
+    vertices_edge_attach_to
+  def
+  /square_2
+    square_1 1
+    square@top_l vertices_mirror_y 1 2
+    vertices_edge_attach_to
+  def
+  /square_3
+    square_0 4
+    square@bot_l vertices_mirror_y 4 5
+    vertices_edge_attach_to
+  def
+  /square_4
+    square_1 2
+    square@long 0 3
+    vertices_edge_attach_to
+  def
+  /square_5
+    square_4 2
+    square@long vertices_mirror_y 2 3
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+    /square_6
+      square_5 2 reverse_edges
+      square@r_bot_r 2 1
+      vertices_edge_attach_to
+    def
+  def
+  /square_7
+    square_4 0
+    square@r_bot_r vertices_mirror_y 1 2
+    vertices_edge_attach_to
+  def
+  /square_8
+    square_6 0
+    square@bot_bot_r 0 2
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+    /square_9
+      square_7 2
+      square@bot_bot_r vertices_mirror_y 1 0
+      vertices_edge_attach_to
+    def
+    /square_10
+      square_7 1 reverse_edges
+      square@top_top_r 2 1
+      vertices_edge_attach_to
+    def
+  def
+  /square_11
+    square_10 0
+    square@top_top_r vertices_mirror_y 0 1
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+    /square_12
+      square_5 3
+      square@r_top_r 0 1
+      vertices_edge_attach_to
+    def
+    /square_13
+      square_11 2
+      square@r_top_r vertices_mirror_y 0 2
+      vertices_edge_attach_to
+    def
+  def
+
+  /2squares [
+    square_0 white polygon_create
+    square_1 white polygon_create
+    square_2 white polygon_create
+    square_3 white polygon_create
+    square_4 white polygon_create
+    square_5 white polygon_create
+    square_6 white polygon_create
+    square_7 white polygon_create
+    square_8 white polygon_create
+    square_9 white polygon_create
+    square_10 white polygon_create
+    square_11 white polygon_create
+    square_12 white polygon_create
+    square_13 white polygon_create
+    net_create
+  def
+
+  /1square_0
+    square@bot_l
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /1square_1
+    1square_0 5
+    square@top_l 1 0
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm 2 mul def
+    /1square_2
+      1square_0 0
+      square@long 0 3
+      vertices_edge_attach_to
+    def
+  def
+  /1square_4
+    1square_2 0
+    square@r_bot_r vertices_mirror_y 1 2
+    vertices_edge_attach_to
+  def
+  /1square_5
+    1square_0 0 reverse_edges
+    square@top_top_r 0 1
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm
+    /edge_to_edge_offset_mm edge_to_edge_offset_mm neg def
+    /1square_3
+      1square_4 1 reverse_edges
+      square@bot_bot_r 0 2
+      vertices_edge_attach_to
+    def
+  def
+  /1square_6
+    1square_1 1
+    square@r_top_r vertices_mirror_y 2 0
+    vertices_edge_attach_to
+  def
+
+  /1square [
+    1square_0 white polygon_create
+    1square_1 white polygon_create
+    1square_2 white polygon_create
+    1square_3 white polygon_create
+    1square_4 white polygon_create
+    1square_5 white polygon_create
+    1square_6 white polygon_create
+    net_create
+  def
+
+  % four of the roof triangles meeting at a "four-leaf clover"
+  /tri@4_clover_bot_l vs1 [1 5 11] cv_vertices def
+  /tri@4_clover_bot_r vs1 [0 10 5] cv_vertices def
+  /tri@4_clover_top vs1 [2 8 14 9] cv_vertices def
+  /tri@4_clover_side_l vs1 [1 13 3] cv_vertices def
+  /tri@4_clover_side_r vs1 [0 7 12] cv_vertices def
+  /tri@4_clover_in_l vs1 [1 11 13] cv_vertices def
+  /tri@4_clover_in_r vs1 [0 12 10] cv_vertices def
+
+  /tri@4_clover__0
+    tri@4_clover_bot_l
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /tri@4_clover__1
+    tri@4_clover__0 2
+    tri@4_clover_bot_r 0 2
+    vertices_edge_attach_to
+  def
+  /tri@4_clover__2
+    tri@4_clover__0 1
+    tri@4_clover_top 1 0
+    vertices_edge_attach_to
+  def
+  /tri@4_clover__3
+    tri@4_clover__1 1 reverse_edges
+    tri@4_clover_side_l 0 2 reverse_edges
+    vertices_edge_attach_to
+  def
+  /tri@4_clover__4
+    tri@4_clover__3 0
+    tri@4_clover_side_r 1 0
+    vertices_edge_attach_to
+  def
+  /tri@4_clover__5
+    tri@4_clover__4 2
+    tri@4_clover_in_r 1 0
+    vertices_edge_attach_to
+  def
+  /tri@4_clover__6
+    tri@4_clover__5 2
+    tri@4_clover_in_r 0 2
+    vertices_edge_attach_to
+  def
+
+  /tri@4_clover [
+    tri@4_clover__0 white polygon_create
+    tri@4_clover__1 white polygon_create
+    tri@4_clover__2 white polygon_create
+    tri@4_clover__3 white polygon_create
+    tri@4_clover__4 white polygon_create
+    tri@4_clover__5 white polygon_create
+    tri@4_clover__6 white polygon_create
+    net_create
+  def
+
+  % four of the roof triangles meeting at a {4/2}
+  /tri@4_2_edge_l vs2 [2 7 3] cv_vertices def
+  /tri@4_2_edge_r vs2 [1 5 7] cv_vertices def
+  /tri@4_2_top vs2 [0 6 4] cv_vertices def
+  /tri@4_2_side_l vs2 [3 8 6] cv_vertices def
+  /tri@4_2_side_r vs2 [5 4 8] cv_vertices def
+
+  /tri@4_2__0
+    tri@4_2_edge_l
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /tri@4_2__1
+    tri@4_2__0 1
+    tri@4_2_edge_r 2 1
+    vertices_edge_attach_to
+  def
+  /tri@4_2__2
+    tri@4_2__1 2
+    tri@4_2_top 1 0
+    vertices_edge_attach_to
+  def
+  /tri@4_2__3
+    tri@4_2__0 2
+    tri@4_2_side_l 1 0
+    vertices_edge_attach_to
+  def
+  /tri@4_2__4
+    tri@4_2__2 2
+    tri@4_2_side_r 0 2
+    vertices_edge_attach_to
+  def
+
+  /tri@4_2 [
+    tri@4_2__0 white polygon_create
+    tri@4_2__1 white polygon_create
+    tri@4_2__2 white polygon_create
+    tri@4_2__3 white polygon_create
+    %  1 polygon_reverse_edge
+    tri@4_2__4 white polygon_create
+    %  1 polygon_reverse_edge
+    net_create
+  def
+
+  % four of the roof triangles meeting at a {4/2}
+  /tri@_extra_l vs3 [2 3 4] cv_vertices def
+  /tri@_extra_r vs3 [0 5 3] cv_vertices def
+  /tri@_extra_top vs3 [1 4 5] cv_vertices def
+
+  /tri@_extra_0
+    tri@_extra_l
+    dup 0 vertices_get
+    xy_neg vertices_translate
+  def
+  /tri@_extra_1
+    tri@_extra_0 2
+    tri@_extra_r 1 0
+    vertices_edge_attach_to
+  def
+  /tri@_extra_2
+    tri@_extra_1 2 reverse_edges
+    tri@_extra_top 1 0 reverse_edges
+    vertices_edge_attach_to
+  def
+
+  /tri@_extra [
+    tri@_extra_0 white polygon_create
+    tri@_extra_1 white polygon_create
+    tri@_extra_2 white polygon_create
+    net_create
+  def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (Small Supersemicupola 773)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+polygons begin
+  a4_area
+  gsave
+    40 800 translate
+    (These are the pieces for a roof top polyhedron with squares on a square base) tline
+    (Page 2 contains all the triangles in case you want to use the same colour for all of them.) tline
+    (Page 3 contains one pair of four roof top triangles of you want give these pairs seperate colours) tline
+    (Page 4 has one of four extra triangles. It is positioned exactly above the one in Page 3.) tline
+    (  This gives you the possibilty to cut these in the same colour as the roof top triangles.) tline
+    (Use Page 5 if you want to have all extra triangles in one colour.) tline
+    (Page 6 has the pieces for both versions of the squares, which are each other's mirror image) tline
+    (Page 7 has the square pieces for one orientation. Use this if you use two colours for the squares) tline
+    (Page 8 has the square pieces for the opposite orientation. Use this for the other colour) tline
+  grestore
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+
+    % square
+    /base_face_no 0 def
+    def_base_face
+    show_base_face
+
+    % triangle 1
+    250 0 rel_translate
+    /base_face_no 1 def
+    def_base_face
+    show_base_face
+
+    % triangle 2
+    -250 250 rel_translate
+    /base_face_no 2 def
+    def_base_face
+    show_base_face
+
+    % triangle 2
+    250 0 rel_translate
+    /base_face_no 3 def
+    def_base_face
+    show_base_face
+
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+% This page will have all eight squares that are needed
+polygons begin
+  a4_area
+  .1 setlinewidth
+  50 60 rel_translate
+  /triangles {
+    tri@4_2 net_cut
+    25 90 rel_translate
+    tri@4_clover net_cut
+    50 120 rel_translate
+    tri@_extra net_cut
+    -75 -210 translate
+  } def
+  /2triangles {
+    triangles
+    150 0 translate
+    triangles
+    -150 0 translate
+  } def
+  2triangles
+  0 310 translate
+  2triangles
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 3 3
+%%BeginPage
+polygons begin
+  a4_area
+  .1 setlinewidth
+  50 60 rel_translate
+  tri@4_2 net_cut
+  25 90 rel_translate
+  tri@4_clover net_cut
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 4 4
+%%BeginPage
+polygons begin
+  a4_area
+  .1 setlinewidth
+  % See Page 2 and 3
+  % position trio@_extra just above the others in case you want the use the
+  % same colour
+  50 60 rel_translate
+  25 90 rel_translate
+  50 120 rel_translate
+  tri@_extra net_cut
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 5 5
+%%BeginPage
+polygons begin
+  a4_area
+  90 30 rel_translate
+  .1 setlinewidth
+  /2extra {
+    tri@_extra net_cut
+    150 0 translate
+    tri@_extra net_cut
+    -150 0 translate
+  } def
+  2extra
+  0 100 translate
+  2extra
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 6 6
+%%BeginPage
+polygons begin
+  a4_area
+  160 230 rel_translate
+  .1 setlinewidth
+  /2s {
+    2squares net_cut
+    215 0 translate
+    2squares net_cut
+    -215 0 translate
+  } def
+  /4s {
+    2s
+    0 235 translate
+    2s
+  } def
+  4s
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 7 7
+%%BeginPage
+polygons begin
+  a4_area
+  115 160 rel_translate
+  .1 setlinewidth
+  3 {
+    1square net_cut
+    120 0 rel_translate
+  } repeat
+  showpage
+end % polygons
+%%EndPage
+
+%%Page: 8 8
+%%BeginPage
+polygons begin
+  a4_area
+  115 335 rel_translate
+  1 -1 scale
+  .1 setlinewidth
+  3 {
+    1square net_cut
+    120 0 rel_translate
+  } repeat
+  showpage
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF
