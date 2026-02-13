@@ -1,1 +1,6 @@
+*.generated.ps
+*.gen.ps
+*_generated.ps
+*_gen.ps
 *.pdf
+.attic
