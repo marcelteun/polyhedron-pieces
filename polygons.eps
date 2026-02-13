@@ -375,6 +375,10 @@
     end
   } bd
 
+  /vertices_mirror { % Vs -> newVs with vertices mirrored in y-axis
+    -1 1 /mul vertices_xy_op
+  } bd
+
   /vertices_rotate { % Vs alpha -> newVs
     4 dict begin
       dup
@@ -769,8 +773,8 @@
   %%%%%%%
   /net_new { % _ ->  net
     2 dict dup begin
-      /p 13 dict def
-      /l 0 def
+      /p 13 dict def  % polygons
+      /l 0 def  % no. of polygons
     end
   } bd
 
