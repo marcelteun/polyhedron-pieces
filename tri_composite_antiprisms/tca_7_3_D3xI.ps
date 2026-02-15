@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0
 %%Title: Tri Composite of {7/3} anti-prisms
 %%Creator: PS.py written by marcelteun
-%%Pages: 9 1
+%%Pages: 10 1
 %%BoundingBox: 0 0 595 842
 % %%BoundingBox: -595 -842 1100 1700
 %%EndComments
@@ -287,6 +287,47 @@ polygons begin
   /v_opp vs2 [1 26 16 25] cv_vertices vertices_mirror def
   /split_l vs2 [1 26 17] cv_vertices def
   /strip_in vs2 [25 28 29 27] cv_vertices def
+  /small_tri vs2 [26 3 9] cv_vertices def
+  /s_small_tri vs2 [26 9 3] cv_vertices vertices_mirror def
+  /para vs2 [3 31 30 13] cv_vertices def
+  /s_para vs2 [3 13 30 31] cv_vertices vertices_mirror def
+
+  /paras_0
+    para
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    -95 vertices_rotate
+  def
+  /paras_1
+    paras_0 3
+    s_para 1 0
+    vertices_edge_attach_to
+  def
+  /paras_2
+    paras_0 2
+    s_para 2 1
+    vertices_edge_attach_to
+  def
+  /paras_3
+    paras_2 0
+    para 0 3
+    vertices_edge_attach_to
+  def
+  /half_paras [
+    paras_0 white polygon_create
+    paras_1 white polygon_create
+      1 polygon_reverse_edge
+    net_create
+  def
+  /paras [
+    paras_0 white polygon_create
+    paras_1 white polygon_create
+      1 polygon_reverse_edge
+    paras_2 white polygon_create
+      1 polygon_reverse_edge
+    paras_3 white polygon_create
+    net_create
+  def
 
   % Define combined sub parts:
   /double_sided_0
@@ -320,6 +361,11 @@ polygons begin
     strip_in 0 3
     vertices_edge_attach_to
   def
+  /double_sided_6
+    double_sided_5 2
+    small_tri 1 0
+    vertices_edge_attach_to
+  def
   /double_sided [
     double_sided_0 white polygon_create
       3 polygon_reverse_edge
@@ -334,6 +380,36 @@ polygons begin
       1 polygon_reverse_edge
     double_sided_5 white polygon_create
       1 polygon_reverse_edge
+    double_sided_6 white polygon_create
+    net_create
+  def
+
+  /extra_0
+    small_tri
+    dup 2 vertices_get
+    xy_neg vertices_translate
+    120 vertices_rotate
+  def
+  /extra_1
+    extra_0 2
+    s_small_tri 1 0
+    vertices_edge_attach_to
+  def
+  /extra_2
+    extra_0 0
+    s_small_tri 0 2
+    vertices_edge_attach_to
+  def
+  /extra_3
+    extra_1 2
+    small_tri 1 0
+    vertices_edge_attach_to
+  def
+  /extra [
+    extra_0 white polygon_create
+    extra_1 white polygon_create
+    extra_2 white polygon_create
+    extra_3 white polygon_create
     net_create
   def
 
@@ -589,13 +665,10 @@ polygons begin
     (All faces belonging to one of the three original antiprisms in one colour,) tline
     (and the two shared triangles from page 9 on the fourth colour. This means:) tline
     (  * use page 2 once for colour 1, 2, and 3.) tline
-    (  * use page 3 once for colour 1, 2, and 3.) tline
-    (  * use page 4 once for colour 1, 2, and 3.) tline
-    (  * use page 5 once for colour 4.) tline
-    (  * a total of six heptagrams. I suggest using three colours: i.e. cut out page three times in different colours) tline
-    (There is an alternative way using three colours, where the heptagons have one colour, ) tline
+    (  * use page 3 once for colour 4.) tline
+    (Page 4 to 6 are provided as bonus, in case you use a different colour scheme) tline
+    (E.g. there is an alternative way using three colours, where the heptagons have one colour, ) tline
     (and the triangles in one prism alternate using two more colours.) tline
-    (In that case the two triangles from page 5 and 9 will have different colours.) tline
     (All triangles sharing and edge with the same heptagon will have the same colour.) tline
     showpage
   end % local dict
@@ -608,60 +681,48 @@ polygons begin
   a4_area
   local_dict_size dict begin
     .1 setlinewidth
-    145 150 rel_translate
+    16 80 rel_translate
     gsave
-      -20 rotate
+      2 {
+        double_sided net_cut
+        130 0 rel_translate
+        -1 1 scale
+          double_sided net_cut
+        -1 1 scale
+        5 0 rel_translate
+      } repeat
+    grestore
+    gsave
+    0 80 rel_translate
+      2 {
+        dd net_cut
+        70 140 rel_translate
+        -1 1 scale
+          dd net_cut
+        -1 1 scale
+        5 -135 rel_translate
+      } repeat
+    grestore
+    250 60 rel_translate
+    gsave
+      -200 rotate
       heptagram net_cut
-      -5 -3 rel_translate
-      -80 rotate
+      200 rotate
+      2 130 rel_translate
+      -175 rotate
       heptagram net_cut
     grestore
+  -88 220 rel_translate
+  gsave
+    79 rotate
+    paras net_cut
+  grestore
   end % local dict
 end % polygons
 showpage
 %%EndPage
 
 %%Page: 3 3
-%%BeginPage
-polygons begin
-  a4_area
-  local_dict_size dict begin
-    .1 setlinewidth
-    16 100 rel_translate
-    2 {
-      double_sided net_cut
-      130 0 rel_translate
-      -1 1 scale
-        double_sided net_cut
-      -1 1 scale
-      5 0 rel_translate
-    } repeat
-  end % local dict
-end % polygons
-showpage
-%%EndPage
-
-%%Page: 4 4
-%%BeginPage
-polygons begin
-  a4_area
-  local_dict_size dict begin
-    .1 setlinewidth
-    25 40 rel_translate
-    2 {
-      dd net_cut
-      150 0 rel_translate
-      -1 1 scale
-        dd net_cut
-      -1 1 scale
-      -150 138 rel_translate
-    } repeat
-  end % local dict
-end % polygons
-showpage
-%%EndPage
-
-%%Page: 5 5
 %%BeginPage
 polygons begin
   a4_area
@@ -682,7 +743,71 @@ end % polygons
 showpage
 %%EndPage
 
+%%Page: 4 4
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    145 150 rel_translate
+    gsave
+      -20 rotate
+      heptagram net_cut
+      -5 -3 rel_translate
+      -80 rotate
+      heptagram net_cut
+    grestore
+  end % local dict
+end % polygons
+showpage
+%%EndPage
+
+%%Page: 5 5
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    16 100 rel_translate
+    2 {
+      double_sided net_cut
+      130 0 rel_translate
+      -1 1 scale
+        double_sided net_cut
+      -1 1 scale
+      5 0 rel_translate
+      gsave
+        -100 58 rel_translate
+        30 rotate
+        half_paras net_cut
+      grestore
+    } repeat
+  end % local dict
+end % polygons
+showpage
+%%EndPage
+
 %%Page: 6 6
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    25 40 rel_translate
+    2 {
+      dd net_cut
+      150 0 rel_translate
+      -1 1 scale
+        dd net_cut
+      -1 1 scale
+      -150 138 rel_translate
+    } repeat
+  end % local dict
+end % polygons
+showpage
+%%EndPage
+
+%%Page: 7 7
 %%BeginPage
 polygons begin
   a4_area
@@ -697,7 +822,7 @@ polygons begin
 end % polygons
 %%EndPage
 
-%%Page: 7 7
+%%Page: 8 8
 %%BeginPage
 polygons begin
   a4_area
@@ -712,7 +837,7 @@ polygons begin
 end % polygons
 %%EndPage
 
-%%Page: 8 8
+%%Page: 9 9
 %%BeginPage
 polygons begin
   a4_area
@@ -727,7 +852,7 @@ polygons begin
 end % polygons
 %%EndPage
 
-%%Page: 9 9
+%%Page: 10 10
 %%BeginPage
 polygons begin
   a4_area
