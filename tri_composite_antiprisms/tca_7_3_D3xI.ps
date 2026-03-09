@@ -539,14 +539,6 @@ polygons begin
       1 polygon_reverse_edge
     sliv_7 white polygon_create
       1 polygon_reverse_edge
-    sliv_8 white polygon_create
-      1 polygon_reverse_edge
-    sliv_9 white polygon_create
-      1 polygon_reverse_edge
-    sliv_10 white polygon_create
-      1 polygon_reverse_edge
-    sliv_11 white polygon_create
-      1 polygon_reverse_edge
     net_create
   def
 
@@ -658,14 +650,14 @@ polygons begin
     (For the 3x{7/3} you will need:) tline
     (  * a total of six heptagrams.) tline
     (  * a total of 26 equilateral triangles:) tline
-    (      - six of the kind that can be found on page 7, plus six of those mirrored) tline
     (      - six of the kind that can be found on page 8, plus six of those mirrored) tline
-    (      - two of the kind that can be found on page 9) tline
+    (      - six of the kind that can be found on page 9, plus six of those mirrored) tline
+    (      - two of the kind that can be found on page 10) tline
     (In this document I assumed using four colours as follows:) tline
     (All faces belonging to one of the three original antiprisms in one colour,) tline
     (and the two shared triangles from page 9 on the fourth colour. This means:) tline
     (  * use page 2 once for colour 1, 2, and 3.) tline
-    (  * use page 3 once for colour 4.) tline
+    (  * use page 3 once for colour 4. This page contains some spares for the thin slivers) tline
     (Page 4 to 6 are provided as bonus, in case you use a different colour scheme) tline
     (E.g. there is an alternative way using three colours, where the heptagons have one colour, ) tline
     (and the triangles in one prism alternate using two more colours.) tline
@@ -730,9 +722,7 @@ polygons begin
     .1 setlinewidth
     100 150 rel_translate
     tri_o3 net_cut
-    0 150 rel_translate
-    tri_o3 net_cut
-    70 -106 rel_translate
+    70 44 rel_translate
     slivers net_cut
     -145 0 rel_translate
     -1 1 scale
