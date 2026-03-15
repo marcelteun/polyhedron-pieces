@@ -1,0 +1,1260 @@
+%!PS-Adobe-2.0
+%%Title: Tri Composite of {7/3} anti-prisms
+%%Creator: PS.py written by marcelteun
+%%Pages: 13 1
+%%BoundingBox: 0 0 595 842
+% %%BoundingBox: -595 -842 1100 1700
+%%EndComments
+%%BeginProlog
+(polygons.eps) run
+(fonts.eps) run
+polygons begin
+  % update this one if you want to scale the facelets. The relative positions
+  % should still be okay
+  /scaling_size 160 def
+  % N.B. if you change this one all positions of the pieces will change
+  /org_scaling 200 def
+  /gray_value 0.2 def
+  /edge_to_edge_offset_mm 1 mm2pt def
+  % set if_show_base to true if you want to see the A4 area drawn
+  /if_show_a4_area false def
+  % set if_show_base to true if you want to see one whole face with vertex numbers
+  /if_show_base false def
+  % then define the base face number here to decide which one to show:
+  /base_face_no 0 def
+  /xy_offset {20 40} def
+  /local_dict_size 16 def
+
+  /vertices0 [
+    [1.264762098226 -0.190632213614] % 0
+    [-0.467288709343 -1.190632213614] % 1
+    [-1.056799058165 0.720513397958] % 2
+    [0.937608536197 0.869973585131] % 3
+    [0.639524003845 -1.107688067319] % 4
+    [-1.222223493443 -0.377006018586] % 5
+    [-0.095583377316 1.275471530045] % 6
+    [0.731327639449 -0.498610741984] % 7
+    [0.066145749434 -0.882653685244] % 8
+    [-0.648845239032 -0.602040400662] % 9
+    [-0.875242528476 0.131921585005] % 10
+    [-0.442564342284 0.766543926454] % 11
+    [0.323373820316 0.823943056636] % 12
+    [0.845804900594 0.260896259796] % 13
+    [-0.346284388189 0.907760682582] % 14
+    [1.264762098222 -0.190632213612] % 15
+    [-0.859205218451 -0.349801559738] % 16
+    [0.398736694441 -0.690632213614] % 17
+    [-0.717927321591 0.587516041927] % 18
+    [-0.467288709343 -1.190632213614] % 19
+    [-0.169204176991 0.787029438836] % 20
+    [-0.859205218451 -0.349801559738] % 21
+    [0.398736694441 -0.690632213614] % 22
+    [0.823131275052 0.110466583351] % 23
+    [-0.516605126551 0.760995336734] % 24
+    [-0.717927321591 0.587516041927] % 25
+    [-0.467288709343 -1.190632213614] % 26
+    [-0.613001617578 0.753771418397] % 27
+    [1.264762098226 -0.190632213614] % 28
+    [-0.149840156644 0.915501319532] % 29
+    [0.398736694441 -0.690632213614] % 30
+    [0.732539646242 0.569192766373] % 31
+    [-0.149840156644 0.915501319532] % 32
+    [-0.400738730497 0.827890831686] % 33
+    [-0.507232504978 -0.657619303169] % 34
+    [0.398736694441 -0.690632213614] % 35
+    [0.732539646242 0.569192766373] % 36
+    [-0.596985399063 0.540049835119] % 37
+  ] def
+  /faces0 [
+    [0 7 4 8 1 9 5 10 2 11 6 12 3 13][14 15][16 17][18 19][20 21][22 23][24 25]
+    [26 27][28 29][30 31][32 33][34 35][36 37]
+  ] def
+  /bbox0 [-1.222223493443 -1.190632213614 1.264762098226 1.275471530045] def
+
+  /vertices0 vertices0 scaling_size vertices_scale def
+  /vs0 vertices0 0.000001 vertices_make_unique def
+  /vs0 vs0 1 21 20 17 vertices_add_intersection def
+  /vs0 vs0 0 14 22 24 vertices_add_intersection def
+  /vs0 vs0 23 26 22 0 vertices_add_intersection def
+  /vs0 vs0 16 23 22 0 vertices_add_intersection def
+  /vs0 vs0 1 17 15 18 vertices_add_intersection def
+  /vs0 vs0 1 17 15 16 vertices_add_intersection def
+  /vs0 vs0 23 26 15 18 vertices_add_intersection def
+
+  /h1_small_inner vs0 [11 20 27 26 33 18 28 24] cv_vertices def
+  /h1_big_l vs0 [1 32 15 31 17 27 21 2 10 5 9] cv_vertices def
+  /h1_big_r vs0 [0 13 3 12 6 14 28 22 29 23 30] cv_vertices def
+  /h1_big_c vs0 [1 8 4 7 0 19 16 25] cv_vertices def
+
+  /vertices1 [
+    [-0.639524003845 1.107688067319] % 0
+    [-0.937608536197 -0.869973585131] % 1
+    [1.056799058165 -0.720513397958] % 2
+    [0.467288709343 1.190632213614] % 3
+    [-1.264762098226 0.190632213614] % 4
+    [0.095583377316 -1.275471530045] % 5
+    [1.222223493444 0.377006018587] % 6
+    [0.875242528476 -0.131921585005] % 7
+    [0.442564342284 -0.766543926453] % 8
+    [-0.323373820316 -0.823943056636] % 9
+    [-0.845804900593 -0.260896259796] % 10
+    [-0.731327639449 0.498610741984] % 11
+    [-0.066145749434 0.882653685244] % 12
+    [0.648845239032 0.602040400662] % 13
+    [-0.49381109561 -0.836715564692] % 14
+    [-0.639524003845 1.10768806732] % 15
+    [-0.272872084277 -0.878370983658] % 16
+    [-0.011718174545 -0.927608442714] % 17
+    [0.291349744799 0.742347042953] % 18
+    [-0.599580208211 0.574675156874] % 19
+    [-0.509827314125 -0.622993981414] % 20
+    [0.809191563428 -0.453655984515] % 21
+    [-0.011718174545 -0.927608442714] % 22
+    [1.222223493444 0.377006018587] % 23
+    [0.809191563428 -0.453655984515] % 24
+    [0.291349744799 0.742347042953] % 25
+    [-0.639524003845 1.107688067319] % 26
+    [0.97152248257 0.009295171123] % 27
+    [-0.011718174545 -0.927608442714] % 28
+    [0.794442271372 0.130026414869] % 29
+    [-0.197893180672 0.806589270354] % 30
+    [-0.788566270021 0.118857241094] % 31
+    [0.809191563428 -0.453655984515] % 32
+    [0.897127627933 -0.202871334861] % 33
+    [-0.788566270021 0.118857241094] % 34
+    [-0.011718174545 -0.927608442714] % 35
+    [-0.937608536197 -0.869973585131] % 36
+    [0.809191563428 -0.453655984515] % 37
+  ] def
+  /faces1 [
+    [6 7 2 8 5 9 1 10 4 11 0 12 3 13][14 15][16 17][18 19][20 21][22 23][24 25]
+    [26 27][28 29][30 31][32 33][34 35][36 37]
+  ] def
+  /bbox1 [-1.264762098226 -1.275471530045 1.222223493444 1.190632213614] def
+
+  /vertices1 vertices1 scaling_size vertices_scale def
+  /vs1 vertices1 0.000001 vertices_make_unique def
+  /vs1 vs1 0 14 1 20 vertices_add_intersection def
+  /vs1 vs1 0 21 6 16 vertices_add_intersection def
+  /vs1 vs1 16 6 1 20 vertices_add_intersection def
+
+  /h2_thin_l vs1 [0 11 18] cv_vertices def
+  /h2_thin_r vs1 [0 23 12] cv_vertices def
+  /h2_tri_lr vs1 [4 10 11] cv_vertices def
+  /h2_back_l vs1 [1 26 19 10] cv_vertices def
+  /h2_back_r vs1 [6 13 22 27] cv_vertices def
+  /h2_th_back_l vs1 [1 14 26] cv_vertices def
+  /h2_th_back_r vs1 [6 27 21] cv_vertices def
+  /h2_c vs1 [15 5 8 2 25 20 28 16] cv_vertices def
+
+  /quint h2_thin_l def
+  % Mirror image fits edge-to-edge with x_pacm
+  % Use clock-wise for that reason
+  /kite h2_c def
+  /strip_at_kite h2_c def
+  /quad1 h2_c def
+  % TODO: check which to mirror and which not (same for vs2)
+  /strip_at_quad1 h2_c def
+  /tri h2_c def
+  /strip h2_c def
+
+  % Define combined sub parts:
+  /dd_0
+    quint
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    165 vertices_rotate
+  def
+  /dd_1
+    dd_0 4
+    kite 0 3
+    vertices_edge_attach_to
+  def
+  /dd_2
+    dd_1 0
+    strip_at_kite 1 0
+    vertices_edge_attach_to
+  def
+  /dd_3
+    dd_2 2
+    quad1 1 0
+    vertices_edge_attach_to
+  def
+  /dd_4
+    dd_3 3
+    strip_at_quad1 0 2
+    vertices_edge_attach_to
+  def
+  /dd_5
+    dd_4 0
+    tri 1 0
+    vertices_edge_attach_to
+  def
+  /dd_6
+    dd_5 1
+    strip 1 0
+    vertices_edge_attach_to
+  def
+  /dd [
+    dd_0 white polygon_create
+    dd_1 white polygon_create
+    dd_2 white polygon_create
+    dd_3 white polygon_create
+    dd_4 white polygon_create
+      1 polygon_reverse_edge
+    dd_5 white polygon_create
+      1 polygon_reverse_edge
+    dd_6 white polygon_create
+    net_create
+  def
+
+  /vertices2 [
+    [-0.224958349966 -1.132575416524] % 0
+    [-0.868359907428 0.761107354126] % 1
+    [1.093318257394 0.371468062398] % 2
+    [-0.423112214784 -0.54936178362] % 3
+    [0.434179953714 -0.380553677063] % 4
+    [0.112479174983 0.566287708262] % 5
+    [-0.67020604261 0.177893721222] % 6
+    [0.434179953714 -0.380553677063] % 7
+    [0.112479174983 0.566287708262] % 8
+    [-0.511298980917 -0.28980729904] % 9
+    [0.57735026919 0.473952458199] % 10
+    [0.875382297392 0.122821338612] % 11
+    [0.916556013087 0.406577550239] % 12
+    [0.544257990523 -0.254963833088] % 13
+    [0.438683940534 0.376668818403] % 14
+    [-0.511298980917 -0.28980729904] % 15
+    [0.121779734392 -0.7369762291] % 16
+    [-0.399226447377 -0.619663239495] % 17
+    [0.875382297393 0.122821338612] % 18
+    [0.121779734392 -0.7369762291] % 19
+    [-0.143607887863 -0.723008341038] % 20
+    [-0.051323838761 0.598823162549] % 21
+    [-0.565367372734 -0.130671249657] % 22
+    [0.622830783488 -0.165318840359] % 23
+    [-0.544057548061 0.696692638259] % 24
+    [-0.368128665441 -0.711191357782] % 25
+    [0.57735026919 0.473952458199] % 26
+    [-0.544057548061 0.696692638259] % 27
+    [-0.143607887862 -0.723008341038] % 28
+  ] def
+  /faces2 [
+    [0 2 1][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20][21 22][23 24]
+    [25 26][27 28]
+  ] def
+  /bbox2 [-0.868359907428 -1.132575416524 1.093318257394 0.761107354126] def
+
+  /vertices2 vertices2 scaling_size vertices_scale def
+  /vs2 vertices2 0.000001 vertices_make_unique def
+  /vs2 vs2 15 19 5 6 vertices_add_intersection def
+  /vs2 vs2 15 19 3 4 vertices_add_intersection def
+  /vs2 vs2 18 19 11 12 vertices_add_intersection def
+  /vs2 vs2 18 19 5 6 vertices_add_intersection def
+
+  /t1_l_stripe vs2 [1 6 21 19] cv_vertices def
+  /t1_l_lambda vs2 [0 13 15 22 20] cv_vertices def
+  /t1_l_vt vs2 [9 2 10] cv_vertices def
+  /t1_l_t_at_vt vs2 [9 23 18] cv_vertices def
+  /t1_l_inner vs2 [22 3 14] cv_vertices def
+  /t1_l_et vs2 [19 24 16] cv_vertices def
+
+  /vertices3 [
+    [0.904405501973 0.717902515202] % 0
+    [0.16951906462 -1.142189397632] % 1
+    [-1.073924566593 0.42428688243] % 2
+    [0.678076258478 0.145034145255] % 3
+    [-0.08475953231 0.571094698816] % 4
+    [-0.452202750987 -0.358951257601] % 5
+    [0.395848308115 -0.569321027685] % 6
+    [-0.08475953231 0.571094698816] % 7
+    [-0.452202750987 -0.358951257601] % 8
+    [-0.746869333809 0.012266384222] % 9
+    [0.904405501973 0.717902515202] % 10
+    [-0.573831903464 0.086210139808] % 11
+    [-0.004496608348 -0.601001744543] % 12
+    [0.596153320765 -0.062323326825] % 13
+    [0.395848308115 0.500581738018] % 14
+    [-0.274260829317 -0.583120486127] % 15
+    [0.904405501973 0.717902515202] % 16
+    [-0.004496608348 -0.601001744543] % 17
+    [0.525402907959 -0.241401704111] % 18
+  ] def
+  /faces3 [
+    [0 2 1][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18]
+  ] def
+  /bbox3 [-1.073924566593 -1.142189397632 0.904405501973 0.717902515202] def
+
+  /vertices3 vertices3 scaling_size vertices_scale def
+  /vs3 vertices3 0.000001 vertices_make_unique def
+  /vs3 vs3 3 4 0 7 vertices_add_intersection def
+  /vs3 vs3 4 5 0 7 vertices_add_intersection def
+  /vs3 vs3 8 9 0 12 vertices_add_intersection def
+  /vs3 vs3 5 6 9 13 vertices_add_intersection def
+  /vs3 vs3 3 4 0 12 vertices_add_intersection def
+
+  /t2_l_quad vs3 [2 7 15 4] cv_vertices def
+  /t2_l_crook vs3 [1 6 17 9 16 12] cv_vertices def
+  /t2_l_tri_small vs3 [0 18 3] cv_vertices def
+  /t2_l_tri_long vs3 [0 4 14] cv_vertices def
+
+  /tri_o3_sub vs3 [2 9 5 6] cv_vertices def
+
+  /tri_0
+    tri_o3_sub
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    120 vertices_rotate
+  def
+  /tri_1
+    tri_0 0
+    tri_o3_sub 0 3
+    vertices_edge_attach_to
+  def
+  /tri_2
+    tri_1 0
+    tri_o3_sub 0 3
+    vertices_edge_attach_to
+  def
+  /tri_3
+    tri_2 0
+    tri_o3_sub 0 3
+    vertices_edge_attach_to
+  def
+  /tri_4
+    tri_3 0
+    tri_o3_sub 0 3
+    vertices_edge_attach_to
+  def
+  /tri_5
+    tri_4 0
+    tri_o3_sub 0 3
+    vertices_edge_attach_to
+  def
+  /tri_o3 [
+    tri_0 white polygon_create
+    tri_1 white polygon_create
+    tri_2 white polygon_create
+    tri_3 white polygon_create
+    tri_4 white polygon_create
+    tri_5 white polygon_create
+    net_create
+  def
+
+  /vertices4 [
+    [0.57735026919 -1] % 0
+    [0.577350269189 1] % 1
+    [-1.154700538379 0] % 2
+    [-0.288675134595 -0.5] % 3
+    [0.57735026919 0] % 4
+    [0.57735026919 0] % 5
+    [0.043915810413 0.69202147163] % 6
+    [-0.621266079602 0.30797852837] % 7
+    [-0.288675134595 -0.5] % 8
+    [0.368566237828 0.638375449873] % 9
+    [0.57735026919 0.473952458199] % 10
+    [0.121779734392 -0.7369762291] % 11
+    [0.191932705829 0.777479066044] % 12
+    [0.368566237828 0.638375449873] % 13
+    [-0.868359907428 -0.16531884036] % 14
+    [-0.339038129239 0.470922911485] % 15
+    [-0.433303926068 -0.41649852831] % 16
+    [-0.868359907428 -0.16531884036] % 17
+    [0.57735026919 -0.286208264215] % 18
+    [0.577350269189 1] % 19
+    [0.121779734392 -0.7369762291] % 20
+    [-0.315919378564 0.484270528411] % 21
+    [-0.593829773993 -0.092679641511] % 22
+    [-0.593829773993 -0.092679641511] % 23
+    [0.16951906462 -0.554958132087] % 24
+    [0.437044326314 0.465048617149] % 25
+    [-0.149168022968 0.580544468451] % 26
+    [0.577350269189 1] % 27
+    [-0.536538762178 -0.356895867892] % 28
+  ] def
+  /faces4 [
+    [1 2 0][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20][21 22][23 24]
+    [25 26][27 28]
+  ] def
+  /bbox4 [-1.154700538379 -1 0.57735026919 1] def
+
+  /vertices4 vertices4 scaling_size vertices_scale def
+  /vs4 vertices4 0.000001 vertices_make_unique def
+  /vs4 vs4 3 6 11 7 vertices_add_intersection def
+  /vs4 vs4 1 9 11 14 vertices_add_intersection def
+  /vs4 vs4 12 13 11 14 vertices_add_intersection def
+  /vs4 vs4 9 10 1 20 vertices_add_intersection def
+  /vs4 vs4 9 1 7 8 vertices_add_intersection def
+
+  /t4_l_quad_l vs4 [2 11 21 6] cv_vertices def
+  /t4_l_quad_r vs4 [0 14 22 9] cv_vertices def
+  /t4_l_tri_at_quad vs4 [11 20 23] cv_vertices def
+  /t4_l_vt_long vs4 [1 10 24] cv_vertices def
+  /t4_l_vt_short vs4 [1 25 8] cv_vertices def
+  /t4_l_back vs4 [1 24 7 25] cv_vertices def
+
+  /vertices5 [
+    [1.114026678832 -0.303772764059] % 0
+    [-0.820088270069 -0.812889022332] % 1
+    [-0.293938408763 1.116661786392] % 2
+    [0.518360803171 -0.460569640051] % 3
+    [0.410044135035 0.406444511166] % 4
+    [0.410044135034 0.406444511166] % 5
+    [0.371243481252 -0.499295270348] % 6
+    [0.011883305199 0.808131601505] % 7
+    [-0.557013339416 0.15188638203] % 8
+    [-0.557013339416 0.15188638203] % 9
+    [0.371243481252 -0.499295270348] % 10
+    [-0.557013339416 0.15188638203] % 11
+    [0.743698392197 0.069835287717] % 12
+    [0.409938834028 -0.489109509037] % 13
+    [0.594137417029 0.079269846798] % 14
+    [-0.705804149104 -0.393774556569] % 15
+    [0.987158228516 -0.175780719527] % 16
+    [-0.557013339416 0.15188638203] % 17
+    [-0.224422394408 -0.65609214634] % 18
+  ] def
+  /faces5 [
+    [0 2 1][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18]
+  ] def
+  /bbox5 [-0.820088270069 -0.812889022332 1.114026678832 1.116661786392] def
+
+  /vertices5 vertices5 scaling_size vertices_scale def
+  /vs5 vertices5 0.000001 vertices_make_unique def
+  /vs5 vs5 11 12 7 13 vertices_add_intersection def
+  /vs5 vs5 11 12 3 4 vertices_add_intersection def
+  /vs5 vs5 7 8 3 4 vertices_add_intersection def
+
+  /t5_l_quad_l vs5 [1 13 14 11] cv_vertices def
+  /t5_l_quad_r vs5 [0 12 15 3] cv_vertices def
+  /t5_l_et vs5 [4 16 8] cv_vertices def
+  /t5_l_vt vs5 [7 6 2] cv_vertices def
+
+  /vertices6 [
+    [0.57735026919 -1] % 0
+    [0.57735026919 1] % 1
+    [-1.154700538379 0] % 2
+    [-0.288675134595 -0.5] % 3
+    [0.57735026919 0] % 4
+    [0.57735026919 0] % 5
+    [0.043915810413 0.69202147163] % 6
+    [0.57735026919 0.473952458199] % 7
+    [-0.288675134595 -0.5] % 8
+    [0.477771245828 0.361963555605] % 9
+    [-0.053178914655 0.635963805976] % 10
+    [0.57735026919 0.819784664501] % 11
+    [-0.778484713636 -0.217208307689] % 12
+    [0.121779734392 -0.7369762291] % 13
+    [-0.19348485753 0.554958132087] % 14
+    [0.081623014022 -0.572416528431] % 15
+    [0.57735026919 -0.16700294338] % 16
+    [0.57735026919 0.473952458199] % 17
+    [-0.19348485753 0.554958132087] % 18
+    [0.57735026919 -0.669362319281] % 19
+    [0.108216809138 0.729145670554] % 20
+    [0.421279210496 -0.90989233225] % 21
+    [0.57735026919 -0.669362319281] % 22
+  ] def
+  /faces6 [
+    [1 2 0][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20][21 22]
+  ] def
+  /bbox6 [-1.154700538379 -1 0.57735026919 1] def
+
+  /vertices6 vertices6 scaling_size vertices_scale def
+  /vs6 vertices6 0.000001 vertices_make_unique def
+  /vs6 vs6 9 10 11 12 vertices_add_intersection def
+  /vs6 vs6 9 10 15 16 vertices_add_intersection def
+  /vs6 vs6 13 14 15 16 vertices_add_intersection def
+  /vs6 vs6 3 4 11 12 vertices_add_intersection def
+
+  /t6_l_quad_l vs6 [2 10 18 12] cv_vertices def
+  /t6_l_quad_r vs6 [1 16 19 9] cv_vertices def
+  /t6_l_vt vs6 [15 17 0] cv_vertices def
+  /t6_l_et_r vs6 [15 14 20] cv_vertices def
+  /t6_l_et_b vs6 [11 21 3] cv_vertices def
+
+  /vertices7 [
+    [0.57735026919 -1] % 0
+    [0.57735026919 1] % 1
+    [-1.154700538379 0] % 2
+    [-0.288675134595 -0.5] % 3
+    [-0.489518648364 0.38404294326] % 4
+    [0.57735026919 0] % 5
+    [-0.489518648364 0.38404294326] % 6
+    [0.201134444446 -0.782791692311] % 7
+    [0.57735026919 0] % 8
+    [-0.087831620825 0.61595705674] % 9
+    [0.57735026919 0] % 10
+    [-0.087831620825 0.61595705674] % 11
+    [-0.288675134595 -0.5] % 12
+    [-0.288675134595 -0.5] % 13
+    [0.57735026919 -0.565583384622] % 14
+    [-0.288675134595 -0.5] % 15
+    [0.57735026919 0] % 16
+  ] def
+  /faces7 [
+    [1 2 0][3 4][5 6][7 8][9 10][11 12][13 14][15 16]
+  ] def
+  /bbox7 [-1.154700538379 -1 0.57735026919 1] def
+
+  /vertices7 vertices7 scaling_size vertices_scale def
+  /vs7 vertices7 0.000001 vertices_make_unique def
+  /vs7 vs7 3 8 5 6 vertices_add_intersection def
+
+  /t7_kite vs7 [0 8 9 6] cv_vertices def
+  /t7_t_l vs7 [3 4 2] cv_vertices def
+  /t7_t_r vs7 [5 1 7] cv_vertices def
+
+  /vertices8 [
+    [1.154700538379 0] % 0
+    [-0.57735026919 -1] % 1
+    [-0.57735026919 1] % 2
+    [0.621266079602 -0.30797852837] % 3
+    [0.288675134595 0.5] % 4
+    [-0.57735026919 0] % 5
+    [-0.043915810413 -0.69202147163] % 6
+    [0.288675134595 0.5] % 7
+    [-0.57735026919 0] % 8
+    [-0.57735026919 -0.38404294326] % 9
+    [0.288675134595 -0.5] % 10
+    [0.288675134595 0.5] % 11
+    [-0.57735026919 0.38404294326] % 12
+    [0.288675134595 -0.5] % 13
+    [0.288675134595 0.5] % 14
+    [-0.043915810413 0.69202147163] % 15
+    [-0.57735026919 0] % 16
+    [0.288675134595 -0.5] % 17
+    [0.621266079602 0.30797852837] % 18
+    [-0.57735026919 0] % 19
+    [0.288675134595 -0.5] % 20
+  ] def
+  /faces8 [
+    [1 0 2][3 4][5 6][7 8][9 10][11 12][13 14][15 16][17 18][19 20]
+  ] def
+  /bbox8 [-0.57735026919 -1 1.154700538379 1] def
+
+  /vertices8 vertices8 scaling_size vertices_scale def
+  /vs8 vertices8 0.000001 vertices_make_unique def
+  /vs8 vs8 4 9 5 10 vertices_add_intersection def
+
+  /t8_kite vs8 [2 9 12 10] cv_vertices def
+
+  % Define combined sub parts:
+  /yellow_0
+    t8_kite
+    dup 2 vertices_get
+    xy_neg vertices_translate
+  def
+  /yellow_1
+    yellow_0 0
+    t8_kite 0 3
+    vertices_edge_attach_to
+  def
+  /yellow_2
+    yellow_1 0
+    t8_kite 0 3
+    vertices_edge_attach_to
+  def
+  /yellow_3
+    yellow_2 0
+    t8_kite 0 3
+    vertices_edge_attach_to
+  def
+  /yellow_4
+    yellow_3 0
+    t8_kite 0 3
+    vertices_edge_attach_to
+  def
+  /yellow_5
+    yellow_4 0
+    t8_kite 0 3
+    vertices_edge_attach_to
+  def
+  /yellow [
+    yellow_0 white polygon_create
+    yellow_1 white polygon_create
+    yellow_2 white polygon_create
+    yellow_3 white polygon_create
+    yellow_4 white polygon_create
+    yellow_5 white polygon_create
+    net_create
+  def
+
+  /o3_0
+    h1_big_c
+    dup 2 vertices_get
+    xy_neg vertices_translate
+    -30 vertices_rotate
+  def
+  /o3_1
+    o3_0 1
+    t5_l_quad_l 1 0
+    vertices_edge_attach_to
+  def
+  /o3_2
+    o3_0 2
+    t5_l_quad_l
+    vertices_mirror vertices_reverse
+    0 3
+    vertices_edge_attach_to
+  def
+  /o3_3
+    o3_1 3
+    t7_kite 1 0
+    vertices_edge_attach_to
+  def
+  /o3_4
+    o3_0 7
+    h2_thin_l 0 2
+    vertices_edge_attach_to
+  def
+  /o3_5
+    o3_0 4
+    h2_thin_r 1 0
+    vertices_edge_attach_to
+  def
+  /o3 [
+    o3_0 white polygon_create
+    o3_1 white polygon_create
+    o3_2 white polygon_create
+    o3_3 white polygon_create
+    o3_4 white polygon_create
+    o3_5 white polygon_create
+    net_create
+  def
+
+  /big_s_0
+    h2_tri_lr
+    100 vertices_rotate
+  def
+  /big_s_1
+    big_s_0 0
+    t6_l_quad_l 0 3
+    vertices_edge_attach_to
+  def
+  /big_s_2
+    big_s_1 0
+    t5_l_vt 2 1
+    vertices_edge_attach_to
+  def
+  /big_s_3
+    big_s_2 2
+    t7_t_l 0 2
+    vertices_edge_attach_to
+  def
+  /big_s [
+    big_s_0 white polygon_create
+    big_s_1 white polygon_create
+    big_s_2 white polygon_create
+    big_s_3 white polygon_create
+    net_create
+  def
+
+  /inner_0
+    h2_back_r
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    -160 vertices_rotate
+  def
+  /inner_1
+    inner_0 3
+    t4_l_back
+    vertices_mirror vertices_reverse
+    1 0
+    vertices_edge_attach_to
+  def
+  /inner_2
+    inner_1 3
+    t4_l_back 1 0
+    vertices_edge_attach_to
+  def
+  /inner_3
+    inner_2 3
+    h2_back_l 1 0
+    vertices_edge_attach_to
+  def
+  /inner [
+    inner_0 white polygon_create
+    inner_1 white polygon_create
+    inner_2 white polygon_create
+    inner_3 white polygon_create
+    net_create
+  def
+
+  /v_shape_0
+    h1_small_inner
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    -120 vertices_rotate
+  def
+  /v_shape [
+    v_shape_0 white polygon_create
+    net_create
+  def
+
+  /deep_0
+    t1_l_inner
+    0 vertices_rotate
+  def
+  /deep_1
+    deep_0 0
+    t1_l_inner
+    vertices_mirror vertices_reverse
+    0 2
+    vertices_edge_attach_to
+  def
+  /deep [
+    deep_0 white polygon_create
+    deep_1 white polygon_create
+    net_create
+  def
+
+  /half_0
+    t2_l_quad
+    0 vertices_rotate
+  def
+  /half_1
+    half_0 3
+    t2_l_tri_long 1 0
+    vertices_edge_attach_to
+  def
+  /half_2
+    half_0 0
+    t4_l_vt_short 0 2
+    vertices_edge_attach_to
+  def
+  /half_3
+    half_2 0
+    h2_th_back_l 0 2
+    vertices_edge_attach_to
+  def
+  /half_4
+    half_3 0
+    t4_l_vt_long
+    vertices_mirror vertices_reverse
+    0 2
+    vertices_edge_attach_to
+  def
+  /half [
+    half_0 white polygon_create
+    half_1 white polygon_create
+    half_2 white polygon_create
+    half_3 white polygon_create
+    half_4 white polygon_create
+    net_create
+  def
+
+  /edge_tri_0
+    t5_l_et
+    0 vertices_rotate
+  def
+  /edge_tri_1
+    edge_tri_0 2
+    t6_l_et_b 0 2
+    vertices_edge_attach_to
+  def
+  /edge_tri [
+    edge_tri_0 white polygon_create
+    edge_tri_1 white polygon_create
+    net_create
+  def
+
+  /edge_s_0
+    t2_l_tri_small
+    236 vertices_rotate
+  def
+  /edge_s_1
+    edge_s_0 0
+    t2_l_tri_small
+    vertices_mirror vertices_reverse
+    0 2
+    vertices_edge_attach_to
+  def
+  /edge_s_2
+    edge_s_1 1
+    t5_l_quad_r 3 2
+    vertices_edge_attach_to
+  def
+  /edge_s_3
+    edge_s_2 1
+    t5_l_quad_r
+    vertices_mirror vertices_reverse
+    3 2
+    vertices_edge_attach_to
+  def
+  /edge_s [
+    edge_s_0 white polygon_create
+    edge_s_1 white polygon_create
+    edge_s_2 white polygon_create
+    edge_s_3 white polygon_create
+    net_create
+  def
+
+  /hept_0
+    h1_big_l
+    dup 6 vertices_get
+    xy_neg vertices_translate
+    175.55 vertices_rotate
+  def
+  %/hept_1
+  %  hept_0 5
+  %  h1_big_r 6 5
+  %  vertices_edge_attach_to
+  %def
+  /hept_2
+    hept_0 8
+    t1_l_stripe 1 0
+    vertices_edge_attach_to
+  def
+  /hept_3
+    hept_2 3
+    t6_l_vt 0 2
+    vertices_edge_attach_to
+  def
+  /hept_4
+    hept_2 2
+    t6_l_et_r
+    vertices_mirror vertices_reverse
+    1 0
+    vertices_edge_attach_to
+  def
+  /hept_5
+    hept_4 2
+    t1_l_et
+    vertices_mirror vertices_reverse
+    1 0
+    vertices_edge_attach_to
+  def
+  edge_to_edge_offset_mm
+  /edge_to_edge_offset_mm edge_to_edge_offset_mm 4 mul def
+  /hept_6
+    hept_0 10
+    t2_l_crook
+    vertices_mirror vertices_reverse
+    0 5
+    vertices_edge_attach_to
+  def
+  /edge_to_edge_offset_mm exch def
+  /hept_7
+    hept_6 0
+    t4_l_quad_r
+    vertices_mirror vertices_reverse
+    0 3
+    vertices_edge_attach_to
+  def
+  /hept [
+    hept_0 white polygon_create  % right
+    %hept_1 white polygon_create  % left
+    hept_2 white polygon_create
+    hept_3 white polygon_create
+    hept_4 white polygon_create
+    hept_5 white polygon_create
+    hept_6 white polygon_create
+    hept_7 white polygon_create
+    net_create
+  def
+
+  /lambda_0
+    t1_l_lambda
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    -49 vertices_rotate
+  def
+  /lambda [
+    lambda_0 white polygon_create
+    net_create
+  def
+
+  /big_w_0
+    h2_c
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    60 vertices_rotate
+  def
+  /big_w_1
+    big_w_0 0
+    t6_l_quad_r 1 0
+    vertices_edge_attach_to
+  def
+  /big_w_2
+    big_w_0 3
+    t6_l_quad_r
+    vertices_mirror vertices_reverse
+    0 3
+    vertices_edge_attach_to
+  def
+  /big_w [
+    big_w_0 white polygon_create
+    big_w_1 white polygon_create
+    big_w_2 white polygon_create
+    net_create
+  def
+
+  /tipi_0
+    t1_l_vt
+    dup 2 vertices_get
+    xy_neg vertices_translate
+    70 vertices_rotate
+  def
+  /tipi_1
+    tipi_0 2
+    t1_l_vt
+    vertices_mirror vertices_reverse
+    1 0
+    vertices_edge_attach_to
+  def
+  /tipi [
+    tipi_0 white polygon_create
+    tipi_1 white polygon_create
+    net_create
+  def
+
+  /o3_b_0
+    t4_l_tri_at_quad
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    30 vertices_rotate
+  def
+  /o3_b_1
+    o3_b_0 0
+    t1_l_t_at_vt
+    0 2
+    vertices_edge_attach_to
+  def
+  /o3_b [
+    o3_b_0 white polygon_create
+    o3_b_1 white polygon_create
+    net_create
+  def
+
+  /a4_area {
+    if_show_a4_area {
+      0 0 595 842 rectstroke
+    } if
+  } bind def
+  /show_base_face {
+    if_show_base {
+      gsave
+        xy_offset translate
+        bbox 0 get scaling_size mul neg
+        bbox 1 get scaling_size mul neg
+        translate
+        faces aload length { %repeat
+          dup 0 get
+          vertices exch get
+          aload pop
+          moveto
+          aload length 1 sub { %repeat
+            vertices exch get
+            aload pop
+            lineto
+          } repeat
+          pop
+          closepath stroke
+        } repeat
+        vs vertices_show_nos
+      grestore
+    } if
+  } bind def
+
+  /def_base_face {
+    % Choose the right vertices, faces etc for the show_base_face function
+    /put_digit { % (abc..) d
+      % replace the last character in string (abc..) with the integer 'd'
+      % for which should hold 0 <= d <= 9, i.e. d is a digit
+      1 index dup length 1 sub  % (abc..) d (abc..) 4
+      48 % this is the ASCII code for the character '0'
+      4 -1 roll add % (abc..) (abc..) 4 48+d
+      put % (abc.d)
+    } bind def
+    /vertices
+      (vertices?) base_face_no put_digit
+      cvn load
+    def
+    /vs (vs?) base_face_no put_digit cvn load def
+    /faces (faces?) base_face_no put_digit cvn load def
+    /bbox (bbox?) base_face_no put_digit cvn load def
+  } bind def
+
+  def_base_face
+end
+%%EndProlog
+[
+  /Author (Marcel T"unnissen)
+  /Title (Tri Composite of {7/3} anti-prisms)
+  /DOCINFO
+pdfmark
+
+%%Page: 1 1
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    25 625 translate
+    (For the 3x{7/2} you will need:) tline
+    (  * a total of six heptagrams.) tline
+    (  * a total of 34 equilateral triangles:) tline
+    (      - three times eleven that are originally from the three antiprisms) tline
+    (      - one of the kind that is shared and these are found on page 2) tline
+    (In this document I assumed using four colours as follows:) tline
+    (All faces belonging to one of the three original antiprisms in one colour,) tline
+    (and the one triangles that is shared in the fourth colour. This means:) tline
+    (  * use page 3 and 4 once for colour 1, 2, and 3.) tline
+    (  * use page 2 once for colour 4.) tline
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 2 2
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    250 30 rel_translate
+    yellow net_cut
+  end % local dict
+end % polygons
+showpage
+%%EndPage
+
+%%Page: 3 3
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    260 180 rel_translate
+    gsave
+      0 -5 rel_translate
+      o3 net_cut
+    grestore
+    gsave
+      -140 450 rel_translate
+      97 rotate
+      big_s net_cut
+    grestore
+    gsave
+      -140 340 rel_translate
+      1 -1 scale
+      97 rotate
+      big_s net_cut
+    grestore
+    gsave
+      180 -78 rel_translate
+      inner net_cut
+    grestore
+    gsave
+      110 395 rel_translate
+      v_shape net_cut
+    grestore
+    gsave
+      200 440 rel_translate
+      deep net_cut
+    grestore
+    gsave
+      5 192 rel_translate
+      half net_cut
+    grestore
+    gsave
+      50 345 rel_translate
+      edge_tri net_cut
+      -1 1 scale
+      -310 0 rel_translate
+      edge_tri net_cut
+    grestore
+    gsave
+      -15 530 rel_translate
+      edge_s net_cut
+    grestore
+    gsave
+      -125 85 rel_translate
+      -180 rotate
+      lambda net_cut
+      180 rotate
+      35 -163 rel_translate
+      -1 1 scale
+      lambda net_cut
+    grestore
+    gsave
+      -225 332 rel_translate
+      big_w net_cut
+    grestore
+    gsave
+      0 -48 rel_translate
+      tipi net_cut
+    grestore
+    gsave
+      170 187 rel_translate
+      -20 rotate
+      o3_b net_cut
+      10 rotate
+      0 -117 rel_translate
+      1 -1 scale
+      o3_b net_cut
+    grestore
+  end % local dict
+end % polygons
+showpage
+%%EndPage
+
+%%Page: 4 4
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    gsave
+      250 100 rel_translate
+      hept net_cut
+      gsave
+        -1 1 scale
+        5 0 translate
+        hept net_cut
+      grestore
+    grestore
+    gsave
+    grestore
+  end % local dict
+end % polygons
+showpage
+%%EndPage
+
+%%Page: 5 5
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 0 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 6 6
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 1 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 7 7
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 2 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 8 8
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 3 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 9 9
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 4 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 10 10
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 5 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 11 11
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 6 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 12 12
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 7 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Page: 13 13
+%%BeginPage
+polygons begin
+  a4_area
+  local_dict_size dict begin
+    .1 setlinewidth
+    /if_show_base true def
+    /base_face_no 8 def
+    def_base_face
+    show_base_face
+    showpage
+  end % local dict
+end % polygons
+%%EndPage
+
+%%Tailer
+%%EOF
