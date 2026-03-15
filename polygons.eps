@@ -317,6 +317,7 @@
   } bd
 
   /vertices_get_reverse { % Vs i -> x y
+    % Get vertex with index i counted from the end
     %/---vertices_get_reverse-in-- pstack ==
     vertices_index_mod
     1 index length 1 sub  % Vs i maxI
@@ -377,6 +378,19 @@
 
   /vertices_mirror { % Vs -> newVs with vertices mirrored in y-axis
     -1 1 /mul vertices_xy_op
+  } bd
+
+  /vertices_reverse { % Vs -> new Vs starting at the same v but the opposite direction
+    2 dict begin
+      dup length 1 sub /last_i exch def
+      [ exch                          % [ Vs
+      dup 0 get exch                  % [ [x0 y0] Vs
+      last_i -1 1 { % for             % [ [x0 y0]..[xi yi] Vs i
+        1 index exch                  % [ [x y]* Vs Vs i
+        get exch                      % [ [x y]* Vs
+      } for
+      pop ]
+    end
   } bd
 
   /vertices_rotate { % Vs alpha -> newVs
