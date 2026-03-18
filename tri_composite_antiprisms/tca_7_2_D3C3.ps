@@ -660,11 +660,12 @@ polygons begin
     inner_0 3
     t4_l_back
     vertices_mirror vertices_reverse
-    1 0
+    [ exch aload length 1 roll ]
+    2 1
     vertices_edge_attach_to
   def
   /inner_2
-    inner_1 3
+    inner_1 0
     t4_l_back 1 0
     vertices_edge_attach_to
   def
@@ -676,7 +677,9 @@ polygons begin
   /inner [
     inner_0 white polygon_create
     inner_1 white polygon_create
+      1 polygon_reverse_edge
     inner_2 white polygon_create
+      1 polygon_reverse_edge
     inner_3 white polygon_create
     net_create
   def
@@ -909,6 +912,33 @@ polygons begin
     net_create
   def
 
+  /o3_strip_0
+    t4_l_quad_l
+    dup 0 vertices_get
+    xy_neg vertices_translate
+    255 vertices_rotate
+  def
+  /o3_strip_1
+    o3_strip_0 2
+    t4_l_quad_l
+    vertices_mirror vertices_reverse
+    2 1
+    vertices_edge_attach_to
+  def
+  /o3_strip [
+    o3_strip_0 white polygon_create
+    o3_strip_1 white polygon_create
+    net_create
+  def
+  /o3_strip_l [
+    o3_strip_0 white polygon_create
+    net_create
+  def
+  /o3_strip_r [
+    o3_strip_1 white polygon_create
+    net_create
+  def
+
   /o3_b_0
     t4_l_tri_at_quad
     dup 0 vertices_get
@@ -1094,6 +1124,12 @@ polygons begin
       1 -1 scale
       o3_b net_cut
     grestore
+    gsave
+      270 220 rel_translate
+      o3_strip_r net_cut
+      -380 300 rel_translate
+      o3_strip_l net_cut
+    grestore
   end % local dict
 end % polygons
 showpage
@@ -1115,6 +1151,10 @@ polygons begin
       grestore
     grestore
     gsave
+      170 445 rel_translate
+      23 rotate
+      -1 1 scale
+      half net_cut
     grestore
   end % local dict
 end % polygons
