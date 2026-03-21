@@ -2,7 +2,7 @@ The PS files need to be converted to PDF first.
 
 I use ghostscript for this. I go the the directorty and type:
 
-```ps2pdf -dNOSAFER -sPAPERSIZE=a4```
+```ps2pdf -dNOSAFER -sPAPERSIZE=a4 eg_file.ps```
 
 The resulting PDF can be loaded into the tool inkscape to which I have installed a plug-in to export to Silhouette Portrait. I usually load only one page at the time.
 
